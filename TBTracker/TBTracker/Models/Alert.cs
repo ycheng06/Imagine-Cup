@@ -17,5 +17,6 @@ namespace TBTracker.Models
 
         public int PatientId { get; set; }
         public Patient Patient { get; set; }
+        //not sure why this is neccessary, will find out
     }
 }

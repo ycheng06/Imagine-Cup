@@ -73,3 +73,37 @@ textarea
 {
     display: none;
 }
+
+/* Tables */
+table
+{
+	border: 1px solid #000;
+	border-collapse: collapse;
+	color: #666666;
+	min-width: 500px;
+	width: 100%;
+}
+
+tr
+{
+	border: 1px solid #000;
+	line-height: 25px;
+}
+
+th
+{
+	background-color: #9b9993;
+	color: #000;
+	font-size: 13px;
+	text-align: left;
+}
+
+th, td
+{
+	padding-left: 5px;
+}
+
+tr:hover
+{
+	background-color: #fff;
+}

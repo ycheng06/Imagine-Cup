@@ -23,15 +23,18 @@ namespace TBTracker.Models
        
         [Required(ErrorMessage="Phone Number is required")]
         [Digits]
+        [StringLength(10)]
         [DisplayName("Phone Number")]
         public string Phone { get; set; }
       
         [Required(ErrorMessage="At least one family number is required")]
         [Digits]
+        [StringLength(10)]
         [DisplayName("Family Phone #1")]
         public string FamilyPhone1 { get; set; }
        
         [DisplayName("Family Phone #2")] 
+        [StringLength(10)]
         public string FamilyPhone2 { get; set; }
         
         [Required]

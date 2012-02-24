@@ -17,7 +17,7 @@ namespace TBTracker.Controllers
         // GET: /PatientManager/
 
         public ViewResult Index()
-        {
+        { 
             return View(db.Patients.ToList());
         }
 

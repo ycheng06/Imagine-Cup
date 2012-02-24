@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TBTracker.Models;
 
 namespace TBTracker.Controllers
 {
@@ -10,10 +11,17 @@ namespace TBTracker.Controllers
     {
         //
         // GET: /Alert/
+        private TrackerEntities db = new TrackerEntities();
 
-        public string Index()
+        public ViewResult Index()
         {
-            return "Here be some Alerts blahhhh";
+            var samp_alerts = new List<Alert>
+            {
+                new Alert { PatientId = 666, AlertDate = DateTime.Now, AlertType = "Bad News"}
+            };
+
+            return View(samp_alerts);
+            //return View(db.Alerts.ToList());
         }
 
     }

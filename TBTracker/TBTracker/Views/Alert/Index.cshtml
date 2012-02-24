@@ -1,0 +1,39 @@
+﻿@model IEnumerable<TBTracker.Models.Alert>
+@{
+    //ViewBag.Title = "Index";
+    ViewBag.Title = "Alerts";
+}
+
+<h2>Hey ya'll here are your alerts</h2>
+
+<p>
+    @Html.ActionLink("Back", "/../Home/Index")
+</p>
+<p> Do we need any additional fields? I guess we probably do</p>
+<table>
+    <tr>
+        <th>
+            Patient (use name instead of ID?)
+        </th>
+        <th>
+            Alert Date
+        </th>
+        <th>
+            Alert Type
+        </th>
+    </tr>
+   @foreach (var item in Model)
+   {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlertDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlertType)
+            </td>
+        </tr>
+   }
+</table>

@@ -11,7 +11,6 @@ namespace TBTracker.Models
 {
     public class Patient
     {
-        [ScaffoldColumn(false)]
         public int PatientId { get; set; }
         
         [Required(ErrorMessage="First/Last Name is Required")]

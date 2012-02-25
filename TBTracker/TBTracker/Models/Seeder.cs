@@ -48,12 +48,28 @@ namespace TBTracker.Models
             {
                 Name = "Missed Checkup"
             };
+            Message message1 = new Message
+            {
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now,
+                MessageText = "You need to follow your regimen!",
+                Patient = patient1
+            };
+            Message message2 = new Message
+            {
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now,
+                MessageText = "Calling Greg! Report to base to pick up your regimen!",
+                Patient = patient2
+            };
             context.Patients.Add(patient1);
             context.Patients.Add(patient2);
             context.Alerts.Add(alert1);
             context.Alerts.Add(alert2);
             context.AlertTypes.Add(alertType1);
             context.AlertTypes.Add(alertType2);
+            context.Messages.Add(message1);
+            context.Messages.Add(message2);
         }
     }
 }

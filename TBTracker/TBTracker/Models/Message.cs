@@ -14,7 +14,8 @@ namespace TBTracker.Models
         public int MessageId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public string Reminder { get; set; }
+        [Required(ErrorMessage="Message is blank")]
+        public string MessageText { get; set; }
 
         public int PatientId { get; set; }
         public Patient Patient { get; set; }

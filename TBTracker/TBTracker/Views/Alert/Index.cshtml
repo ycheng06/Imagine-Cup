@@ -1,19 +1,22 @@
 ﻿@model IEnumerable<TBTracker.Models.Alert>
 @{
-    //ViewBag.Title = "Index";
     ViewBag.Title = "Alerts";
 }
 
-<h2>Hey ya'll here are your alerts</h2>
+<h2>Here's ya'll's alerts</h2>
 
 <p>
     @Html.ActionLink("Back", "/../Home/Index")
 </p>
 <p> Do we need any additional fields? I guess we probably do</p>
+<p> Do we go to the patient's records (or other related pages) once the fields are clicked?</p>
 <table>
     <tr>
         <th>
-            Patient (use name instead of ID?)
+            Patient Full Name
+        </th>
+        <th>
+            Patient ID
         </th>
         <th>
             Alert Date
@@ -25,6 +28,10 @@
    @foreach (var item in Model)
    {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient.FirstName)
+                @Html.DisplayFor(modelItem => item.Patient.LastName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PatientId)
             </td>

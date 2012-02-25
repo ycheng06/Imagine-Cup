@@ -13,6 +13,7 @@ namespace TBTracker.Models
     {
         public int AlertId { get; set; }
         public DateTime AlertDate { get; set; }
+
         public string AlertType { get; set; }
 
         public int PatientId { get; set; }

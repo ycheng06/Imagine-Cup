@@ -6,7 +6,7 @@
 <h2>Here's ya'll's alerts</h2>
 
 <p>
-    @Html.ActionLink("Back", "/../Home/Index")
+    @Html.ActionLink("Back", "Index", "Home")
 </p>
 <p> Do we need any additional fields? I guess we probably do</p>
 <p> Do we go to the patient's records (or other related pages) once the fields are clicked?</p>
@@ -29,6 +29,7 @@
    {
         <tr>
             <td>
+                
                 @Html.DisplayFor(modelItem => item.Patient.FirstName)
                 @Html.DisplayFor(modelItem => item.Patient.LastName)
             </td>

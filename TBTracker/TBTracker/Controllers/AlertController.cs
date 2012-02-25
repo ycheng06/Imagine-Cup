@@ -18,7 +18,6 @@ namespace TBTracker.Controllers
         public ViewResult Index()
         {
             var samp_alerts  = db.Alerts.ToList();
-
             return View(samp_alerts);
             //return View(db.Alerts.ToList());
         }

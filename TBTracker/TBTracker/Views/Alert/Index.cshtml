@@ -29,7 +29,7 @@
    {
         <tr>
             <td>
-                @Html.ActionLink(item.Patient.FirstName + " " + item.Patient.LastName, "/../PatientManager/Details",  new { id = item.PatientId })
+               @Html.ActionLink(item.Patient.FirstName + " " + item.Patient.LastName, "Details", "PatientManager", "", "", "", new { id = item.PatientId}, "")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PatientId)

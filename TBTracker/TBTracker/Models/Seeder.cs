@@ -10,7 +10,7 @@ namespace TBTracker.Models
     {
         protected override void Seed(TrackerEntities context)
         {
-            Patient patient = new Patient
+            Patient patient1 = new Patient
             {
                 FirstName = "Jason",
                 LastName = "Cheng",
@@ -19,14 +19,41 @@ namespace TBTracker.Models
                 FamilyPhone2 = "6175129381",
                 Address = "887 Broadway",
             };
-            Alert alert = new Alert
+            Patient patient2 = new Patient
+            {
+                FirstName = "Greg",
+                LastName = "Wong",
+                Phone = "6175832334",
+                FamilyPhone1 = "6175832334",
+                FamilyPhone2 = "6175832334",
+                Address = "Classified",
+            };
+            Alert alert1 = new Alert
             {
                 AlertDate = DateTime.Now,
-                AlertType = "Miss Medication",
-                Patient = patient,
+                AlertTypeId = 1, 
+                Patient = patient1,
             };
-            context.Patients.Add(patient);
-            context.Alerts.Add(alert);
+            Alert alert2 = new Alert
+            {
+                AlertDate = DateTime.Now,
+                AlertTypeId = 2, 
+                Patient = patient2,
+            };
+            AlertType alertType1 = new AlertType
+            {
+                Name = "Missed Medication"
+            };
+            AlertType alertType2 = new AlertType
+            {
+                Name = "Missed Checkup"
+            };
+            context.Patients.Add(patient1);
+            context.Patients.Add(patient2);
+            context.Alerts.Add(alert1);
+            context.Alerts.Add(alert2);
+            context.AlertTypes.Add(alertType1);
+            context.AlertTypes.Add(alertType2);
         }
     }
 }

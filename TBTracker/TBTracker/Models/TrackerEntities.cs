@@ -10,6 +10,7 @@ namespace TBTracker.Models
         public DbSet<Test> Tests { get; set; }
         public DbSet<TestInfo> TestInfos { get; set; }
         public DbSet<Alert> Alerts { get; set; }
+        public DbSet<AlertType> AlertTypes { get; set; }
         public DbSet<Message> Messages { get; set; }
     }
 }

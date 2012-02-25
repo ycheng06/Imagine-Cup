@@ -103,6 +103,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Alert.cs" />
+    <Compile Include="Models\AlertType.cs" />
     <Compile Include="Models\Drug.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Patient.cs" />

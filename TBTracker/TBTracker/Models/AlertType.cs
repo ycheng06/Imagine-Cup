@@ -9,15 +9,9 @@ using DataAnnotationsExtensions;
 
 namespace TBTracker.Models
 {
-    public class Alert
+    public class AlertType
     {
-        public int AlertId { get; set; }
-        public DateTime AlertDate { get; set; }
-
         public int AlertTypeId { get; set; }
-        public AlertType AlertType { get; set; }
-
-        public int PatientId { get; set; }
-        public Patient Patient { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -16,20 +16,35 @@
 
         @Html.HiddenFor(model => model.MessageId)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.StartDate)
-        </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.StartDate)
-            @Html.ValidationMessageFor(model => model.StartDate)
+            <div class="date-container">
+                @Html.EditorFor(model => model.StartDate)
+            </div>
+            <!--
+            <div class="time-container">
+                @Html.EditorFor(model => model.StartDate.TimeOfDay)
+            </div>
+            -->
+            <div class="clear">
+                @Html.ValidationMessageFor(model => model.StartDate)
+            </div>
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.EndDate)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.EndDate)
-            @Html.ValidationMessageFor(model => model.EndDate)
+            <div class="date-container">
+                @Html.EditorFor(model => model.EndDate)
+            </div>
+            <!--
+            <div class="time-container">
+                @Html.EditorFor(model => model.EndDate.TimeOfDay)
+            </div>
+            -->
+            <div class="clear">
+                @Html.ValidationMessageFor(model => model.EndDate)
+            </div>
         </div>
 
         <div class="editor-label">

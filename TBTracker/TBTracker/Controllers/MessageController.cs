@@ -37,7 +37,6 @@ namespace TBTracker.Controllers
 
         public ActionResult Create()
         {
-            
             IEnumerable<SelectListItem> items = db.Patients
                 .Select(c => new SelectListItem
                     {
@@ -45,7 +44,11 @@ namespace TBTracker.Controllers
                         Text = c.FirstName + " " + c.LastName
                     });
             ViewBag.PatientId = items;
-            return View();
+            return View(new Message
+            {
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now
+            });
 
         }
 

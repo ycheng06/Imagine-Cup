@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Editing Timeline for @ViewData["Name"].ToString()</h2>
+
+
+Drugs
+@foreach (var drug in ViewData["DrugList"] as IEnumerable<TBTracker.Models.Drug>)
+{
+    <ul>
+        <li>Drug: @drug.DrugId, @drug.TimesPerWeek times a week, @drug.StartDate to @drug.EndDate</li>
+    </ul>
+}
+Tests
+@foreach (var test in ViewData["TestList"] as IEnumerable<TBTracker.Models.Test>)
+{
+    <ul>
+        <li>Test: @test.TestId, Taken: @test.TestDate, Result: @test.TestResult</li>
+    </ul>
+}
+Messages
+
+<p>
+Things to help finish [xihan]<br />
+-Make id display name - how? <br />
+-Make entries into (prefilled) form <br />
+-Messages list <br />
+</p>

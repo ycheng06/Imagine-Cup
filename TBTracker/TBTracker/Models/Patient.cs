@@ -41,6 +41,7 @@ namespace TBTracker.Models
         public string Address { get; set; }
 
         public virtual ICollection<Drug> Drugs { get; set; }
+        //public virtual ICollection<DrugInfo> DrugInfos { get; set; }
         public virtual ICollection<Test> Tests { get; set; }
         public virtual ICollection<Alert> Alerts { get; set; }
         public virtual ICollection<Message> Messages { get; set; }

@@ -16,14 +16,15 @@ namespace TBTracker.Models
         public string TestResult { get; set; }
 
         public int TestInfoId { get; set; }
-        public TestInfo TestInfo { get; set; }
+        public virtual TestInfo TestInfo { get; set; }
         public int PatientId { get; set; }
-        public Patient Patient { get; set; }
+        public virtual Patient Patient { get; set; }
     }
 
     public class TestInfo
     {
         public int TestInfoId { get; set; }
         public string Name { get; set; }
+        public virtual ICollection<Test> Tests { get; set; }
     }
 }

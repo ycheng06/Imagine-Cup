@@ -1,5 +1,0 @@
-git pull
-git add file.txt
-git rm file1.txt
-git commit -m "message goes here"
-git push

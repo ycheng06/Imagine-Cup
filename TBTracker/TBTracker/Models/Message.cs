@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using DataAnnotationsExtensions;
-using TBTracker.Validation;
 
 namespace TBTracker.Models
 {
@@ -16,9 +15,8 @@ namespace TBTracker.Models
 
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
-        
+
         [DataType(DataType.Date)]
-        [DateGreaterThanAttribute("StartDate")]
         public DateTime EndDate { get; set; }
 
         [Required(ErrorMessage="Message is blank")]

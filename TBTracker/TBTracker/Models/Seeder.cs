@@ -51,19 +51,18 @@ namespace TBTracker.Models
             Message message1 = new Message
             {
                 StartDate = DateTime.Now,
-                EndDate = DateTime.Now.AddDays(1),
+                EndDate = DateTime.Now,
                 MessageText = "You need to follow your regimen!",
                 Patient = patient1
             };
             Message message2 = new Message
             {
                 StartDate = DateTime.Now,
-                EndDate = DateTime.Now.AddDays(1),
+                EndDate = DateTime.Now,
                 MessageText = "Calling Greg! Report to base to pick up your regimen!",
                 Patient = patient2
             };
 
-            
             context.Patients.Add(patient1);
             context.Patients.Add(patient2);
             context.Alerts.Add(alert1);
@@ -72,7 +71,121 @@ namespace TBTracker.Models
             context.AlertTypes.Add(alertType2);
             context.Messages.Add(message1);
             context.Messages.Add(message2);
-            
+
+            ////////////////////////////////////////////////////////////
+            //Sean's tests for patients -> drugs/tests
+            DrugInfo drugInfo1 = new DrugInfo
+            {
+                Name = "D1: sugar",
+                Description = "..spice and everything nice",
+            };
+
+            DrugInfo drugInfo2 = new DrugInfo
+            {
+                Name = "D2: kryptonite",
+                Description = "that was easy..",
+            };
+
+            DrugInfo drugInfo3 = new DrugInfo
+            {
+                Name = "D3: placebo",
+                Description = "cheap and effective",
+            };
+
+            Drug drug1 = new Drug
+            {
+                StartDate = new DateTime(2010, 1, 1),
+                EndDate = new DateTime(2010, 2, 2),
+                Timezone = 0,
+                TimesPerWeek = 1,
+                Type = "none",
+                DrugInfo = drugInfo1,
+                Patient = patient1,
+            };
+
+            Drug drug2 = new Drug
+            {
+                StartDate = new DateTime(2010, 1, 1),
+                EndDate = new DateTime(2010, 2, 2),
+                Timezone = 0,
+                TimesPerWeek = 2,
+                Type = "none",
+                DrugInfo = drugInfo2,
+                Patient = patient1,
+            };
+
+            Drug drug3 = new Drug
+            {
+                StartDate = new DateTime(2010, 1, 1),
+                EndDate = new DateTime(2010, 2, 2),
+                Timezone = 0,
+                TimesPerWeek = 3,
+                Type = "none",
+                DrugInfo = drugInfo3,
+                Patient = patient1,
+            };
+
+            Drug drug4 = new Drug
+            {
+                StartDate = new DateTime(2010, 2, 3),
+                EndDate = new DateTime(2010, 2, 20),
+                Timezone = 0,
+                TimesPerWeek = 4,
+                Type = "none",
+                DrugInfo = drugInfo3,
+                Patient = patient1,
+            };
+
+            TestInfo testInfo1 = new TestInfo
+            {
+                Name = "TI1: leap of faith",
+            };
+
+            TestInfo testInfo2 = new TestInfo
+            {
+                Name = "TI2: calculus exam",
+            };
+
+            Test test1 = new Test
+            {
+                TestDate = new DateTime(2010, 1, 17),
+                TestResult = "positive",
+                TestInfo = testInfo1,
+                Patient = patient1,
+            };
+
+            Test test2 = new Test
+            {
+                TestDate = new DateTime(2010, 1, 18),
+                TestResult = "negative",
+                TestInfo = testInfo2,
+                Patient = patient1,
+            };
+
+            Test test3 = new Test
+            {
+                TestDate = new DateTime(2010, 1, 19),
+                TestResult = "positive",
+                TestInfo = testInfo1,
+                Patient = patient1,
+            };
+
+            context.DrugInfos.Add(drugInfo1);
+            context.DrugInfos.Add(drugInfo2);
+            context.DrugInfos.Add(drugInfo3);
+            context.Drugs.Add(drug1);
+            context.Drugs.Add(drug2);
+            context.Drugs.Add(drug3);
+            context.Drugs.Add(drug4);
+
+            context.TestInfos.Add(testInfo1);
+            context.TestInfos.Add(testInfo2);
+            context.Tests.Add(test1);
+            context.Tests.Add(test2);
+            context.Tests.Add(test3);
+            context.Patients.Add(patient1);
+            context.Patients.Add(patient2);
+
         }
     }
 }

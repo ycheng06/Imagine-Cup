@@ -1,0 +1,36 @@
+﻿@model TBTracker.Models.Message
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Message</legend>
+
+    <div class="display-label">StartDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartDate)
+    </div>
+
+    <div class="display-label">EndDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EndDate)
+    </div>
+
+    <div class="display-label">Message Text</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MessageText)
+    </div>
+
+    <div class="display-label">Patient</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Patient.FirstName)
+        @Html.DisplayFor(model => model.Patient.LastName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MessageId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

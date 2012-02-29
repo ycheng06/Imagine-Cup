@@ -6,6 +6,11 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Data.Entity;
 using TBTracker.Models;
+using Quartz;
+using Quartz.Impl;
+using System.Diagnostics;
+using Microsoft.WindowsAzure.Diagnostics;
+
 namespace TBTracker
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
@@ -33,12 +38,28 @@ namespace TBTracker
         protected void Application_Start()
         {
             Database.SetInitializer<TrackerEntities>(new Seeder());
+            Scheduler();
             AreaRegistration.RegisterAllAreas();
-
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
             ModelBinders.Binders.Add(typeof(DateTime), new Models.DateTimeModelBinder());
 
+        }
+
+        private void Scheduler()
+        {
+            ISchedulerFactory schedulePool = new StdSchedulerFactory();
+            IScheduler sched = schedulePool.GetScheduler();
+            sched.Start();
+
+            //construct job info
+            JobDetail jobDetail = new JobDetail("SendReminder", null, typeof(ReminderSender));
+
+            //Set when to repeat the job
+            Trigger trigger = TriggerUtils.MakeMinutelyTrigger(2, 3);
+            trigger.StartTimeUtc = DateTime.UtcNow; 
+            trigger.Name = "Testing";
+            sched.ScheduleJob(jobDetail, trigger);
         }
     }
 }

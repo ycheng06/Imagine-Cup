@@ -16,8 +16,8 @@ namespace TBTracker
 
         public void Execute(JobExecutionContext context)
         {
-            var twilio = new TwilioRestClient(accountSid, authToken);
-            var msg = twilio.SendSmsMessage(twiliNumber, "+16469266783", "Testing");
+            //var twilio = new TwilioRestClient(accountSid, authToken);
+            //var msg = twilio.SendSmsMessage(twiliNumber, "+16469266783", "Testing");
             Trace.WriteLine("wtf");
         }
             

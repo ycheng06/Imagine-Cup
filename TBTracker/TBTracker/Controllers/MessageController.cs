@@ -9,17 +9,24 @@ using TBTracker.Models;
 using System.Data.Objects.SqlClient;
 
 namespace TBTracker.Controllers
-{ 
+{
     public class MessageController : Controller
     {
         private TrackerEntities db = new TrackerEntities();
+        private TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
 
         //
         // GET: /Message/
 
         public ViewResult Index()
         {
-            var messages = db.Messages.Include(m => m.Patient);
+            var messages = db.Messages.Include("Patient");
+            foreach (Message m in messages)
+            {
+                //convert to usertimezone
+                m.StartDate = TimeZoneInfo.ConvertTimeFromUtc(m.StartDate, userTimeZone);
+                m.EndDate = TimeZoneInfo.ConvertTimeFromUtc(m.EndDate, userTimeZone);
+            }
             return View(messages.ToList());
         }
 
@@ -29,6 +36,9 @@ namespace TBTracker.Controllers
         public ViewResult Details(int id)
         {
             Message message = db.Messages.Include("Patient").SingleOrDefault(x => x.MessageId == id);
+            //convert to usertime
+            message.StartDate = TimeZoneInfo.ConvertTimeFromUtc(message.StartDate, userTimeZone);
+            message.EndDate = TimeZoneInfo.ConvertTimeFromUtc(message.EndDate, userTimeZone);
             return View(message);
         }
 
@@ -39,15 +49,16 @@ namespace TBTracker.Controllers
         {
             IEnumerable<SelectListItem> items = db.Patients
                 .Select(c => new SelectListItem
-                    {
-                        Value = SqlFunctions.StringConvert((decimal)c.PatientId),
-                        Text = c.FirstName + " " + c.LastName
-                    });
+                {
+                    Value = SqlFunctions.StringConvert((decimal)c.PatientId),
+                    Text = c.FirstName + " " + c.LastName
+                });
             ViewBag.PatientId = items;
             return View(new Message
             {
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Now
+                //convert time now in utc to usertime
+                StartDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, userTimeZone),
+                EndDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow.AddDays(1), userTimeZone)
             });
 
         }
@@ -60,18 +71,21 @@ namespace TBTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+                //convert usertime to utc before storing
+                message.StartDate = TimeZoneInfo.ConvertTimeToUtc(message.StartDate);
+                message.EndDate = TimeZoneInfo.ConvertTimeToUtc(message.EndDate);
                 db.Messages.Add(message);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             IEnumerable<SelectListItem> items = db.Patients
                 .Select(c => new SelectListItem
-                    {
-                        Value = SqlFunctions.StringConvert((decimal)c.PatientId),
-                        Text = c.FirstName + " " + c.LastName
-                    });
+                {
+                    Value = SqlFunctions.StringConvert((decimal)c.PatientId),
+                    Text = c.FirstName + " " + c.LastName
+                });
             ViewBag.PatientId = items;
-            return View();
+            return View(message);
         }
 
         //
@@ -82,12 +96,15 @@ namespace TBTracker.Controllers
             Message message = db.Messages.Find(id);
             IEnumerable<SelectListItem> items = db.Patients
                 .Select(c => new SelectListItem
-                    {
-                        Value = SqlFunctions.StringConvert((decimal)c.PatientId),
-                        Text = c.FirstName + " " + c.LastName,
-                        Selected = (c.PatientId == message.PatientId)
-                    });
+                {
+                    Value = SqlFunctions.StringConvert((decimal)c.PatientId),
+                    Text = c.FirstName + " " + c.LastName,
+                    Selected = (c.PatientId == message.PatientId)
+                });
             ViewBag.PatientId = items;
+            //convert to usertime
+            message.StartDate = TimeZoneInfo.ConvertTimeFromUtc(message.StartDate, userTimeZone);
+            message.EndDate = TimeZoneInfo.ConvertTimeFromUtc(message.EndDate, userTimeZone);
             return View(message);
         }
 
@@ -99,17 +116,20 @@ namespace TBTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+                //convert usertime to utc before storing
+                message.StartDate = TimeZoneInfo.ConvertTimeToUtc(message.StartDate);
+                message.EndDate = TimeZoneInfo.ConvertTimeToUtc(message.EndDate);
                 db.Entry(message).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             IEnumerable<SelectListItem> items = db.Patients
                             .Select(c => new SelectListItem
-                                {
-                                    Value = SqlFunctions.StringConvert((decimal)c.PatientId),
-                                    Text = c.FirstName + " " + c.LastName,
-                                    Selected = (c.PatientId == message.PatientId)
-                                });
+                            {
+                                Value = SqlFunctions.StringConvert((decimal)c.PatientId),
+                                Text = c.FirstName + " " + c.LastName,
+                                Selected = (c.PatientId == message.PatientId)
+                            });
             ViewBag.PatientId = items;
             return View(message);
         }

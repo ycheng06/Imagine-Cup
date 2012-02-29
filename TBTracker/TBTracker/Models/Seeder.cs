@@ -51,14 +51,14 @@ namespace TBTracker.Models
             Message message1 = new Message
             {
                 StartDate = DateTime.Now,
-                EndDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(1),
                 MessageText = "You need to follow your regimen!",
                 Patient = patient1
             };
             Message message2 = new Message
             {
                 StartDate = DateTime.Now,
-                EndDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(1),
                 MessageText = "Calling Greg! Report to base to pick up your regimen!",
                 Patient = patient2
             };

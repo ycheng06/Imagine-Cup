@@ -42,7 +42,6 @@ namespace TBTracker
             AreaRegistration.RegisterAllAreas();
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
-            ModelBinders.Binders.Add(typeof(DateTime), new Models.DateTimeModelBinder());
 
         }
 

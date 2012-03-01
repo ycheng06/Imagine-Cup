@@ -14,7 +14,6 @@ C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\System.Web.WebPages
 C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\WebActivator.dll
 C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\EntityFramework.xml
 C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\Microsoft.Web.Infrastructure.xml
-C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\System.Web.Mvc.xml
 C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\System.Web.Razor.xml
 C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\System.Web.WebPages.xml
 C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\System.Web.Helpers.xml
@@ -114,3 +113,20 @@ D:\ImagineCup\TBTracker\TBTracker\bin\System.Web.WebPages.Razor.xml
 D:\ImagineCup\TBTracker\TBTracker\obj\Debug\ResolveAssemblyReference.cache
 D:\ImagineCup\TBTracker\TBTracker\obj\Debug\TBTracker.dll
 D:\ImagineCup\TBTracker\TBTracker\obj\Debug\TBTracker.pdb
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\Common.Logging.dll
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\Microsoft.WindowsAzure.Diagnostics.dll
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\Microsoft.WindowsAzure.StorageClient.dll
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\Newtonsoft.Json.dll
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\Quartz.dll
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\RestSharp.dll
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\Twilio.Api.dll
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\TwilioSharp.dll
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\TwilioSharp.MVC3.dll
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\Microsoft.WindowsAzure.Diagnostics.xml
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\Microsoft.WindowsAzure.StorageClient.xml
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\Newtonsoft.Json.pdb
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\Newtonsoft.Json.xml
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\Twilio.Api.pdb
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\Twilio.Api.xml
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\TwilioSharp.pdb
+C:\Users\Gregory Wong\Desktop\ic2012\TBTracker\TBTracker\bin\TwilioSharp.MVC3.pdb

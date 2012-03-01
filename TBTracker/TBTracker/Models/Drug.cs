@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace TBTracker.Models
 {
     public class Drug
     {
         public int DrugId { get; set; }
+        [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
+        [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
         public int Timezone { get; set; }   //timezone in relation to +0
         public int TimesPerWeek { get; set; }

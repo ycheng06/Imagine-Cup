@@ -23,15 +23,21 @@ namespace TBTracker.Controllers
         // GET: /Timeline/Edit/1
         public ActionResult Edit(int id) //id == patientId
         {
-            var Patient = trackerDB.Patients.Find(id);
-            return View(Patient);
+            var x = id;
+
+            var patient = trackerDB.Patients.Find(id);
+            return View(patient);
         }
         // GET: /MsgTemplate/AddDrug
         public ActionResult AddDrug(int pid)
         {
             ViewData["PatientId"] = pid;
             populateDrugNames();
-            return View();
+            return View(new Drug
+            {
+                StartDate = DateTime.UtcNow,
+                EndDate = DateTime.UtcNow.AddDays(1)
+            });
         }
         // POST: /MsgTemplate/AddDrug
         [HttpPost]
@@ -47,7 +53,7 @@ namespace TBTracker.Controllers
                 return RedirectToAction("Edit", new { id = drug.PatientId });
             }
             populateDrugNames();
-            return View();
+            return View(drug);
         }
         // GET: /MsgTemplate/EditDrug
         public ActionResult EditDrug(int id)

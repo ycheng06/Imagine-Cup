@@ -206,9 +206,6 @@
     <Content Include="Views\PatientManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\PatientManager\Details.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\PatientManager\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -242,7 +239,13 @@
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Debug\ResolveAssemblyReference.cache" />
+    <Content Include="Views\PatientManager\Details.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Views\MsgTemplate\Edit.cshtml" />
+    <Content Include="Views\MsgTemplate\AddDrug.cshtml" />
+    <Content Include="Views\MsgTemplate\EditDrug.cshtml" />
+    <Content Include="Views\MsgTemplate\DeleteDrug.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

@@ -1,50 +1,35 @@
-﻿@using TBTracker.Models
-@model Patient
-           
+﻿@model TBTracker.Models.Patient
+
 @{
     ViewBag.Title = "Edit";
 }
 
-//xihan's attempt 
-<table title = "Drug Messages">
-  <tr>
-     <th>Drug Name</th>
-     <th>Dosage</th>
-     <th>Duration</th>
-  </tr>
-  @foreach (var drug in Model.Drugs)
-  {
-    <tr>
-      <td>@drug.DrugInfo.Name</td>
-      <td>@drug.TimesPerWeek Times Per Week</td>
-      <td>@drug.StartDate To @drug.EndDate</td>
-    </tr>
-  }
-</table>
-<table title = "Test Messages">
-  <tr>
-    <th>Description</th>
-    <th>Test Date</th>
-  </tr>
-  @foreach (var test in Model.Tests)
-  {
-      <tr>
-        <td>@test.TestInfo.Name</td>
-        <td>@test.TestDate</td>
-      </tr>
-  }
-</table>
+<h2>Edit</h2>
 
-<table title = "Custom Messages">
- <tr>
-   <th>Message</th>
-   <th>Duration</th>
- </tr>
- @foreach (var msg in Model.Messages)
- {
-     <tr>
-       <td>@msg.MessageText</td>
-       <td>@msg.StartDate To @msg.EndDate</td>
-     </tr>
- }
-</table>
+@using (@Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+      <legend>Drug Messages</legend>
+      <table class = "Drug Messages">
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Dosage</th>
+          <th>Duration</th>
+        </tr>
+        @foreach (var drug in Model.Drugs)
+        {
+          <tr>
+              <td>
+              @Html.ActionLink("Delete", "DeleteDrug", new {id = drug.DrugId }) | @Html.ActionLink("Edit", "EditDrug", new {id = drug.DrugId })
+              </td>
+              <td>@drug.DrugInfo.Name</td>
+              <td>@drug.TimesPerWeek Times Per Week</td>
+              <td>@drug.StartDate To @drug.EndDate</td>
+          </tr>
+        }
+        <tr><td>@Html.ActionLink("Add","AddDrug",new {pid=Model.PatientId})</td></tr>
+      </table>
+    </fieldset>
+}

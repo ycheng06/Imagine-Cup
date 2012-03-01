@@ -39,6 +39,48 @@
         @Html.DisplayFor(model => model.Address)
     </div>
 </fieldset>
+<table title = "Drug Messages">
+  <tr>
+     <th>Drug Name</th>
+     <th>Dosage</th>
+     <th>Duration</th>
+  </tr>
+  @foreach (var drug in Model.Drugs)
+  {
+    <tr>
+      <td>@drug.DrugInfo.Name</td>
+      <td>@drug.TimesPerWeek Times Per Week</td>
+      <td>@drug.StartDate To @drug.EndDate</td>
+    </tr>
+  }
+</table>
+<table title = "Test Messages">
+  <tr>
+    <th>Description</th>
+    <th>Test Date</th>
+  </tr>
+  @foreach (var test in Model.Tests)
+  {
+      <tr>
+        <td>@test.TestInfo.Name</td>
+        <td>@test.TestDate</td>
+      </tr>
+  }
+</table>
+
+<table title = "Custom Messages">
+ <tr>
+   <th>Message</th>
+   <th>Duration</th>
+ </tr>
+ @foreach (var msg in Model.Messages)
+ {
+     <tr>
+       <td>@msg.MessageText</td>
+       <td>@msg.StartDate To @msg.EndDate</td>
+     </tr>
+ }
+</table>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.PatientId }) |
     @Html.ActionLink("Back to List", "Index")

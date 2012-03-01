@@ -62,6 +62,13 @@ namespace TBTracker.Models
                 MessageText = "Calling Greg! Report to base to pick up your regimen!",
                 Patient = patient2
             };
+            Message message3 = new Message
+            {
+                StartDate = DateTime.UtcNow.AddDays(-1),
+                EndDate = DateTime.UtcNow,
+                MessageText = "This is intended to be an expired message.",
+                Patient = patient1
+            };
 
             context.Patients.Add(patient1);
             context.Patients.Add(patient2);
@@ -71,6 +78,7 @@ namespace TBTracker.Models
             context.AlertTypes.Add(alertType2);
             context.Messages.Add(message1);
             context.Messages.Add(message2);
+            context.Messages.Add(message3);
 
             ////////////////////////////////////////////////////////////
             //Sean's tests for patients -> drugs/tests

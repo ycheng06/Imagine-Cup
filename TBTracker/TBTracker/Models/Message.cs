@@ -17,7 +17,7 @@ namespace TBTracker.Models
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
         [DateGreaterThanAttribute("StartDate")]
         public DateTime EndDate { get; set; }
 

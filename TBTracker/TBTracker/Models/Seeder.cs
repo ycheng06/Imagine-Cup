@@ -30,13 +30,13 @@ namespace TBTracker.Models
             };
             Alert alert1 = new Alert
             {
-                AlertDate = DateTime.Now,
+                AlertDate = DateTime.UtcNow,
                 AlertTypeId = 1, 
                 Patient = patient1,
             };
             Alert alert2 = new Alert
             {
-                AlertDate = DateTime.Now,
+                AlertDate = DateTime.UtcNow,
                 AlertTypeId = 2, 
                 Patient = patient2,
             };
@@ -50,15 +50,15 @@ namespace TBTracker.Models
             };
             Message message1 = new Message
             {
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Now.AddDays(1),
+                StartDate = DateTime.UtcNow,
+                EndDate = DateTime.UtcNow.AddDays(1),
                 MessageText = "You need to follow your regimen!",
                 Patient = patient1
             };
             Message message2 = new Message
             {
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Now.AddDays(1),
+                StartDate = DateTime.UtcNow,
+                EndDate = DateTime.UtcNow.AddDays(1),
                 MessageText = "Calling Greg! Report to base to pick up your regimen!",
                 Patient = patient2
             };

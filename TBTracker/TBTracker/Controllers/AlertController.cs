@@ -14,12 +14,19 @@ namespace TBTracker.Controllers
         //
         // GET: /Alert/
         private TrackerEntities db = new TrackerEntities();
+        //for now
+        private TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
 
         public ViewResult Index()
         {
-            var samp_alerts  = db.Alerts.Include("Patient")
+            var alerts  = db.Alerts.Include("Patient")
                                         .Include("AlertType").ToList();
-            return View(samp_alerts);
+            foreach (Alert a in alerts)
+            {
+                //convert to usertimezone
+                a.AlertDate = TimeZoneInfo.ConvertTimeFromUtc(a.AlertDate, userTimeZone);
+            }
+            return View(alerts);
             //return View(db.Alerts.ToList());
         }
         public ViewResult Details(int id)

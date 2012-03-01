@@ -13,6 +13,7 @@ namespace TBTracker.Controllers
     public class MessageController : Controller
     {
         private TrackerEntities db = new TrackerEntities();
+        //for now
         private TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
 
         //
@@ -23,6 +24,7 @@ namespace TBTracker.Controllers
             var messages = db.Messages.Include("Patient");
             foreach (Message m in messages)
             {
+
                 //convert to usertimezone
                 m.StartDate = TimeZoneInfo.ConvertTimeFromUtc(m.StartDate, userTimeZone);
                 m.EndDate = TimeZoneInfo.ConvertTimeFromUtc(m.EndDate, userTimeZone);
@@ -71,9 +73,9 @@ namespace TBTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                //convert usertime to utc before storing
-                message.StartDate = TimeZoneInfo.ConvertTimeToUtc(message.StartDate);
-                message.EndDate = TimeZoneInfo.ConvertTimeToUtc(message.EndDate);
+                //convert usertime to utc before storing - no need for this because of datetimeconversionbinder
+                //message.StartDate = TimeZoneInfo.ConvertTimeToUtc(message.StartDate);
+                //message.EndDate = TimeZoneInfo.ConvertTimeToUtc(message.EndDate);
                 db.Messages.Add(message);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -116,9 +118,11 @@ namespace TBTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                //convert usertime to utc before storing
+                /*
+                //convert usertime to utc before storing - no need for this because of datetimeconversionbinder
                 message.StartDate = TimeZoneInfo.ConvertTimeToUtc(message.StartDate);
                 message.EndDate = TimeZoneInfo.ConvertTimeToUtc(message.EndDate);
+                */
                 db.Entry(message).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

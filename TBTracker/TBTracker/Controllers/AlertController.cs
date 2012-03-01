@@ -21,11 +21,13 @@ namespace TBTracker.Controllers
         {
             var alerts  = db.Alerts.Include("Patient")
                                         .Include("AlertType").ToList();
+            /*
             foreach (Alert a in alerts)
             {
                 //convert to usertimezone
                 a.AlertDate = TimeZoneInfo.ConvertTimeFromUtc(a.AlertDate, userTimeZone);
             }
+            */
             return View(alerts);
             //return View(db.Alerts.ToList());
         }

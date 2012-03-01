@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="TBTracker.Azure" generation="1" functional="0" release="0" Id="d4e35b30-e395-478b-beb2-ccdcce726b0f" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+=======
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="TBTracker.Azure" generation="1" functional="0" release="0" Id="042615c7-527e-42de-bde0-57117f4efff4" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+>>>>>>> origin/master
   <groups>
     <group name="TBTracker.AzureGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -42,7 +46,11 @@
       </maps>
       <components>
         <groupHascomponents>
+<<<<<<< HEAD
           <role name="TBTracker" generation="1" functional="0" release="0" software="D:\ImagineCup\TBTracker\TBTracker.Azure\csx\Debug\roles\TBTracker" entryPoint="base\x86\WaHostBootstrapper.exe" parameters="base\x86\WaIISHost.exe " memIndex="1792" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
+=======
+          <role name="TBTracker" generation="1" functional="0" release="0" software="C:\Users\Jason\Documents\ic2012\TBTracker\TBTracker.Azure\csx\Debug\roles\TBTracker" entryPoint="base\x86\WaHostBootstrapper.exe" parameters="base\x86\WaIISHost.exe " memIndex="1792" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
+>>>>>>> origin/master
             <componentports>
               <inPort name="Endpoint1" protocol="http" portRanges="80" />
             </componentports>
@@ -68,9 +76,15 @@
     </group>
   </groups>
   <implements>
+<<<<<<< HEAD
     <implementation Id="2ae9eeb3-c872-4c33-98fb-76492ce4e8eb" ref="Microsoft.RedDog.Contract\ServiceContract\TBTracker.AzureContract@ServiceDefinition.build">
       <interfacereferences>
         <interfaceReference Id="be5291ac-5b36-49ff-939f-611c5e878161" ref="Microsoft.RedDog.Contract\Interface\TBTracker:Endpoint1@ServiceDefinition.build">
+=======
+    <implementation Id="c828821c-ae68-4913-b557-40a9bea0b287" ref="Microsoft.RedDog.Contract\ServiceContract\TBTracker.AzureContract@ServiceDefinition.build">
+      <interfacereferences>
+        <interfaceReference Id="daef8d67-c1e6-4e2f-8192-8216db253d6d" ref="Microsoft.RedDog.Contract\Interface\TBTracker:Endpoint1@ServiceDefinition.build">
+>>>>>>> origin/master
           <inPort>
             <inPortMoniker name="/TBTracker.Azure/TBTracker.AzureGroup/TBTracker:Endpoint1" />
           </inPort>

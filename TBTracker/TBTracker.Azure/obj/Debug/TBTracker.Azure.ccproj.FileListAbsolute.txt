@@ -1,4 +1,5 @@
 C:\Users\Jason\Documents\ic2012\TBTracker\TBTracker.Azure\bin\Debug\ServiceConfiguration.cscfg
+<<<<<<< HEAD
 D:\ImagineCup\TBTracker\TBTracker.Azure\bin\Debug\ServiceConfiguration.cscfg
 D:\ImagineCup\TBTracker\TBTracker.Azure\obj\Debug\TBTracker\bin\Common.Logging.dll
 D:\ImagineCup\TBTracker\TBTracker.Azure\obj\Debug\TBTracker\bin\DataAnnotationsExtensions.ClientValidation.dll
@@ -44,3 +45,5 @@ D:\ImagineCup\TBTracker\TBTracker.Azure\obj\Debug\TBTracker\bin\WebMatrix.Data.d
 D:\ImagineCup\TBTracker\TBTracker.Azure\obj\Debug\TBTracker\bin\WebMatrix.Data.xml
 D:\ImagineCup\TBTracker\TBTracker.Azure\obj\Debug\TBTracker\bin\WebMatrix.WebData.dll
 D:\ImagineCup\TBTracker\TBTracker.Azure\obj\Debug\TBTracker\bin\WebMatrix.WebData.xml
+=======
+>>>>>>> origin/master

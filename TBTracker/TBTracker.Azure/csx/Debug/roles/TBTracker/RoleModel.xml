@@ -28,6 +28,7 @@
     <Property name="ProjectName" value="TBTracker" />
     <Property name="Configuration" value="Debug" />
     <Property name="Platform" value="AnyCPU" />
+<<<<<<< HEAD
     <Property name="OutputDir" value="D:\ImagineCup\TBTracker\TBTracker.Azure\obj\Debug\TBTracker\" />
     <Property name="EntryPoint" value="TBTracker.dll" />
     <Property name="SourceDir" value="D:\ImagineCup\TBTracker\TBTracker\" />
@@ -35,12 +36,25 @@
     <Property name="SitePhysicalPath" value="D:\ImagineCup\TBTracker\TBTracker\" />
     <Property name="OriginalItemSpec" value="D:\ImagineCup\TBTracker\TBTracker.Azure\TBTracker.Azure.ccproj" />
     <Property name="MSBuildSourceProjectFile" value="D:\ImagineCup\TBTracker\TBTracker.Azure\TBTracker.Azure.ccproj" />
+=======
+    <Property name="OutputDir" value="C:\Users\Jason\Documents\ic2012\TBTracker\TBTracker.Azure\obj\Debug\TBTracker\" />
+    <Property name="EntryPoint" value="TBTracker.dll" />
+    <Property name="SourceDir" value="C:\Users\Jason\Documents\ic2012\TBTracker\TBTracker\" />
+    <Property name="RoleTargetFramework" value="v4.0" />
+    <Property name="SitePhysicalPath" value="C:\Users\Jason\Documents\ic2012\TBTracker\TBTracker\" />
+    <Property name="OriginalItemSpec" value="C:\Users\Jason\Documents\ic2012\TBTracker\TBTracker.Azure\TBTracker.Azure.ccproj" />
+    <Property name="MSBuildSourceProjectFile" value="C:\Users\Jason\Documents\ic2012\TBTracker\TBTracker.Azure\TBTracker.Azure.ccproj" />
+>>>>>>> origin/master
     <Property name="MSBuildSourceTargetName" value="ResolveSingleWebRoleReference" />
     <Property name="TargetFrameworkVersion" value="v4.0" />
     <Property name="TargetRuntimeVersion" value="v4.0" />
   </Properties>
   <Sites>
+<<<<<<< HEAD
     <Site name="Web" physicalDirectory="D:\ImagineCup\TBTracker\TBTracker\">
+=======
+    <Site name="Web" physicalDirectory="C:\Users\Jason\Documents\ic2012\TBTracker\TBTracker\">
+>>>>>>> origin/master
       <Bindings>
         <Binding name="Endpoint1" endpointName="Endpoint1" />
       </Bindings>

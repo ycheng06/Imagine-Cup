@@ -38,19 +38,31 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Address)
     </div>
+
+    <div class="display-label">Time Zone</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TimeZone)
+    </div>
+
+    <div class="display-label">Gender</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Gender)
+    </div>
 </fieldset>
 <table title = "Drug Messages">
   <tr>
      <th>Drug Name</th>
      <th>Dosage</th>
-     <th>Duration</th>
+     <th>Start Date</th>
+     <th>End Date</th>
   </tr>
   @foreach (var drug in Model.Drugs)
   {
     <tr>
       <td>@drug.DrugInfo.Name</td>
       <td>@drug.TimesPerWeek Times Per Week</td>
-      <td>@drug.StartDate To @drug.EndDate</td>
+      <td>@Html.DisplayFor(modelItem => drug.StartDate) </td>
+      <td>@Html.DisplayFor(modelItem => drug.EndDate) </td>
     </tr>
   }
 </table>
@@ -63,7 +75,7 @@
   {
       <tr>
         <td>@test.TestInfo.Name</td>
-        <td>@test.TestDate</td>
+        <td>@Html.DisplayFor(modelItem => test.TestDate) </td>
       </tr>
   }
 </table>
@@ -71,13 +83,15 @@
 <table title = "Custom Messages">
  <tr>
    <th>Message</th>
-   <th>Duration</th>
+   <th>Start Date</th>
+   <th>End Date</th>
  </tr>
  @foreach (var msg in Model.Messages)
  {
      <tr>
        <td>@msg.MessageText</td>
-       <td>@msg.StartDate To @msg.EndDate</td>
+       <td>@Html.DisplayFor(modelItem => msg.StartDate) </td>
+       <td>@Html.DisplayFor(modelItem => msg.EndDate) </td>
      </tr>
  }
 </table>

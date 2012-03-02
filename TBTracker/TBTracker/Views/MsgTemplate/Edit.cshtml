@@ -16,7 +16,8 @@
           <th></th>
           <th>Name</th>
           <th>Dosage</th>
-          <th>Duration</th>
+          <th>Start Date</th>
+          <th>End Date</th>
         </tr>
         @foreach (var drug in Model.Drugs)
         {
@@ -26,7 +27,12 @@
               </td>
               <td>@drug.DrugInfo.Name</td>
               <td>@drug.TimesPerWeek Times Per Week</td>
-              <td>@drug.StartDate To @drug.EndDate</td>
+              <td>
+                @Html.DisplayFor(modelItem => drug.StartDate)
+              </td>
+              <td>
+                @Html.DisplayFor(modelItem => drug.EndDate)
+              </td>
           </tr>
         }
         <tr><td>@Html.ActionLink("Add","AddDrug",new {pid=Model.PatientId})</td></tr>
@@ -50,7 +56,7 @@
            <tr>
              <td>@Html.ActionLink("Delete","DeleteTest",new {id = testMsg.TestId}) | @Html.ActionLink("Edit","EditTest",new {id=testMsg.TestId})</td>
              <td>@testMsg.TestInfo.Name</td>
-             <td>@testMsg.TestDate</td>
+             <td>@Html.DisplayFor(modelItem => testMsg.TestDate)</td>
            </tr>
         }
         <tr><td>@Html.ActionLink("Add","AddTest",new {pid=Model.PatientId})</td></tr>
@@ -67,14 +73,20 @@
         <tr>
            <th></th>
            <th>Message</th>
-           <th>Duration</th>
+           <th>Start Date</th>
+           <th>End Date</th>
         </tr>
         @foreach (var msg in Model.Messages)
         {
            <tr>
                <td>@Html.ActionLink("Delete","DeleteMsg",new {id = msg.MessageId}) | @Html.ActionLink("Edit","EditMsg",new {id=msg.MessageId})</td>
                <td>@msg.MessageText</td>
-               <td>@msg.StartDate To @msg.EndDate</td>
+               <td>
+                   @Html.DisplayFor(modelItem => msg.StartDate)
+               </td>
+               <td>
+                   @Html.DisplayFor(modelItem => msg.EndDate)
+               </td>
            </tr>
         }
         <tr><td>@Html.ActionLink("Add","AddMsg",new {pid=Model.PatientId})</td></tr>

@@ -33,3 +33,51 @@
       </table>
     </fieldset>
 }
+
+@using (@Html.BeginForm())
+{
+   @Html.ValidationSummary(true)
+   <fieldset>
+      <legend>Test Messages</legend>
+      <table class="Test Messages">
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Date</th>
+        </tr>
+        @foreach (var testMsg in Model.Tests)
+        {
+           <tr>
+             <td>@Html.ActionLink("Delete","DeleteTest",new {id = testMsg.TestId}) | @Html.ActionLink("Edit","EditTest",new {id=testMsg.TestId})</td>
+             <td>@testMsg.TestInfo.Name</td>
+             <td>@testMsg.TestDate</td>
+           </tr>
+        }
+        <tr><td>@Html.ActionLink("Add","AddTest",new {pid=Model.PatientId})</td></tr>
+      </table>
+   </fieldset>
+}
+
+@using (@Html.BeginForm())
+{
+   @Html.ValidationSummary(true)
+   <fieldset>
+     <legend>Custom Messages</legend>
+     <table class="Custom Messages">
+        <tr>
+           <th></th>
+           <th>Message</th>
+           <th>Duration</th>
+        </tr>
+        @foreach (var msg in Model.Messages)
+        {
+           <tr>
+               <td>@Html.ActionLink("Delete","DeleteMsg",new {id = msg.MessageId}) | @Html.ActionLink("Edit","EditMsg",new {id=msg.MessageId})</td>
+               <td>@msg.MessageText</td>
+               <td>@msg.StartDate To @msg.EndDate</td>
+           </tr>
+        }
+        <tr><td>@Html.ActionLink("Add","AddMsg",new {pid=Model.PatientId})</td></tr>
+     </table>
+   </fieldset>
+}

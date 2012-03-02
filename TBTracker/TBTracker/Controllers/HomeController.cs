@@ -6,11 +6,12 @@ using System.Web.Mvc;
 
 namespace TBTracker.Controllers
 {
+    [HandleError]
     public class HomeController : Controller
     {
         //
         // GET: /Home/
-
+        [Authorize]
         public ActionResult Index()
         {
             return View();

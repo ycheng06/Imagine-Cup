@@ -10,6 +10,7 @@ using System.Data.Objects.SqlClient;
 
 namespace TBTracker.Controllers
 {
+    [Authorize]
     public class MessageController : Controller
     {
         private TrackerEntities db = new TrackerEntities();

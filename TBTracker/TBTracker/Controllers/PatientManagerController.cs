@@ -9,6 +9,7 @@ using TBTracker.Models;
 
 namespace TBTracker.Controllers
 { 
+    [Authorize]
     public class PatientManagerController : Controller
     {
         private TrackerEntities db = new TrackerEntities();

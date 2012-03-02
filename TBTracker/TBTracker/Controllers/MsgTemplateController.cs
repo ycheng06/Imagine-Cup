@@ -9,6 +9,7 @@ using System.Data.Entity;
 
 namespace TBTracker.Controllers
 {
+    [Authorize]
     public class MsgTemplateController : Controller
     {
         TrackerEntities trackerDB = new TrackerEntities();

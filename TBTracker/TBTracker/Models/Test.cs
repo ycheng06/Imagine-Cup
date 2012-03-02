@@ -12,6 +12,7 @@ namespace TBTracker.Models
     public class Test
     {
         public int TestId { get; set; }
+        [DataType(DataType.Date)]
         public DateTime TestDate { get; set; }
         public string TestResult { get; set; }
 

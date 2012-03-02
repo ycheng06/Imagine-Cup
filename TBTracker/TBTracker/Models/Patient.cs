@@ -9,9 +9,18 @@ using System.Data.Entity;
 
 namespace TBTracker.Models
 {
+    /*
+    public enum Gender
+    {
+        Female = 0,
+        Male = 1,
+        NotSpecified = -1
+    }
+    */
     public class Patient
     {
         public int PatientId { get; set; }
+        public int Gender { get; set; } //0 for female, 1 for male, -1 for other/prefer not to disclose
         
         [Required(ErrorMessage="First/Last Name is Required")]
         [DisplayName("First Name")]
@@ -39,6 +48,11 @@ namespace TBTracker.Models
         
         [Required]
         public string Address { get; set; }
+
+        [Required]
+        public string TimeZone { get; set; }
+
+
 
         public virtual ICollection<Drug> Drugs { get; set; }
         //public virtual ICollection<DrugInfo> DrugInfos { get; set; }

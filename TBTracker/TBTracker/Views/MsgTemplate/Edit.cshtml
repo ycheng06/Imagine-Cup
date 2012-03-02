@@ -16,7 +16,8 @@
           <th></th>
           <th>Name</th>
           <th>Dosage</th>
-          <th>Duration</th>
+          <th>Start Date</th>
+          <th>End Date</th>
         </tr>
         @foreach (var drug in Model.Drugs)
         {
@@ -26,7 +27,12 @@
               </td>
               <td>@drug.DrugInfo.Name</td>
               <td>@drug.TimesPerWeek Times Per Week</td>
-              <td>@drug.StartDate To @drug.EndDate</td>
+              <td>
+                @Html.DisplayFor(modelItem => drug.StartDate)
+              </td>
+              <td>
+                @Html.DisplayFor(modelItem => drug.EndDate)
+              </td>
           </tr>
         }
         <tr><td>@Html.ActionLink("Add","AddDrug",new {pid=Model.PatientId})</td></tr>

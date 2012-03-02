@@ -32,6 +32,12 @@
         <th>
             Address
         </th>
+        <th>
+            Time Zone
+        </th>
+        <th>
+            Gender
+        </th>
         <th></th>
     </tr>
 
@@ -54,6 +60,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeZone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.PatientId }) |

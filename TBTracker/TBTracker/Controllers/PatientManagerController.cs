@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TBTracker.Models;
+using System.Collections.ObjectModel;
 
 namespace TBTracker.Controllers
 { 
@@ -35,6 +36,7 @@ namespace TBTracker.Controllers
 
         public ActionResult Create()
         {
+            populateTimeZones(null);
             return View();
         } 
 
@@ -51,6 +53,7 @@ namespace TBTracker.Controllers
                 return RedirectToAction("Index");  
             }
 
+            populateTimeZones(null);
             return View(patient);
         }
         
@@ -60,6 +63,7 @@ namespace TBTracker.Controllers
         public ActionResult Edit(int id)
         {
             Patient patient = db.Patients.Find(id);
+            populateTimeZones(patient.TimeZone);
             return View(patient);
         }
 
@@ -75,6 +79,7 @@ namespace TBTracker.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            populateTimeZones(patient.TimeZone);
             return View(patient);
         }
 
@@ -103,6 +108,22 @@ namespace TBTracker.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+        private void populateTimeZones(string id)
+        {
+            Dictionary<string, string> timeZones = new Dictionary<string, string>();
+            foreach (var tz in TimeZoneInfo.GetSystemTimeZones())
+            {
+                timeZones.Add(tz.Id, tz.DisplayName);
+            }
+            if (id == null)
+            {
+                ViewData["TimeZone"] = new SelectList(timeZones, "Key", "Value");
+            }
+            else
+            {
+                ViewData["TimeZone"] = new SelectList(timeZones, "Key", "Value", id);
+            }
         }
     }
 }

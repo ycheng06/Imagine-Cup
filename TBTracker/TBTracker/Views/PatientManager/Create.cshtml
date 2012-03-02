@@ -66,7 +66,7 @@
             @Html.LabelFor(model => model.TimeZone)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.TimeZone)
+            @Html.DropDownList("TimeZone")
             @Html.ValidationMessageFor(model => model.TimeZone)
         </div>
 

@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 
 namespace TBTracker.Controllers
 { 
+    [Authorize]
     public class PatientManagerController : Controller
     {
         private TrackerEntities db = new TrackerEntities();
@@ -80,6 +81,18 @@ namespace TBTracker.Controllers
                 return RedirectToAction("Index");
             }
             populateTimeZones(patient.TimeZone);
+            return View(patient);
+        }
+
+        [HttpPost]
+        public ActionResult SaveAndEditTimeline(Patient patient)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(patient).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Edit", "MsgTemplate", new { id = patient.PatientId });
+            }
             return View(patient);
         }
 

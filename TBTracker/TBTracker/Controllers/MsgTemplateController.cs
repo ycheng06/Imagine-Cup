@@ -9,17 +9,11 @@ using System.Data.Entity;
 
 namespace TBTracker.Controllers
 {
+    [Authorize]
     public class MsgTemplateController : Controller
     {
         TrackerEntities trackerDB = new TrackerEntities();
 
-        //
-        // GET: /Timeline/
-        public ActionResult Index()
-        {
-            var patients = trackerDB.Patients.ToList();
-            return View(patients);
-        }
         // GET: /Timeline/Edit/1
         public ActionResult Edit(int id) //id == patientId
         {

@@ -38,6 +38,7 @@ namespace TBTracker.Controllers
         public ActionResult Create()
         {
             populateTimeZones(null);
+            populateGenderList(null);
             return View();
         } 
 
@@ -55,6 +56,7 @@ namespace TBTracker.Controllers
             }
 
             populateTimeZones(null);
+            populateGenderList(null);
             return View(patient);
         }
         
@@ -65,6 +67,7 @@ namespace TBTracker.Controllers
         {
             Patient patient = db.Patients.Find(id);
             populateTimeZones(patient.TimeZone);
+            populateGenderList(patient.Gender);
             return View(patient);
         }
 
@@ -81,6 +84,7 @@ namespace TBTracker.Controllers
                 return RedirectToAction("Index");
             }
             populateTimeZones(patient.TimeZone);
+            populateGenderList(patient.Gender);
             return View(patient);
         }
 
@@ -136,6 +140,21 @@ namespace TBTracker.Controllers
             else
             {
                 ViewData["TimeZone"] = new SelectList(timeZones, "Key", "Value", id);
+            }
+        }
+         private void populateGenderList(string id)
+        {
+            Dictionary<string, string> genders = new Dictionary<string, string>();
+            genders.Add("Male", "Male");
+            genders.Add("Female", "Female");
+            genders.Add("Unspecified", "Unspecified");
+            if (id == null)
+            {
+                ViewData["Gender"] = new SelectList(genders, "Key", "Value");
+            }
+            else
+            {
+                ViewData["Gender"] = new SelectList(genders, "Key", "Value", id);
             }
         }
     }

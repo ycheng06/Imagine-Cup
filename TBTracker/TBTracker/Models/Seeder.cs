@@ -19,7 +19,7 @@ namespace TBTracker.Models
                 FamilyPhone2 = "6175129381",
                 Address = "887 Broadway",
                 TimeZone = "Eastern Standard Time",
-                Gender = 1
+                Gender = "Male"
             };
             Patient patient2 = new Patient
             {
@@ -30,7 +30,7 @@ namespace TBTracker.Models
                 FamilyPhone2 = "6175832334",
                 Address = "Classified",
                 TimeZone = "Eastern Standard Time",
-                Gender = 1
+                Gender = "Male"
             };
             Alert alert1 = new Alert
             {

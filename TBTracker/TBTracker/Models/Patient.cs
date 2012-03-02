@@ -43,6 +43,7 @@ namespace TBTracker.Models
         public string FamilyPhone1 { get; set; }
        
         [DisplayName("Family Phone #2")] 
+        [Digits]
         [StringLength(10)]
         public string FamilyPhone2 { get; set; }
         

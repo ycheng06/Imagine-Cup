@@ -38,7 +38,7 @@ namespace TBTracker.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Alert");
                     }
                 }
                 else
@@ -58,7 +58,7 @@ namespace TBTracker.Controllers
         {
             FormsAuthentication.SignOut();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Alert");
         }
 
         //
@@ -84,7 +84,7 @@ namespace TBTracker.Controllers
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Alert");
                 }
                 else
                 {

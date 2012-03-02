@@ -22,14 +22,22 @@ namespace TBTracker.Controllers
         public ViewResult Index()
         {
             var messages = db.Messages.Include("Patient");
+            List<Message> ongoing_messages = new List<Message>();
+            List<Message> expired_messages = new List<Message>();
+
             foreach (Message m in messages)
             {
-                /*
-                //convert to usertimezone
-                m.StartDate = TimeZoneInfo.ConvertTimeFromUtc(m.StartDate, userTimeZone);
-                m.EndDate = TimeZoneInfo.ConvertTimeFromUtc(m.EndDate, userTimeZone);
-                */
+                if (m.EndDate <  DateTime.UtcNow)
+                {
+                    expired_messages.Add(m);
+                }
+                else
+                {
+                    ongoing_messages.Add(m);
+                }
             }
+            ViewBag.OngoingMessages = ongoing_messages;
+            ViewBag.ExpiredMessages = expired_messages;
             return View(messages.ToList());
         }
 

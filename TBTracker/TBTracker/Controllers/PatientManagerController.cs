@@ -79,6 +79,18 @@ namespace TBTracker.Controllers
             return View(patient);
         }
 
+        [HttpPost]
+        public ActionResult SaveAndEditTimeline(Patient patient)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(patient).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Edit", "MsgTemplate", new { id = patient.PatientId });
+            }
+            return View(patient);
+        }
+
         //
         // GET: /PatientManager/Delete/5
  

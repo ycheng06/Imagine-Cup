@@ -4,11 +4,13 @@
     ViewBag.Title = "Patient Manager";
 }
 
-<h2>Patients</h2>
+<h2>PATIENTS</h2>
 <p>
-    @Html.ActionLink("Back", "Index","Home")
+    @Html.ActionLink("Alerts", "Index", "Alert") | @Html.ActionLink("Patients", "Index", "PatientManager")
 </p>
-
+<p>
+    @Html.ActionLink("Logoff", "LogOff", "Account")  
+</p>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -56,7 +58,6 @@
             @Html.DisplayFor(modelItem => item.Address)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PatientId }) |
             @Html.ActionLink("Details", "Details", new { id=item.PatientId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.PatientId })
         </td>

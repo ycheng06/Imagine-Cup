@@ -14,13 +14,6 @@ namespace TBTracker.Controllers
     {
         TrackerEntities trackerDB = new TrackerEntities();
 
-        //
-        // GET: /Timeline/
-        public ActionResult Index()
-        {
-            var patients = trackerDB.Patients.ToList();
-            return View(patients);
-        }
         // GET: /Timeline/Edit/1
         public ActionResult Edit(int id) //id == patientId
         {

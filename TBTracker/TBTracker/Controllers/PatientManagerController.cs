@@ -12,13 +12,13 @@ namespace TBTracker.Controllers
     public class PatientManagerController : Controller
     {
         private TrackerEntities db = new TrackerEntities();
-
         //
         // GET: /PatientManager/
-
         public ViewResult Index()
         {
-            return View(db.Patients.ToList());
+            var patients = from s in db.Patients
+                           select s;
+            return View(patients.ToList());
         }
 
         //

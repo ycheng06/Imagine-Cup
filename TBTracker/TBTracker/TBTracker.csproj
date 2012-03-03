@@ -134,7 +134,6 @@
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\Seeder.cs" />
-    <Compile Include="Models\SendMailJob.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="Models\TrackerEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

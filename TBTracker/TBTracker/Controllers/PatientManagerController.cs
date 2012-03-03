@@ -10,7 +10,7 @@ using System.Collections.ObjectModel;
 
 namespace TBTracker.Controllers
 { 
-    [Authorize]
+    [Authorize(Roles="user")]
     public class PatientManagerController : Controller
     {
         private TrackerEntities db = new TrackerEntities();
@@ -20,8 +20,8 @@ namespace TBTracker.Controllers
 
         public ViewResult Index()
         {
-            return View(db.Patients.ToList());
-        }
+            return View(db.Patients.Where(patient => patient.RegisteredBy == User.Identity.Name).ToList());
+       }
 
         //
         // GET: /PatientManager/Details/5
@@ -49,6 +49,7 @@ namespace TBTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+                patient.RegisteredBy = User.Identity.Name;
                 db.Patients.Add(patient);
                 db.SaveChanges();
                 return RedirectToAction("Index");  

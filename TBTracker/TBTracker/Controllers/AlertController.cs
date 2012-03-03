@@ -9,7 +9,7 @@ using TBTracker.Models;
 
 namespace TBTracker.Controllers
 {
-    [Authorize]
+    [Authorize(Roles="user")]
     public class AlertController : Controller
     {
         //

@@ -44,6 +44,28 @@ namespace TBTracker
             RegisterRoutes(RouteTable.Routes);
             ModelBinders.Binders.DefaultBinder = new DateTimeConversionBinder();
 
+            //delete as required:
+            ISchedulerFactory schedFact = new StdSchedulerFactory();
+            // get a scheduler
+            IScheduler sched = schedFact.GetScheduler();
+            sched.Start();
+            // construct job info
+            JobDetail jobDetail = new JobDetail("mySendMailJob", typeof(SendMailJob));
+            // fire every day at 06:00
+            //Trigger trigger = TriggerUtils.MakeDailyTrigger(06, 00);
+            SimpleTrigger trigger2 = new SimpleTrigger("myTrigger",
+                                    null,
+                                    DateTime.UtcNow,
+                                    null,
+                                    1, //SimpleTrigger.RepeatIndefinitely,
+                                    TimeSpan.FromSeconds(60));
+            //Trigger trigger = TriggerUtils.MakeHourlyTrigger();
+            //// start on the next even hour
+            //trigger.StartTimeUtc = TriggerUtils.GetEvenHourDate(DateTime.UtcNow);  
+            //trigger.Name = "mySendMailTrigger";
+            // schedule the job for execution
+            sched.ScheduleJob(jobDetail, trigger2);
+
         }
 
         private void Scheduler()

@@ -9,8 +9,8 @@ using System.Data.Entity;
 
 namespace TBTracker.Controllers
 {
-    [Authorize]
-    public class MsgTemplateController : Controller
+    [Authorize(Roles="user")]
+    public class TreatmentPlannerController : Controller
     {
         TrackerEntities trackerDB = new TrackerEntities();
 

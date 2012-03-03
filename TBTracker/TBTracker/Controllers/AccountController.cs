@@ -38,7 +38,7 @@ namespace TBTracker.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Alert");
+                            return RedirectToAction("Index", "Alert");
                     }
                 }
                 else
@@ -53,7 +53,6 @@ namespace TBTracker.Controllers
 
         //
         // GET: /Account/LogOff
-
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
@@ -79,12 +78,12 @@ namespace TBTracker.Controllers
             {
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
-
+                Membership.CreateUser(model.UserName, model.Password, model.Email, "question", "answer", true, null, out createStatus);
+                
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
-                    return RedirectToAction("Index", "Alert");
+                    Roles.AddUserToRole(model.UserName, "user");
                 }
                 else
                 {
@@ -98,7 +97,6 @@ namespace TBTracker.Controllers
 
         //
         // GET: /Account/ChangePassword
-
         public ActionResult ChangePassword()
         {
             return View();
@@ -106,7 +104,6 @@ namespace TBTracker.Controllers
 
         //
         // POST: /Account/ChangePassword
-
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordModel model)
         {
@@ -142,7 +139,6 @@ namespace TBTracker.Controllers
 
         //
         // GET: /Account/ChangePasswordSuccess
-
         public ActionResult ChangePasswordSuccess()
         {
             return View();

@@ -120,7 +120,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
-    <Compile Include="Controllers\MsgTemplateController.cs" />
+    <Compile Include="Controllers\TreatmentPlannerController.cs" />
     <Compile Include="Controllers\PatientManagerController.cs" />
     <Compile Include="Controllers\ReminderController.cs" />
     <Compile Include="Global.asax.cs">
@@ -141,6 +141,10 @@
     <Compile Include="Validation\DateGreaterThanAttributes.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\ASPNETDB.MDF" />
+    <Content Include="App_Data\aspnetdb_log.ldf">
+      <DependentUpon>ASPNETDB.MDF</DependentUpon>
+    </Content>
     <Content Include="bin\TBTracker.dll" />
     <Content Include="bin\TBTracker.pdb" />
     <Content Include="Content\themes\base\jquery-ui.css" />
@@ -225,12 +229,13 @@
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Date.cshtml" />
-    <Content Include="Views\MsgTemplate\AddTest.cshtml" />
-    <Content Include="Views\MsgTemplate\EditTest.cshtml" />
-    <Content Include="Views\MsgTemplate\DeleteTest.cshtml" />
-    <Content Include="Views\MsgTemplate\AddMsg.cshtml" />
-    <Content Include="Views\MsgTemplate\EditMsg.cshtml" />
-    <Content Include="Views\MsgTemplate\DeleteMsg.cshtml" />
+    <Content Include="Views\TreatmentPlanner\AddMsg.cshtml" />
+    <Content Include="Views\TreatmentPlanner\AddTest.cshtml" />
+    <Content Include="Views\TreatmentPlanner\DeleteMsg.cshtml" />
+    <Content Include="Views\TreatmentPlanner\DeleteTest.cshtml" />
+    <Content Include="Views\TreatmentPlanner\EditMsg.cshtml" />
+    <Content Include="Views\TreatmentPlanner\EditTest.cshtml" />
+    <Content Include="Views\Shared\LoginStatus.cshtml" />
     <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
     <None Include="_bin_deployableAssemblies\WebMatrix.WebData.xml" />
     <None Include="_bin_deployableAssemblies\WebMatrix.WebData.dll" />
@@ -276,9 +281,6 @@
     <Content Include="Views\PatientManager\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\MsgTemplate\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Message\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -303,13 +305,12 @@
     <Content Include="Views\PatientManager\Details.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Views\MsgTemplate\Edit.cshtml" />
-    <Content Include="Views\MsgTemplate\AddDrug.cshtml" />
-    <Content Include="Views\MsgTemplate\EditDrug.cshtml" />
-    <Content Include="Views\MsgTemplate\DeleteDrug.cshtml" />
+    <Content Include="Views\TreatmentPlanner\Edit.cshtml" />
+    <Content Include="Views\TreatmentPlanner\AddDrug.cshtml" />
+    <Content Include="Views\TreatmentPlanner\EditDrug.cshtml" />
+    <Content Include="Views\TreatmentPlanner\DeleteDrug.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="obj\Release\TempPE\" />
     <Folder Include="obj\Release\TransformWebConfig\transformed\Views\" />

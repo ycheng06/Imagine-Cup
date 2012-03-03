@@ -57,7 +57,7 @@ namespace TBTracker
             JobDetail jobDetail = new JobDetail("SendReminder", null, typeof(ReminderSender));
 
             //Set when to repeat the job
-            Trigger trigger = TriggerUtils.MakeMinutelyTrigger(2, 3);
+            Trigger trigger = TriggerUtils.MakeSecondlyTrigger(5);
             trigger.StartTimeUtc = DateTime.UtcNow; 
             trigger.Name = "Testing";
             sched.ScheduleJob(jobDetail, trigger);

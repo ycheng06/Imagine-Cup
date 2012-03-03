@@ -13,18 +13,18 @@ namespace TBTracker.Controllers
     {
 
         //
-        // GET: /Account/LogOn
+        // GET: /Account/Login
 
-        public ActionResult LogOn()
+        public ActionResult Login()
         {
             return View();
         }
 
         //
-        // POST: /Account/LogOn
+        // POST: /Account/Login
 
         [HttpPost]
-        public ActionResult LogOn(LogOnModel model, string returnUrl)
+        public ActionResult Login(LogOnModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -38,7 +38,7 @@ namespace TBTracker.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Alert");
                     }
                 }
                 else
@@ -58,11 +58,12 @@ namespace TBTracker.Controllers
         {
             FormsAuthentication.SignOut();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Alert");
         }
 
         //
         // GET: /Account/Register
+        [Authorize(Roles="admin")]
         public ActionResult Register()
         {
             return View();
@@ -70,7 +71,7 @@ namespace TBTracker.Controllers
 
         //
         // POST: /Account/Register
-
+        [Authorize(Roles="admin")]
         [HttpPost]
         public ActionResult Register(RegisterModel model)
         {
@@ -83,7 +84,7 @@ namespace TBTracker.Controllers
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Alert");
                 }
                 else
                 {
@@ -98,7 +99,6 @@ namespace TBTracker.Controllers
         //
         // GET: /Account/ChangePassword
 
-        [Authorize]
         public ActionResult ChangePassword()
         {
             return View();
@@ -107,7 +107,6 @@ namespace TBTracker.Controllers
         //
         // POST: /Account/ChangePassword
 
-        [Authorize]
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordModel model)
         {

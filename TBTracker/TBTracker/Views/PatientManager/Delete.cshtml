@@ -39,6 +39,16 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Address)
     </div>
+
+    <div class="display-label">Time Zone</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TimeZone)
+    </div>
+
+    <div class="display-label">Gender</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Gender)
+    </div>
 </fieldset>
 @using (Html.BeginForm()) {
     <p>

@@ -62,6 +62,22 @@
             @Html.ValidationMessageFor(model => model.Address)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TimeZone)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("TimeZone")
+            @Html.ValidationMessageFor(model => model.TimeZone)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Gender)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Gender")
+            @Html.ValidationMessageFor(model => model.Gender)
+        </div>
+
         <p>
             <input type="submit" value="Create" />
         </p>

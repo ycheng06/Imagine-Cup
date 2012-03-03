@@ -9,17 +9,11 @@ using System.Data.Entity;
 
 namespace TBTracker.Controllers
 {
+    [Authorize]
     public class MsgTemplateController : Controller
     {
         TrackerEntities trackerDB = new TrackerEntities();
 
-        //
-        // GET: /Timeline/
-        public ActionResult Index()
-        {
-            var patients = trackerDB.Patients.ToList();
-            return View(patients);
-        }
         // GET: /Timeline/Edit/1
         public ActionResult Edit(int id) //id == patientId
         {
@@ -33,7 +27,7 @@ namespace TBTracker.Controllers
         public ActionResult AddDrug(int pid)
         {
             ViewData["PatientId"] = pid;
-            populateDrugNames();
+            populateDrugNames(1);
             return View(new Drug
             {
                 StartDate = DateTime.UtcNow,
@@ -50,15 +44,15 @@ namespace TBTracker.Controllers
                 trackerDB.SaveChanges();
                 return RedirectToAction("Edit", new { id = drug.PatientId });
             }
-            populateDrugNames();
+            populateDrugNames(1);
             return View(drug);
         }
         // GET: /MsgTemplate/EditDrug
         public ActionResult EditDrug(int id)
         {
-            var Drug = trackerDB.Drugs.Find(id);
-            populateDrugNames();
-            return View(Drug);
+            var drug = trackerDB.Drugs.Find(id);
+            populateDrugNames(drug.DrugInfoId);
+            return View(drug);
         }
         // POST: /MsgTemplate/EditDrug
         [HttpPost]
@@ -70,7 +64,7 @@ namespace TBTracker.Controllers
                 trackerDB.SaveChanges();
                 return RedirectToAction("Edit", new { id = drug.PatientId });
             }
-            populateDrugNames();
+            populateDrugNames(drug.DrugInfoId);
             return View();
         }
         // GET: /MsgTemplate/DeleteDrug
@@ -195,12 +189,12 @@ namespace TBTracker.Controllers
                             select t;
             ViewData["TestInfoId"] = new SelectList(testnames, "TestInfoId", "Name");
         }
-        private void populateDrugNames()
+        private void populateDrugNames(int drugInfoId)
         {
             var drugnames = from d in trackerDB.DrugInfos
                             orderby d.Name
                             select d;
-            ViewData["DrugInfoId"] = new SelectList(drugnames, "DrugInfoId","Name");
+            ViewData["DrugInfoId"] = new SelectList(drugnames, "DrugInfoId","Name", drugInfoId);
         }
         protected override void Dispose(bool disposing)
         {

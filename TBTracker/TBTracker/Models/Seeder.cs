@@ -18,6 +18,8 @@ namespace TBTracker.Models
                 FamilyPhone1 = "6175129381",
                 FamilyPhone2 = "6175129381",
                 Address = "887 Broadway",
+                TimeZone = "Eastern Standard Time",
+                Gender = "Male"
             };
             Patient patient2 = new Patient
             {
@@ -27,6 +29,8 @@ namespace TBTracker.Models
                 FamilyPhone1 = "6175832334",
                 FamilyPhone2 = "6175832334",
                 Address = "Classified",
+                TimeZone = "Eastern Standard Time",
+                Gender = "Male"
             };
             Alert alert1 = new Alert
             {
@@ -104,8 +108,6 @@ namespace TBTracker.Models
             {
                 StartDate = new DateTime(2010, 1, 1),
                 EndDate = new DateTime(2010, 2, 2),
-                Timezone = 0,
-                TimesPerWeek = 1,
                 Type = "none",
                 DrugInfo = drugInfo1,
                 Patient = patient1,
@@ -115,7 +117,6 @@ namespace TBTracker.Models
             {
                 StartDate = new DateTime(2010, 1, 1),
                 EndDate = new DateTime(2010, 2, 2),
-                Timezone = 0,
                 TimesPerWeek = 2,
                 Type = "none",
                 DrugInfo = drugInfo2,
@@ -126,7 +127,6 @@ namespace TBTracker.Models
             {
                 StartDate = new DateTime(2010, 1, 1),
                 EndDate = new DateTime(2010, 2, 2),
-                Timezone = 0,
                 TimesPerWeek = 3,
                 Type = "none",
                 DrugInfo = drugInfo3,
@@ -137,7 +137,6 @@ namespace TBTracker.Models
             {
                 StartDate = new DateTime(2010, 2, 3),
                 EndDate = new DateTime(2010, 2, 20),
-                Timezone = 0,
                 TimesPerWeek = 4,
                 Type = "none",
                 DrugInfo = drugInfo3,

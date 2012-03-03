@@ -9,9 +9,18 @@ using System.Data.Entity;
 
 namespace TBTracker.Models
 {
+    /*
+    public enum Gender
+    {
+        Female = 0,
+        Male = 1,
+        NotSpecified = -1
+    }
+    */
     public class Patient
     {
         public int PatientId { get; set; }
+        public string Gender { get; set; } //change this to a simpler representation, like int, when you figure out how to make it work
         
         [Required(ErrorMessage="First/Last Name is Required")]
         [DisplayName("First Name")]
@@ -34,11 +43,17 @@ namespace TBTracker.Models
         public string FamilyPhone1 { get; set; }
        
         [DisplayName("Family Phone #2")] 
+        [Digits]
         [StringLength(10)]
         public string FamilyPhone2 { get; set; }
         
         [Required]
         public string Address { get; set; }
+
+        [Required]
+        public string TimeZone { get; set; }
+
+
 
         public virtual ICollection<Drug> Drugs { get; set; }
         //public virtual ICollection<DrugInfo> DrugInfos { get; set; }

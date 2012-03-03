@@ -6,9 +6,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TBTracker.Models;
+using System.Collections.ObjectModel;
 
 namespace TBTracker.Controllers
 { 
+    [Authorize]
     public class PatientManagerController : Controller
     {
         private TrackerEntities db = new TrackerEntities();
@@ -35,6 +37,8 @@ namespace TBTracker.Controllers
 
         public ActionResult Create()
         {
+            populateTimeZones(null);
+            populateGenderList(null);
             return View();
         } 
 
@@ -51,6 +55,8 @@ namespace TBTracker.Controllers
                 return RedirectToAction("Index");  
             }
 
+            populateTimeZones(null);
+            populateGenderList(null);
             return View(patient);
         }
         
@@ -60,6 +66,8 @@ namespace TBTracker.Controllers
         public ActionResult Edit(int id)
         {
             Patient patient = db.Patients.Find(id);
+            populateTimeZones(patient.TimeZone);
+            populateGenderList(patient.Gender);
             return View(patient);
         }
 
@@ -74,6 +82,20 @@ namespace TBTracker.Controllers
                 db.Entry(patient).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+            populateTimeZones(patient.TimeZone);
+            populateGenderList(patient.Gender);
+            return View(patient);
+        }
+
+        [HttpPost]
+        public ActionResult SaveAndEditTimeline(Patient patient)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(patient).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Edit", "MsgTemplate", new { id = patient.PatientId });
             }
             return View(patient);
         }
@@ -103,6 +125,37 @@ namespace TBTracker.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+        private void populateTimeZones(string id)
+        {
+            Dictionary<string, string> timeZones = new Dictionary<string, string>();
+            foreach (var tz in TimeZoneInfo.GetSystemTimeZones())
+            {
+                timeZones.Add(tz.Id, tz.DisplayName);
+            }
+            if (id == null)
+            {
+                ViewData["TimeZone"] = new SelectList(timeZones, "Key", "Value");
+            }
+            else
+            {
+                ViewData["TimeZone"] = new SelectList(timeZones, "Key", "Value", id);
+            }
+        }
+         private void populateGenderList(string id)
+        {
+            Dictionary<string, string> genders = new Dictionary<string, string>();
+            genders.Add("Male", "Male");
+            genders.Add("Female", "Female");
+            genders.Add("Unspecified", "Unspecified");
+            if (id == null)
+            {
+                ViewData["Gender"] = new SelectList(genders, "Key", "Value");
+            }
+            else
+            {
+                ViewData["Gender"] = new SelectList(genders, "Key", "Value", id);
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ namespace TBTracker.Models
     public class Alert
     {
         public int AlertId { get; set; }
+        [DataType(DataType.Date)]
         public DateTime AlertDate { get; set; }
 
         public int AlertTypeId { get; set; }

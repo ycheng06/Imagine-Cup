@@ -3,13 +3,13 @@
     ViewBag.Title = "Alerts";
 }
 
-<h2>Here's ya'll's alerts</h2>
-
+<h2>ALERTS</h2>
 <p>
-    @Html.ActionLink("Back", "Index", "Home")
+    @Html.ActionLink("Alerts", "Index", "Alert") | @Html.ActionLink("Patients", "Index", "PatientManager")
 </p>
-<p> Do we need any additional fields? I guess we probably do</p>
-<p> Do we go to the patient's records (or other related pages) once the fields are clicked?</p>
+<p>
+    @Html.ActionLink("Logoff", "LogOff", "Account")
+</p>
 <table>
     <tr>
         <th>

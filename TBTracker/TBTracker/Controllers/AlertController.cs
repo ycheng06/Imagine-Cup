@@ -20,17 +20,8 @@ namespace TBTracker.Controllers
 
         public ViewResult Index()
         {
-            var alerts  = db.Alerts.Include("Patient")
-                                        .Include("AlertType").ToList();
-            /*
-            foreach (Alert a in alerts)
-            {
-                //convert to usertimezone
-                a.AlertDate = TimeZoneInfo.ConvertTimeFromUtc(a.AlertDate, userTimeZone);
-            }
-            */
-            return View(alerts);
-            //return View(db.Alerts.ToList());
+            return View(db.Alerts.Include("Patient")
+                                        .Include("AlertType").Where(alert => alert.Patient.RegisteredBy == User.Identity.Name).ToList());
         }
         public ViewResult Details(int id)
         {
@@ -51,6 +42,7 @@ namespace TBTracker.Controllers
 
             if (ModelState.IsValid)
             {
+                alert.Patient.RegisteredBy = User.Identity.Name;
                 db.Alerts.Add(alert);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -75,6 +67,7 @@ namespace TBTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+                alert.Patient.RegisteredBy = User.Identity.Name;
                 db.Entry(alert).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

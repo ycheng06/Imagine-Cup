@@ -16,10 +16,11 @@ namespace TBTracker
 
         public void Execute(JobExecutionContext context)
         {
+
             var twilio = new TwilioRestClient(accountSid, authToken);
             string phone = "+16469266783";
             string message = "This is a test message sent at " + DateTime.Now.ToLocalTime();
-            var msg = twilio.SendSmsMessage(twiliNumber, phone, message);
+            //var msg = twilio.SendSmsMessage(twiliNumber, phone, message);
             Trace.WriteLine("Sent message <" + message + "> to " + phone + " at " + DateTime.Now.ToLocalTime());
         }
             

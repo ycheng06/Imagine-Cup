@@ -19,8 +19,6 @@ namespace TBTracker.Controllers
         public ViewResult Index()
         {
             return View(db.Patients.Where(patient => patient.RegisteredBy == User.Identity.Name).ToList());
-                           select s;
-            return View(patients.ToList());
        }
 
         //
@@ -80,6 +78,7 @@ namespace TBTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+                patient.RegisteredBy = User.Identity.Name;
                 db.Entry(patient).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

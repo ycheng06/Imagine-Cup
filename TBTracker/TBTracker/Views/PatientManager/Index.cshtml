@@ -27,21 +27,10 @@
            grid.Column("FamilyPhone1","Family Phone 1"),
            grid.Column("FamilyPhone2","Family Phone 2"),
            grid.Column("Address"),
+           grid.Column("TimeZone", "Time Zone"),
+           grid.Column("Gender","Gender"),
            grid.Column(columnName :"",format: @<text>@Html.ActionLink("Details", "Details", new { id=item.PatientId})</text>),
            grid.Column(columnName :"",format: @<text>@Html.ActionLink("Delete", "Delete", new { id=item.PatientId})</text>)
+           
        )
     )
-</div>
-        <th>
-            Time Zone
-        </th>
-        <th>
-            Gender
-        </th>
-            @Html.DisplayFor(modelItem => item.TimeZone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-

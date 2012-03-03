@@ -74,7 +74,7 @@
             @Html.LabelFor(model => model.Gender)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Gender)
+            @Html.DropDownList("Gender")
             @Html.ValidationMessageFor(model => model.Gender)
         </div>
 

@@ -20,7 +20,7 @@ namespace TBTracker.Models
     public class Patient
     {
         public int PatientId { get; set; }
-        public int Gender { get; set; } //0 for female, 1 for male, -1 for other/prefer not to disclose
+        public string Gender { get; set; } //change this to a simpler representation, like int, when you figure out how to make it work
         
         [Required(ErrorMessage="First/Last Name is Required")]
         [DisplayName("First Name")]

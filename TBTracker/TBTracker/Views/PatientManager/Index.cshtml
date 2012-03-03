@@ -3,74 +3,31 @@
 @{
     ViewBag.Title = "Patient Manager";
 }
-
-<h2>PATIENTS</h2>
+@{
+    var grid = new WebGrid(source: Model, defaultSort: "FirstName",rowsPerPage:30);
+}
 <p>
     @Html.ActionLink("Alerts", "Index", "Alert") | @Html.ActionLink("Patients", "Index", "PatientManager")
 </p>
 <p>
     @Html.ActionLink("Create New", "Register Patient")
 </p>
-<table>
-    <tr>
-        <th>
-            FirstName
-        </th>
-        <th>
-            LastName
-        </th>
-        <th>
-            Phone
-        </th>
-        <th>
-            FamilyPhone1
-        </th>
-        <th>
-            FamilyPhone2
-        </th>
-        <th>
-            Address
-        </th>
-        <th>
-            Time Zone
-        </th>
-        <th>
-            Gender
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FamilyPhone1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FamilyPhone2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimeZone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.PatientId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PatientId })
-        </td>
-    </tr>
-}
-
-</table>
+<div id="grid">
+    @grid.GetHtml(
+        tableStyle:"grid",
+        headerStyle:"head",
+        alternatingRowStyle:"alt",
+        columns: grid.Columns(
+           grid.Column("FirstName","First Name"),
+           grid.Column("LastName","Last Name"),
+           grid.Column("Phone"),
+           grid.Column("FamilyPhone1","Family Phone 1"),
+           grid.Column("FamilyPhone2","Family Phone 2"),
+           grid.Column("Address"),
+           grid.Column("TimeZone", "Time Zone"),
+           grid.Column("Gender","Gender"),
+           grid.Column(columnName :"",format: @<text>@Html.ActionLink("Details", "Details", new { id=item.PatientId})</text>),
+           grid.Column(columnName :"",format: @<text>@Html.ActionLink("Delete", "Delete", new { id=item.PatientId})</text>)
+           
+       )
+    )

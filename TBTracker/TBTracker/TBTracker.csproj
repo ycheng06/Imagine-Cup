@@ -126,6 +126,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Jobs\AlertBuilder.cs" />
+    <Compile Include="Jobs\MsgBuilder.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\AlertType.cs" />

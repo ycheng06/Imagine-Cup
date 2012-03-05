@@ -51,6 +51,9 @@ namespace TBTracker
         private void make_alerts()
         {
             //for each hospital
+            
+            //check for missed confirmations
+            //for each patient
         }
             
     }

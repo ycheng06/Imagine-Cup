@@ -40,11 +40,13 @@ namespace TBTracker.Jobs
             var missed_patients = db.Patients.Where(patient => patient.ResponseReceived == false).ToList();
             foreach (Patient p in missed_patients)
             {
-                string message = "";
+                string message = "Please remember to take your # medicines today. After you are done, please call or send a blank text message to this number.";
                 send_message(p.Phone, message);
 
-                string family_message = 
-                    p.FirstName + " has forgotten to take his/her medication today. Please immediately remind him/her to take the treatment.";
+                string family_message = String.Format(
+                    p.FirstName + " has forgotten to take {0} medication today. Please immediately remind {1} to take the treatment.",
+                    p.Gender=="Male"?"his":"her",
+                    p.Gender=="Male"?"him":"her");
                 send_message(p.FamilyPhone1, family_message);
                 send_message(p.FamilyPhone2, family_message);
             }

@@ -25,14 +25,14 @@ namespace TBTracker.Models
             };
             Patient patient2 = new Patient
             {
-                FirstName = "Greg",
+                FirstName = "Mary",
                 LastName = "Wong",
                 Phone = "6175832334",
                 FamilyPhone1 = "6175832334",
                 FamilyPhone2 = "6175832334",
                 Address = "Classified",
                 TimeZone = "Eastern Standard Time",
-                Gender = "Male",
+                Gender = "Female",
                 RegisteredBy = "bamf",
                 ResponseReceived = false
             };

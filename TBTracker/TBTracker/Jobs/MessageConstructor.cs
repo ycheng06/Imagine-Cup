@@ -12,28 +12,10 @@ using TBTracker.Twilio;
 
 namespace TBTracker.Jobs
 {
-    public class MsgSender : IJob
+    public class MessageConstructor
     {
-        TrackerEntities db = new TrackerEntities();
-        TwilioSender smsClient = new TwilioSender();
-        public void Execute(JobExecutionContext context)
-        {
-            SendReminders();
-        }
         
-        public void SendReminders()
-        {
-            foreach(var p in db.Patients.ToList())
-            {
-                string msg = ConstructMsg(p);
-                Trace.WriteLine("About to text Jason");
-                Trace.WriteLine(msg);
-                smsClient.SendSMS("+16469266783", msg);
-            }
-        }
-       
-        
-        private string ConstructMsg(Patient p)
+        public string ConstructMsg(Patient p)
         {
             DateTime now = DateTime.UtcNow;
             StringBuilder msg = ConstructTitle(p);
@@ -77,7 +59,7 @@ namespace TBTracker.Jobs
                     title.Append(p.LastName);
                     break;
                 case "Female":
-                    title.Append("Dear Mrs. ");
+                    title.Append("Dear Ms. ");
                     title.Append(p.LastName);
                     break;
                 default:

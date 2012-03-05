@@ -48,6 +48,10 @@ namespace TBTracker
                 Trace.WriteLine(sms);
             }
         }
+        private void make_alerts()
+        {
+            //for each hospital
+        }
             
     }
 }

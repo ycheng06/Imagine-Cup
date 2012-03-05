@@ -2,10 +2,9 @@
 
 @{
     ViewBag.Title = "Patient Manager";
-}
-@{
     var grid = new WebGrid(source: Model, defaultSort: "FirstName",rowsPerPage:30);
 }
+<h2>PATIENTS</h2>
 <p>
     @Html.ActionLink("Alerts", "Index", "Alert") | @Html.ActionLink("Patients", "Index", "PatientManager")
 </p>

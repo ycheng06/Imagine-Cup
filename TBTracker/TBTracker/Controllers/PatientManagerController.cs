@@ -23,16 +23,18 @@ namespace TBTracker.Controllers
 
         //
         // GET: /PatientManager/Details/5
-
-        public ViewResult Details(int id)
+        public ActionResult Details(int id)
         {
             Patient patient = db.Patients.Find(id);
-            return View(patient);
+            if (isUrlValid(patient))
+            {
+                return View(patient);
+            }
+            return RedirectToAction("Index");
         }
 
         //
         // GET: /PatientManager/Create
-
         public ActionResult Create()
         {
             populateTimeZones(null);
@@ -42,7 +44,6 @@ namespace TBTracker.Controllers
 
         //
         // POST: /PatientManager/Create
-
         [HttpPost]
         public ActionResult Create(Patient patient)
         {
@@ -61,13 +62,16 @@ namespace TBTracker.Controllers
         
         //
         // GET: /PatientManager/Edit/5
- 
         public ActionResult Edit(int id)
         {
             Patient patient = db.Patients.Find(id);
-            populateTimeZones(patient.TimeZone);
-            populateGenderList(patient.Gender);
-            return View(patient);
+            if (isUrlValid(patient))
+            {
+                populateTimeZones(patient.TimeZone);
+                populateGenderList(patient.Gender);
+                return View(patient);
+            }
+            return RedirectToAction("Index");
         }
 
         //
@@ -106,7 +110,11 @@ namespace TBTracker.Controllers
         public ActionResult Delete(int id)
         {
             Patient patient = db.Patients.Find(id);
-            return View(patient);
+            if (isUrlValid(patient))
+            {
+                return View(patient);
+            }
+            return RedirectToAction("Index");
         }
 
         //
@@ -157,5 +165,14 @@ namespace TBTracker.Controllers
                 ViewData["Gender"] = new SelectList(genders, "Key", "Value", id);
             }
         }
+         private bool isUrlValid(Patient patient)
+         {
+            //check of url hacking
+            if (patient == null || !patient.IsRegistedBy(User.Identity.Name))
+            {
+                return false; 
+            }
+            return true;
+         }
     }
 }

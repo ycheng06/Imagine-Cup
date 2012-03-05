@@ -133,6 +133,7 @@
     <Compile Include="Models\Drug.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Patient.cs" />
+    <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Seeder.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="Models\TrackerEntities.cs" />
@@ -236,6 +237,7 @@
     <Content Include="Views\TreatmentPlanner\EditMsg.cshtml" />
     <Content Include="Views\TreatmentPlanner\EditTest.cshtml" />
     <Content Include="Views\Shared\LoginStatus.cshtml" />
+    <Content Include="Views\Account\RegisterSuccess.cshtml" />
     <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
     <None Include="_bin_deployableAssemblies\WebMatrix.WebData.xml" />
     <None Include="_bin_deployableAssemblies\WebMatrix.WebData.dll" />

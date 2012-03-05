@@ -30,7 +30,7 @@ namespace TBTracker
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Alert", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                new { controller = "Account", action = "Login", id = UrlParameter.Optional } // Parameter defaults
             );
 
         }

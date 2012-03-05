@@ -52,6 +52,13 @@
                 @Html.PasswordFor(m => m.ConfirmPassword)
                 @Html.ValidationMessageFor(m => m.ConfirmPassword)
             </div>
+            <div class="editor-label">
+                @Html.LabelFor(m => m.TimeZone)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("TimeZone")
+                @Html.ValidationMessageFor(m => m.TimeZone)
+            </div>
 
             <p>
                 <input type="submit" value="Register" />

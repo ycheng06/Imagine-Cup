@@ -18,7 +18,7 @@ namespace TBTracker.Controllers
         //for now
         private TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
 
-        public ViewResult Index()
+        public ActionResult Index()
         {
             return View(db.Alerts.Include("Patient")
                                         .Include("AlertType").Where(alert => alert.Patient.RegisteredBy == User.Identity.Name).ToList());

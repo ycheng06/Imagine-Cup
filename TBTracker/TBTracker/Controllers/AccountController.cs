@@ -34,10 +34,15 @@ namespace TBTracker.Controllers
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
+                        if (User.IsInRole("admin")) return RedirectToAction("Register", "Account");
                         return Redirect(returnUrl);
                     }
                     else
                     {
+                        if (User.IsInRole("admin"))
+                        {
+                            return RedirectToAction("Register", "Account");
+                        }
                             return RedirectToAction("Index", "Alert");
                     }
                 }
@@ -57,7 +62,7 @@ namespace TBTracker.Controllers
         {
             FormsAuthentication.SignOut();
 
-            return RedirectToAction("Index", "Alert");
+            return RedirectToAction("Login", "Account");
         }
 
         //
@@ -65,6 +70,7 @@ namespace TBTracker.Controllers
         [Authorize(Roles="admin")]
         public ActionResult Register()
         {
+            populateTimeZones(null);
             return View();
         }
 
@@ -82,8 +88,14 @@ namespace TBTracker.Controllers
                 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
+                    //FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
                     Roles.AddUserToRole(model.UserName, "user");
+
+                    //add profile information
+                    var profile = Profile.GetProfile(model.UserName);
+                    profile.TimeZone = model.TimeZone;
+                    profile.Save();
+                    return RedirectToAction("RegisterSuccess");
                 }
                 else
                 {
@@ -92,11 +104,13 @@ namespace TBTracker.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+            populateTimeZones(null);
             return View(model);
         }
 
         //
         // GET: /Account/ChangePassword
+        [Authorize(Roles="admin")]
         public ActionResult ChangePassword()
         {
             return View();
@@ -104,6 +118,7 @@ namespace TBTracker.Controllers
 
         //
         // POST: /Account/ChangePassword
+        [Authorize(Roles="admin")]
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordModel model)
         {
@@ -144,6 +159,29 @@ namespace TBTracker.Controllers
             return View();
         }
 
+        //
+        //GET: /Account/RegisterSuccess
+        public ActionResult RegisterSuccess()
+        {
+            return View();
+        }
+
+        private void populateTimeZones(string id)
+        {
+            Dictionary<string, string> timeZones = new Dictionary<string, string>();
+            foreach (var tz in TimeZoneInfo.GetSystemTimeZones())
+            {
+                timeZones.Add(tz.Id, tz.DisplayName);
+            }
+            if (id == null)
+            {
+                ViewData["TimeZone"] = new SelectList(timeZones, "Key", "Value");
+            }
+            else
+            {
+                ViewData["TimeZone"] = new SelectList(timeZones, "Key", "Value", id);
+            }
+        }
         #region Status Codes
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {

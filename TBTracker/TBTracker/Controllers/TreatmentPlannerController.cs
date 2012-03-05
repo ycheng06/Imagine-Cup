@@ -17,7 +17,6 @@ namespace TBTracker.Controllers
         // GET: /Timeline/Edit/1
         public ActionResult Edit(int id) //id == patientId
         {
-            var x = id;
 
             var patient = trackerDB.Patients.Find(id);
             return View(patient);

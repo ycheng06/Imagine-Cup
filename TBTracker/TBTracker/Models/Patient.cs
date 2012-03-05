@@ -59,6 +59,11 @@ namespace TBTracker.Models
         public virtual ICollection<Test> Tests { get; set; }
         public virtual ICollection<Alert> Alerts { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
+
+        public bool IsRegistedBy(string userName)
+        {
+            return RegisteredBy.Equals(userName);
+        }
     }
 
 }

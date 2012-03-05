@@ -20,7 +20,7 @@ namespace TBTracker.Models
                 Address = "887 Broadway",
                 TimeZone = "Eastern Standard Time",
                 Gender = "Male",
-                RegisteredBy = "bamf"
+                RegisteredBy = "Jason"
             };
             Patient patient2 = new Patient
             {
@@ -32,7 +32,7 @@ namespace TBTracker.Models
                 Address = "Classified",
                 TimeZone = "Eastern Standard Time",
                 Gender = "Male",
-                RegisteredBy = "bamf"
+                RegisteredBy = "Jason"
             };
             Alert alert1 = new Alert
             {
@@ -90,20 +90,26 @@ namespace TBTracker.Models
             //Sean's tests for patients -> drugs/tests
             DrugInfo drugInfo1 = new DrugInfo
             {
-                Name = "D1: sugar",
+                Name = "Isoniazid (INH)",
                 Description = "..spice and everything nice",
             };
 
             DrugInfo drugInfo2 = new DrugInfo
             {
-                Name = "D2: kryptonite",
+                Name = "Rifampin (RIF)",
                 Description = "that was easy..",
             };
 
             DrugInfo drugInfo3 = new DrugInfo
             {
-                Name = "D3: placebo",
+                Name = "Ethambutol (EMB)",
                 Description = "cheap and effective",
+            };
+
+            DrugInfo drugInfo4 = new DrugInfo
+            {
+                Name = "Pyrazinamide (PZA)",
+                Description = "",
             };
 
             Drug drug1 = new Drug

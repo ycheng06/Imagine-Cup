@@ -14,14 +14,16 @@ namespace TBTracker
         const string accountSid = "ACc27d757e2015405a8da8ad6c4966a3e7";
         const string authToken = "ba5fef2eae6c8e0beec4f76239df114f";
         const string twiliNumber = "+16177022951";
-        public ReminderSender() { }
-
-        public void Execute(JobExecutionContext context)
+        private TwilioRestClient twilio; 
+        public ReminderSender() 
         {
+            twilio = new TwilioRestClient(accountSid, authToken);
+        }
 
-            var twilio = new TwilioRestClient(accountSid, authToken);
-            string phone = "+16469266783";
-            string message = "This is a test message sent at " + DateTime.Now.ToLocalTime();
+        public virtual void Execute(JobExecutionContext context)
+        {
+            //string phone = "+16469266783";
+            //string message = "This is a test message sent at " + DateTime.Now.ToLocalTime();
             //var msg = twilio.SendSmsMessage(twiliNumber, phone, message);
             //Trace.WriteLine("Sent message <" + message + "> to " + phone + " at " + DateTime.Now.ToLocalTime());
             traverse();
@@ -48,9 +50,11 @@ namespace TBTracker
                 Trace.WriteLine(sms);
             }
         }
-        private void make_alerts()
+
+        public void send_message(string phone, string message)
         {
-            //for each hospital
+            var msg = twilio.SendSmsMessage(twiliNumber, phone, message);
+            Trace.WriteLine("Sent message <" + message + "> to " + phone + " at " + DateTime.Now.ToLocalTime());
         }
             
     }

@@ -118,8 +118,8 @@ namespace TBTracker.Models
 
             Drug drug1 = new Drug
             {
-                StartDate = new DateTime(2010, 1, 1),
-                EndDate = new DateTime(2010, 2, 2),
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(4),
                 Type = "none",
                 DrugInfo = drugInfo1,
                 Patient = patient1,
@@ -127,8 +127,8 @@ namespace TBTracker.Models
 
             Drug drug2 = new Drug
             {
-                StartDate = new DateTime(2010, 1, 1),
-                EndDate = new DateTime(2010, 2, 2),
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(10),
                 TimesPerWeek = 2,
                 Type = "none",
                 DrugInfo = drugInfo2,
@@ -137,8 +137,8 @@ namespace TBTracker.Models
 
             Drug drug3 = new Drug
             {
-                StartDate = new DateTime(2010, 1, 1),
-                EndDate = new DateTime(2010, 2, 2),
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(10),
                 TimesPerWeek = 3,
                 Type = "none",
                 DrugInfo = drugInfo3,
@@ -167,7 +167,7 @@ namespace TBTracker.Models
 
             Test test1 = new Test
             {
-                TestDate = new DateTime(2010, 1, 17),
+                TestDate = DateTime.Now.AddDays(2),
                 TestResult = "positive",
                 TestInfo = testInfo1,
                 Patient = patient1,
@@ -175,7 +175,7 @@ namespace TBTracker.Models
 
             Test test2 = new Test
             {
-                TestDate = new DateTime(2010, 1, 18),
+                TestDate = DateTime.Now.AddDays(3),
                 TestResult = "negative",
                 TestInfo = testInfo2,
                 Patient = patient1,

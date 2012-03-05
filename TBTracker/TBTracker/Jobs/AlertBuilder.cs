@@ -14,10 +14,16 @@ namespace TBTracker.Jobs
         private TimeSpan first_follow_up = new TimeSpan(15, 0, 0); //15:00 = 3:00PM
         private TimeSpan second_follow_up = new TimeSpan(18, 0, 0); //18:00 = 6:00PM
 
-        public void Execute(JobExecutionContext context)
+        public override void Execute(JobExecutionContext context)
         {
             TimeSpan timeFired = TimeZoneInfo.ConvertTimeFromUtc((DateTime)context.FireTimeUtc,userTimeZone).TimeOfDay;
-            if (timeFired.Equals(first_follow_up))
+            //testing
+            if (true)
+            {
+                additional_drug_intake_reminder();
+            }
+
+            else if (timeFired.Equals(first_follow_up))
             {
                 additional_drug_intake_reminder();
             }
@@ -39,8 +45,8 @@ namespace TBTracker.Jobs
 
                 string family_message = 
                     p.FirstName + " has forgotten to take his/her medication today. Please immediately remind him/her to take the treatment.";
-                send_message(p.FamilyPhone1, message);
-                send_message(p.FamilyPhone2, message);
+                send_message(p.FamilyPhone1, family_message);
+                send_message(p.FamilyPhone2, family_message);
             }
         }
         private void pre_checkup_reminder()

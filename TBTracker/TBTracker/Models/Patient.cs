@@ -55,7 +55,6 @@ namespace TBTracker.Models
 
         public string RegisteredBy { get; set; } //which hospital "owns" this patient
 
-        public bool MessageSent { get; set; } //message for the day sent to patient?
         public bool ResponseReceived { get; set; } //confirmation received from patient for the day?
 
         public virtual ICollection<Drug> Drugs { get; set; }

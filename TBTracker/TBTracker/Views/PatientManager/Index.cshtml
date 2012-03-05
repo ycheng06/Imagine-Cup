@@ -26,6 +26,7 @@
            grid.Column("Address"),
            grid.Column("TimeZone", "Time Zone"),
            grid.Column("Gender","Gender"),
+           grid.Column("ResponseReceived","Responded"),
            grid.Column(columnName :"",format: @<text>@Html.ActionLink("Details", "Details", new { id=item.PatientId})</text>),
            grid.Column(columnName :"",format: @<text>@Html.ActionLink("Delete", "Delete", new { id=item.PatientId})</text>)
            

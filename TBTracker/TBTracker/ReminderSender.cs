@@ -20,7 +20,7 @@ namespace TBTracker
             twilio = new TwilioRestClient(accountSid, authToken);
         }
 
-        public void Execute(JobExecutionContext context)
+        public virtual void Execute(JobExecutionContext context)
         {
             //string phone = "+16469266783";
             //string message = "This is a test message sent at " + DateTime.Now.ToLocalTime();

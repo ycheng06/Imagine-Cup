@@ -22,8 +22,8 @@ namespace TBTracker
 
         public void Execute(JobExecutionContext context)
         {
-            string phone = "+16469266783";
-            string message = "This is a test message sent at " + DateTime.Now.ToLocalTime();
+            //string phone = "+16469266783";
+            //string message = "This is a test message sent at " + DateTime.Now.ToLocalTime();
             //var msg = twilio.SendSmsMessage(twiliNumber, phone, message);
             //Trace.WriteLine("Sent message <" + message + "> to " + phone + " at " + DateTime.Now.ToLocalTime());
             traverse();

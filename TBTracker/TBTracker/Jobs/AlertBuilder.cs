@@ -3,14 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TBTracker.Models;
+using Quartz;
 
 namespace TBTracker.Jobs
 {
-    public class AlertBuilder
+    public class AlertBuilder : ReminderSender
     {
         private TrackerEntities db = new TrackerEntities();
-        private ReminderSender rs = new ReminderSender();
+        private TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+        private TimeSpan first_follow_up = new TimeSpan(15, 0, 0); //15:00 = 3:00PM
+        private TimeSpan second_follow_up = new TimeSpan(18, 0, 0); //18:00 = 6:00PM
 
+        public void Execute(JobExecutionContext context)
+        {
+            TimeSpan timeFired = TimeZoneInfo.ConvertTimeFromUtc((DateTime)context.FireTimeUtc,userTimeZone).TimeOfDay;
+            if (timeFired.Equals(first_follow_up))
+            {
+                additional_drug_intake_reminder();
+            }
+            else if (timeFired.Equals(second_follow_up))
+            {
+                missed_drug_intake_alert();
+            }
+        }
+
+        
         private void additional_drug_intake_reminder()
         {
             //for each patient, if its ResponseReceived field is false, text them again
@@ -18,12 +35,12 @@ namespace TBTracker.Jobs
             foreach (Patient p in missed_patients)
             {
                 string message = "";
-                rs.send_message(p.Phone, message);
+                send_message(p.Phone, message);
 
                 string family_message = 
                     p.FirstName + " has forgotten to take his/her medication today. Please immediately remind him/her to take the treatment.";
-                rs.send_message(p.FamilyPhone1, message);
-                rs.send_message(p.FamilyPhone2, message);
+                send_message(p.FamilyPhone1, message);
+                send_message(p.FamilyPhone2, message);
             }
         }
         private void pre_checkup_reminder()

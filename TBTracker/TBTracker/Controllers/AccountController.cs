@@ -12,17 +12,13 @@ namespace TBTracker.Controllers
     public class AccountController : Controller
     {
 
-        //
         // GET: /Account/Login
-
         public ActionResult Login()
         {
             return View();
         }
 
-        //
         // POST: /Account/Login
-
         [HttpPost]
         public ActionResult Login(LogOnModel model, string returnUrl)
         {
@@ -34,16 +30,11 @@ namespace TBTracker.Controllers
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
-                        if (User.IsInRole("admin")) return RedirectToAction("Register", "Account");
                         return Redirect(returnUrl);
                     }
                     else
                     {
-                        if (User.IsInRole("admin"))
-                        {
-                            return RedirectToAction("Register", "Account");
-                        }
-                            return RedirectToAction("Index", "Alert");
+                        return RedirectToAction("Index", "Alert");
                     }
                 }
                 else
@@ -61,7 +52,6 @@ namespace TBTracker.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
-
             return RedirectToAction("Login", "Account");
         }
 

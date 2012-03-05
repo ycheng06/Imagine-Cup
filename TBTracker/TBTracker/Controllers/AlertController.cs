@@ -9,7 +9,7 @@ using TBTracker.Models;
 
 namespace TBTracker.Controllers
 {
-    [Authorize(Roles="user")]
+    [Authorize]
     public class AlertController : Controller
     {
         //
@@ -20,6 +20,7 @@ namespace TBTracker.Controllers
 
         public ActionResult Index()
         {
+            if(User.IsInRole("admin")) return RedirectToAction("Register", "Account");
             return View(db.Alerts.Include("Patient")
                                         .Include("AlertType").Where(alert => alert.Patient.RegisteredBy == User.Identity.Name).ToList());
         }

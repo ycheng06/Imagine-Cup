@@ -39,7 +39,7 @@ namespace TBTracker
         protected void Application_Start()
         {
             Database.SetInitializer<TrackerEntities>(new Seeder());
-            Scheduler();
+            //Scheduler();
             AreaRegistration.RegisterAllAreas();
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);

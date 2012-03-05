@@ -14,25 +14,27 @@ namespace TBTracker.Models
             {
                 FirstName = "Jason",
                 LastName = "Cheng",
-                Phone = "6175129381",
-                FamilyPhone1 = "6175129381",
-                FamilyPhone2 = "6175129381",
+                Phone = "6469266783",
+                FamilyPhone1 = "6469266783",
+                FamilyPhone2 = "6469266783",
                 Address = "887 Broadway",
                 TimeZone = "Eastern Standard Time",
                 Gender = "Male",
-                RegisteredBy = "bamf"
+                RegisteredBy = "bamf",
+                ResponseReceived = false
             };
             Patient patient2 = new Patient
             {
-                FirstName = "Greg",
+                FirstName = "Mary",
                 LastName = "Wong",
                 Phone = "6175832334",
                 FamilyPhone1 = "6175832334",
                 FamilyPhone2 = "6175832334",
                 Address = "Classified",
                 TimeZone = "Eastern Standard Time",
-                Gender = "Male",
-                RegisteredBy = "bamf"
+                Gender = "Female",
+                RegisteredBy = "bamf",
+                ResponseReceived = false
             };
             Alert alert1 = new Alert
             {
@@ -48,10 +50,12 @@ namespace TBTracker.Models
             };
             AlertType alertType1 = new AlertType
             {
+                AlertTypeId = 1,
                 Name = "Missed Medication"
             };
             AlertType alertType2 = new AlertType
             {
+                AlertTypeId = 2,
                 Name = "Missed Checkup"
             };
             Message message1 = new Message

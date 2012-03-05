@@ -15,7 +15,8 @@ namespace TBTracker.Models
         [DataType(DataType.Date)]
         public DateTime AlertDate { get; set; }
 
-        public int AlertTypeId { get; set; }
+        public int AlertTypeId { get; set; } //defined in table AlertTypes: 1 = missed medication, 2 = missed checkup
+
         public AlertType AlertType { get; set; }
 
         public int PatientId { get; set; }

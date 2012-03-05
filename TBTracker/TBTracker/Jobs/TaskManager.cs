@@ -9,12 +9,12 @@ using TBTracker.Twilio;
 namespace TBTracker.Jobs
 {
     //things to do:
-    //rename this
+    //rename this - done
     //send custom messages
     //remove test in Execute
     //test if first/second family phone exists
 
-    public class AlertBuilder : ReminderSender
+    public class TaskManager : ReminderSender
     {
         private TrackerEntities db = new TrackerEntities();
         private TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
@@ -29,7 +29,7 @@ namespace TBTracker.Jobs
             //testing
             if (true)
             {
-                first_warning();
+                first_reminder();
             }
             else if (timeFired.Equals(reminder_time))
             {
@@ -47,6 +47,18 @@ namespace TBTracker.Jobs
             var patients = db.Patients.ToList();
             foreach (Patient p in patients)
             {
+                //custom messages
+                //var messages = db.Messages.Where(m => m.Patient.Equals(p)).ToList();
+                var messages = db.Messages.Where(m => m.PatientId == p.PatientId).ToList();
+                if (messages.Count > 0)
+                {
+                    foreach (Message m in messages)
+                    {
+                        twilio.SendSMS(p.Phone, m.MessageText);
+                    }
+                }
+
+
                 if (p.ResponseReceived == false)
                 {
                     string warning = "You forgot yesterday's medication!";
@@ -57,12 +69,12 @@ namespace TBTracker.Jobs
                 p.ResponseReceived = false;
                 string message = msg.ConstructMsg(p);
                 twilio.SendSMS(p.Phone, message);
-                
+
             }
 
         }
 
-        
+
         private void first_warning()
         {
             //for each patient, if its ResponseReceived field is false, text them again
@@ -78,8 +90,8 @@ namespace TBTracker.Jobs
                 //more work
                 string family_message = String.Format(
                     p.FirstName + " has forgotten to take {0} medication today. Please immediately remind {1} to take the treatment.",
-                    p.Gender=="Male"?"his":"her",
-                    p.Gender=="Male"?"him":"her");
+                    p.Gender == "Male" ? "his" : "her",
+                    p.Gender == "Male" ? "him" : "her");
                 twilio.SendSMS(p.FamilyPhone1, family_message);
                 twilio.SendSMS(p.FamilyPhone2, family_message);
             }

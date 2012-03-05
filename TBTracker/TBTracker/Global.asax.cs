@@ -8,6 +8,7 @@ using System.Data.Entity;
 using TBTracker.Models;
 using Quartz;
 using Quartz.Impl;
+using TBTracker.Jobs;
 using System.Diagnostics;
 using Microsoft.WindowsAzure.Diagnostics;
 
@@ -54,10 +55,10 @@ namespace TBTracker
             sched.Start();
 
             //construct job info
-            JobDetail jobDetail = new JobDetail("SendReminder", null, typeof(ReminderSender));
+            JobDetail jobDetail = new JobDetail("MsgSender", null, typeof(MsgSender));
 
             //Set when to repeat the job
-            Trigger trigger = TriggerUtils.MakeSecondlyTrigger(5);
+            Trigger trigger = TriggerUtils.MakeMinutelyTrigger(5);
             trigger.StartTimeUtc = DateTime.UtcNow; 
             trigger.Name = "Testing";
             sched.ScheduleJob(jobDetail, trigger);

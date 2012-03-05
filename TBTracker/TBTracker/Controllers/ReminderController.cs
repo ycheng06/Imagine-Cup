@@ -12,6 +12,9 @@ namespace TBTracker.Controllers
 {
     public class ReminderController : TwiMLController
     {
+
+        private TrackerEntities db = new TrackerEntities();
+
         [HttpPost]
         public ActionResult TextResponse(TextRequest request)
         {
@@ -43,7 +46,6 @@ namespace TBTracker.Controllers
             //mark number off for the day
 
             //look up caller in patient table, mark its ResponseReceived as true
-            TrackerEntities db = new TrackerEntities();
             Patient patient = db.Patients.SingleOrDefault(x => x.Phone == caller);
             patient.ResponseReceived = true;
             db.Entry(patient).State = EntityState.Modified;

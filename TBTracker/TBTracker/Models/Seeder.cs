@@ -48,10 +48,12 @@ namespace TBTracker.Models
             };
             AlertType alertType1 = new AlertType
             {
+                AlertTypeId = 1,
                 Name = "Missed Medication"
             };
             AlertType alertType2 = new AlertType
             {
+                AlertTypeId = 2,
                 Name = "Missed Checkup"
             };
             Message message1 = new Message

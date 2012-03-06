@@ -1,0 +1,11 @@
+﻿@{
+    //editor
+}
+@model DateTime
+@{
+    //we probably will want to get the user's time zone from the database later
+    TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+    var newTime = TimeZoneInfo.ConvertTimeFromUtc(Model, userTimeZone);
+}
+@Html.TextBox("", newTime.ToString("MM/dd/yyyy"),
+                  new { @class = "date" }) 

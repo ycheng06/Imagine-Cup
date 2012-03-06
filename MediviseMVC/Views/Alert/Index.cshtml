@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MediviseMVC.Models.Alert>
+@{
+    ViewBag.Title = "Alerts";
+}
+
+<h2>ALERTS</h2>
+<table>
+    <tr>
+        <th>
+            Patient Full Name
+        </th>
+        <th>
+            Patient ID
+        </th>
+        <th>
+            Alert Date
+        </th>
+        <th>
+            Alert Type
+        </th>
+    </tr>
+   @foreach (var item in Model)
+   {
+        <tr>
+            <td>
+               @Html.ActionLink(item.Patient.FirstName + " " + item.Patient.LastName, "Details", "PatientManager", "", "", "", new { id = item.PatientId}, "")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlertDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlertType.Name)
+            </td>
+        </tr>
+   }
+</table>

@@ -1,0 +1,110 @@
+﻿@model IEnumerable<MediviseMVC.Models.Message>
+
+@{
+    ViewBag.Title = "Message Portal";
+}
+
+<h2>Message Portal</h2>
+<p>
+    Testing: Use this to check if messages are truly expired.
+@{
+    TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+    var newTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, userTimeZone);
+ }
+    The time is now: @newTime
+</p>
+
+<p>
+    @Html.ActionLink("Back", "Index","Alert")
+</p>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p>
+    Ongoing Messages in Effect:
+</p>
+<table>
+    <tr>
+        <th>
+            StartDate
+        </th>
+        <th>
+            EndDate
+        </th>
+        <th>
+            Patient
+        </th>
+        <th>
+            Message Text
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (TBTracker.Models.Message item in ViewBag.OngoingMessages)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient.FirstName)
+                @Html.DisplayFor(modelItem => item.Patient.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MessageText)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MessageId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MessageId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MessageId })
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    Expired Messages:
+</p>
+<table>
+    <tr>
+        <th>
+            StartDate
+        </th>
+        <th>
+            EndDate
+        </th>
+        <th>
+            Patient
+        </th>
+        <th>
+            Message Text
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (TBTracker.Models.Message item in ViewBag.ExpiredMessages)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient.FirstName)
+                @Html.DisplayFor(modelItem => item.Patient.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MessageText)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MessageId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MessageId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MessageId })
+            </td>
+        </tr>
+    }
+</table>

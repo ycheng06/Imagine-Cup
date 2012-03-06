@@ -1,0 +1,28 @@
+﻿@model MediviseMVC.Models.Test
+
+@{
+    ViewBag.Title = "DeleteTest";
+}
+
+<h2>DeleteTest</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Test</legend>
+
+    <div class="display-label">Test Name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TestInfo.Name)
+    </div>
+    <div class="display-label">TestDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TestDate)
+    </div>
+
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Edit", new {id=Model.PatientId })
+    </p>
+}

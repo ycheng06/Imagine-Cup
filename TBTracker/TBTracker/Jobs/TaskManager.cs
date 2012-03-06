@@ -10,9 +10,12 @@ namespace TBTracker.Jobs
 {
     //things to do:
     //rename this - done
-    //send custom messages
+    //send custom messages - done
+    //custom messages - make sure they only get sent in the right time duration
+    //                - done, but please check if the logic is correct
+    //send only if number is valid - done, checking before sending text in TwilioSender.cs
+    //                - please test using a null field and also a number that is not 10 digits (for US numbers)
     //remove test in Execute
-    //test if first/second family phone exists
 
     public class TaskManager : ReminderSender
     {
@@ -54,7 +57,10 @@ namespace TBTracker.Jobs
                 {
                     foreach (Message m in messages)
                     {
-                        twilio.SendSMS(p.Phone, m.MessageText);
+                        if (m.StartDate <= DateTime.UtcNow && m.EndDate <= DateTime.UtcNow)
+                        {
+                            twilio.SendSMS(p.Phone, m.MessageText);
+                        }
                     }
                 }
 
@@ -113,5 +119,6 @@ namespace TBTracker.Jobs
         private void missed_checkup_alert()
         {
         }
+
     }
 }

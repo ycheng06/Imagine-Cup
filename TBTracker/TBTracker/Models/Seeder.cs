@@ -21,7 +21,7 @@ namespace TBTracker.Models
                 TimeZone = "Eastern Standard Time",
                 Gender = "Male",
                 RegisteredBy = "bamf",
-                ResponseReceived = false
+                ResponseReceived = true
             };
             Patient patient2 = new Patient
             {
@@ -34,7 +34,7 @@ namespace TBTracker.Models
                 TimeZone = "Eastern Standard Time",
                 Gender = "Female",
                 RegisteredBy = "bamf",
-                ResponseReceived = false
+                ResponseReceived = true
             };
             Alert alert1 = new Alert
             {

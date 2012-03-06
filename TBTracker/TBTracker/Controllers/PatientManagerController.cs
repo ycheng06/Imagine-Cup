@@ -49,6 +49,7 @@ namespace TBTracker.Controllers
             if (ModelState.IsValid)
             {
                 patient.RegisteredBy = User.Identity.Name;
+                patient.ResponseReceived = true; //first day - change later if this doesn't work
                 db.Patients.Add(patient);
                 db.SaveChanges();
                 return RedirectToAction("Index");  

@@ -17,6 +17,8 @@ namespace TBTracker.Jobs
     //                - please test using a null field and also a number that is not 10 digits (for US numbers)
     //remove test in Execute
 
+    //later: add a confirmation message on successful registration
+
     public class TaskManager : ReminderSender
     {
         private TrackerEntities db = new TrackerEntities();

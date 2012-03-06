@@ -56,7 +56,7 @@ namespace TBTracker
 
             //construct job info
             //JobDetail jobDetail = new JobDetail("MsgSender", null, typeof(MsgSender));
-            JobDetail makeAlert = new JobDetail("AlertBuilder", null, typeof(AlertBuilder));
+            JobDetail makeAlert = new JobDetail("AlertBuilder", null, typeof(TaskManager));
 
             //Set when to repeat the job
             Trigger trigger = TriggerUtils.MakeMinutelyTrigger(5);

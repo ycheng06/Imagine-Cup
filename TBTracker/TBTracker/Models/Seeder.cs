@@ -25,7 +25,7 @@ namespace TBTracker.Models
             };
             Patient patient2 = new Patient
             {
-                FirstName = "Mary",
+                FirstName = "Susie",
                 LastName = "Wong",
                 Phone = "6175832334",
                 FamilyPhone1 = "6175832334",

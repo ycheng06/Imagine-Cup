@@ -9,11 +9,6 @@ using TBTracker.Twilio;
 namespace TBTracker.Jobs
 {
     //things to do:
-    //rename this - done
-    //send custom messages - done
-    //custom messages - make sure they only get sent in the right time duration
-    //                - done, but please check if the logic is correct
-    //send only if number is valid - done, checking before sending text in TwilioSender.cs
     //                - please test using a null field and also a number that is not 10 digits (for US numbers)
     //remove test in Execute
 
@@ -52,36 +47,17 @@ namespace TBTracker.Jobs
             var patients = db.Patients.ToList();
             foreach (Patient p in patients)
             {
-                //custom messages
-                //var messages = db.Messages.Where(m => m.Patient.Equals(p)).ToList();
-                var messages = db.Messages.Where(m => m.PatientId == p.PatientId).ToList();
-                if (messages.Count > 0)
-                {
-                    foreach (Message m in messages)
-                    {
-                        if (m.StartDate <= DateTime.UtcNow && m.EndDate <= DateTime.UtcNow)
-                        {
-                            twilio.SendSMS(p.Phone, m.MessageText);
-                        }
-                    }
-                }
-
-
                 if (p.ResponseReceived == false)
                 {
                     string warning = "You forgot yesterday's medication!";
                     twilio.SendSMS(p.Phone, warning);
                     missed_drug_intake_alert(p);
                 }
-
                 p.ResponseReceived = false;
                 string message = msg.ConstructMsg(p);
                 twilio.SendSMS(p.Phone, message);
-
             }
-
         }
-
 
         private void first_warning()
         {

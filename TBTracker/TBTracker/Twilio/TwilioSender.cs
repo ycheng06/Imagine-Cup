@@ -45,6 +45,7 @@ namespace TBTracker.Twilio
         private List<string> truncateMsg(string msg, int max_len)
         {
             List<string> fragments = new List<string>();
+            /* commented out as this does not seem to work properly yet
             string[] strs = msg.Split(new Char[] { '\n' });
             StringBuilder sb = new StringBuilder();
             foreach (var s in strs)
@@ -75,6 +76,32 @@ namespace TBTracker.Twilio
                     }
                 }
             }
+            */
+            //temporary fix for above code
+            int splits;
+            if (msg.Length % max_len == 0)
+            {
+                splits = msg.Length / max_len;
+            }
+            else
+            {
+                splits = msg.Length / max_len + 1;
+            }
+
+            for (int i = 0; i < msg.Length; i += max_len)
+            {
+                string substring;
+                if (msg.Length - i < max_len)
+                {
+                    substring = msg.Substring(i, msg.Length - i);
+                }
+                else
+                {
+                    substring = msg.Substring(i, max_len);
+                }
+                fragments.Add(substring);
+            }
+
             return fragments;
         }
 

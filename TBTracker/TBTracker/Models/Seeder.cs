@@ -69,7 +69,7 @@ namespace TBTracker.Models
             {
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(1),
-                MessageText = "Calling Greg! Report to base to pick up your regimen!",
+                MessageText = "Paging Dr. Wong! Report to base to pick up your regimen! This is a super long text message for the purposes of texting. Repeat, this is a super long message so I can see if it truncates properly. Repeat for the third time, this is a repeat.",
                 Patient = patient2
             };
             Message message3 = new Message

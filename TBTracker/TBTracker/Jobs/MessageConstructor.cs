@@ -42,13 +42,15 @@ namespace TBTracker.Jobs
             List<Message> customMessages = p.Messages.ToList().FindAll(m => dateInRange(now, m.StartDate, m.EndDate));
             if (customMessages.Count > 0)
             {
-                msg.Append("Note:\n");
+                msg.AppendLine();
+                msg.Append("Note:");
                 foreach (var c in customMessages)
                 {
-                    msg.Append(c.MessageText);
                     msg.AppendLine();
+                    msg.Append(c.MessageText);
                 }
             }
+            /*
             string foo1 = "lots of new lines\n";
             string foo2 = "lots of new lines again\n";
             string foo3 = "lots of new lines once more\n";
@@ -59,6 +61,7 @@ namespace TBTracker.Jobs
             string plop = new String(blob.ToCharArray());
             msg.Append(foo1); msg.Append(foo2); msg.Append(foo3); msg.Append(foo4); msg.Append(foo5); msg.Append(foo6); msg.Append(blob);
             msg.Append(plop);
+            */
             
             return msg.ToString();
 

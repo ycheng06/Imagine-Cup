@@ -12,15 +12,15 @@ namespace TBTracker.Controllers
     public class AccountController : Controller
     {
 
-        // GET: /Account/Login
-        public ActionResult Login()
+        // GET: /Account/LogOn
+        public ActionResult LogOn()
         {
             return View();
         }
 
-        // POST: /Account/Login
+        // POST: /Account/LogOn
         [HttpPost]
-        public ActionResult Login(LogOnModel model, string returnUrl)
+        public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -52,7 +52,7 @@ namespace TBTracker.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("LogOn", "Account");
         }
 
         //

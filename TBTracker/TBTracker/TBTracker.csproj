@@ -145,10 +145,6 @@
     <Compile Include="Validation\DateGreaterThanAttributes.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ASPNETDB.MDF" />
-    <Content Include="App_Data\aspnetdb_log.ldf">
-      <DependentUpon>ASPNETDB.MDF</DependentUpon>
-    </Content>
     <Content Include="bin\TBTracker.dll" />
     <Content Include="bin\TBTracker.pdb" />
     <Content Include="Content\themes\base\jquery-ui.css" />
@@ -270,7 +266,7 @@
   <ItemGroup>
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\LogOn.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +312,7 @@
     <Content Include="Views\TreatmentPlanner\DeleteDrug.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="obj\Release\TempPE\" />
     <Folder Include="obj\Release\TransformWebConfig\transformed\Views\" />

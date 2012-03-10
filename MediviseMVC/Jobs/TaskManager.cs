@@ -22,16 +22,12 @@ namespace MediviseMVC.Jobs
         private TimeSpan follow_up_time = new TimeSpan(15, 0, 0); //15:00 = 3:00PM
         private MessageConstructor msg = new MessageConstructor();
         private TwilioSender twilio = new TwilioSender();
-
         public override void Execute(JobExecutionContext context)
         {
             TimeSpan timeFired = TimeZoneInfo.ConvertTimeFromUtc((DateTime)context.FireTimeUtc,userTimeZone).TimeOfDay;
+            
             //testing
-            if (true)
-            {
-                first_reminder();
-            }
-            else if (timeFired.Equals(reminder_time))
+            if (timeFired.Equals(reminder_time))
             {
                 first_reminder();
             }
@@ -53,9 +49,30 @@ namespace MediviseMVC.Jobs
                     twilio.SendSMS(p.Phone, warning);
                     missed_drug_intake_alert(p);
                 }
+                    string p1 = "From off a hill whose concave womb reworded" +
+                                    "A plaintful story from a sist ring vale" +
+                                    "My spirits t'attend this double voice accorded," +
+                                   " And down I laid to list the sad-tuned tale," +
+                                   " Ere long espied a fickle maid full pale, " +
+                                   " Tearing of papers, breaking rings atwain, " +
+                                   " Storming her world with sorrow's wind and rain. " +
+                                   " Upon her head a platted hive of straw, " +
+                                   " Which fortified her visage from the sun, " +
+                                   " Whereon the thought might think sometime it saw"  +
+                                   " The carcase of a beauty spent and done. " +
+                                   " Time had not scythed all that youth begun, " +
+                                   " Nor youth all quit, but spite of heaven's fell rage" +
+                                   " Some beauty peeped through lattice of seared age\n";
+                    string p2 = "Sometimes her levelled eyes their carriage ride\n" +
+                           " As they did batt'ry to the spheres intend\n" +
+                           " Sometime diverted their poor balls are tied\n" +
+                           " To th'orbed earth; sometimes they do extend\n" +
+                           " Their view right on; anon their gazes lend\n" +
+                           " To every place at once, and nowhere fixed\n" +
+                           " The mind and sight distractedly commixed\n";
                 p.ResponseReceived = false;
                 string message = msg.ConstructMsg(p);
-                twilio.SendSMS(p.Phone, message);
+                twilio.SendSMS(p.Phone, message+p1+p2);
             }
         }
 

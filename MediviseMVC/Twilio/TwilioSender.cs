@@ -17,21 +17,21 @@ namespace MediviseMVC.Twilio
         private const int us_num_digits = 10;
         TwilioRestClient smsClient = new TwilioRestClient(accountSid, authToken);
 
-        public void SendSMS(string receiver,string msg)
+        public void SendSMS(string receiver, string msg)
         {
             Trace.WriteLine(String.Format("Incoming msg length is {0}", msg.Length));
             if (has_enough_digits(receiver, us_num_digits))
             {
                 if (msg.Length <= MAX_CHARS)
                 {
-                    smsClient.SendSmsMessage(twiliNumber, receiver, msg);
+                    //smsClient.SendSmsMessage(twiliNumber, receiver, msg);
                     Trace.WriteLine(msg);
                 }
                 else
                 {
-                    foreach (var frag in truncateMsg(msg,MAX_CHARS))
+                    foreach (var frag in truncateMsg(msg, MAX_CHARS))
                     {
-                        smsClient.SendSmsMessage(twiliNumber,receiver,frag);
+                        //smsClient.SendSmsMessage(twiliNumber, receiver, frag);
                         Trace.WriteLine(frag);
                         Trace.WriteLine("newlines!!");
                     }
@@ -45,7 +45,6 @@ namespace MediviseMVC.Twilio
         private List<string> truncateMsg(string msg, int max_len)
         {
             List<string> fragments = new List<string>();
-            /* commented out as this does not seem to work properly yet
             string[] strs = msg.Split(new Char[] { '\n' });
             StringBuilder sb = new StringBuilder();
             foreach (var s in strs)
@@ -60,8 +59,9 @@ namespace MediviseMVC.Twilio
                     fragments.Add(sb.ToString());
                     sb.Clear();
                     sb.Append(s);
+                    sb.AppendLine();
                 }
-                else 
+                else
                 {
                     if (sb.Length != 0)
                     {
@@ -69,41 +69,16 @@ namespace MediviseMVC.Twilio
                         sb.Clear();
                     }
                     int splits = (s.Length / max_len) + 1;
-                    for (int i=0;i<splits;i+=max_len)
+                    for (int i = 0; i < splits; i++)
                     {
-                        string substring = s.Substring(i,max_len);
+                        int strip_from = i * max_len;
+                        int strip_by = (strip_from + max_len > s.Length) ? (s.Length - strip_from) : max_len;
+                        string substring = s.Substring(strip_from, strip_by);
                         fragments.Add(substring);
                     }
                 }
             }
-            */
-            //temporary fix for above code
-            int splits;
-            if (msg.Length % max_len == 0)
-            {
-                splits = msg.Length / max_len;
-            }
-            else
-            {
-                splits = msg.Length / max_len + 1;
-            }
-
-            for (int i = 0; i < msg.Length; i += max_len)
-            {
-                string substring;
-                if (msg.Length - i < max_len)
-                {
-                    substring = msg.Substring(i, msg.Length - i);
-                }
-                else
-                {
-                    substring = msg.Substring(i, max_len);
-                }
-                fragments.Add(substring);
-            }
-
             return fragments;
         }
-
     }
 }

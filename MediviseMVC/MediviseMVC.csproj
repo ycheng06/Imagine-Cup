@@ -128,7 +128,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Jobs\MessageConstructor.cs" />
+    <Compile Include="Jobs\SendReminderJob.cs" />
+    <Compile Include="Jobs\SendWarningJob.cs" />
     <Compile Include="Jobs\TaskManager.cs" />
+    <Compile Include="Jobs\TestJob.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\AlertType.cs" />

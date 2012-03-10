@@ -52,30 +52,54 @@ namespace MediviseMVC.Controllers
                 patient.ResponseReceived = true; //first day - change later if this doesn't work
                 db.Patients.Add(patient);
                 db.SaveChanges();
-                //for demo
-                ISchedulerFactory schedulePool = new StdSchedulerFactory();
-                IScheduler sched = schedulePool.GetScheduler();
-                sched.Start();
-
-                //construct job info
-                JobDetail makeAlert = new JobDetail("AlertBuilder", null, typeof(TaskManager));
-
-                //Set when to repeat the job
-                Trigger trigger = TriggerUtils.MakeImmediateTrigger(0,new TimeSpan());
-                trigger.StartTimeUtc = DateTime.UtcNow.AddSeconds(30);
-                trigger.Name = "Testing";
-                sched.ScheduleJob(makeAlert, trigger);
-
-                //end for demo
-
+                sendRegisterConfirmation(patient);
+                sendDemoReminders(patient.PatientId);
                 return RedirectToAction("Index");  
             }
-
+              
             populateTimeZones(null);
             populateGenderList(null);
             return View(patient);
         }
-        
+        private void sendDemoReminders(int id)
+        {
+            ISchedulerFactory schedulePool = new StdSchedulerFactory();
+            IScheduler sched = schedulePool.GetScheduler();
+            sched.Start();
+            //set up reminder sender
+            try
+            {
+                JobDetail reminderJob = new JobDetail("AlertBuilder", null, typeof(SendReminderJob));
+                reminderJob.JobDataMap["pid"] = id;
+                Trigger trigger = TriggerUtils.MakeSecondlyTrigger("t1", 10, 0);
+                trigger.StartTimeUtc = TriggerUtils.GetEvenMinuteDate(DateTime.UtcNow);
+                sched.ScheduleJob(reminderJob, trigger);
+                //set up warning sender
+                JobDetail warningJob = new JobDetail("Warnings", null, typeof(SendWarningJob));
+                warningJob.JobDataMap["pid"] = id;
+                Trigger trigger2 = TriggerUtils.MakeSecondlyTrigger("test2", 10, 0);
+                trigger2.StartTimeUtc = TriggerUtils.GetEvenMinuteDate(DateTime.UtcNow).AddSeconds(30);
+                sched.ScheduleJob(warningJob, trigger2);
+                //set up trigger next day
+                JobDetail nextday = new JobDetail("second day", null, typeof(SendReminderJob));
+                nextday.JobDataMap["pid"] = id;
+                Trigger trigger3 = TriggerUtils.MakeSecondlyTrigger("test3", 10, 0);
+                trigger2.StartTimeUtc = TriggerUtils.GetEvenMinuteDate(DateTime.UtcNow).AddMinutes(1);
+                sched.ScheduleJob(nextday, trigger3);
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e.Message);
+                throw e;
+            }
+        }
+        private void sendRegisterConfirmation(Patient p)
+        {
+            string msg = String.Format("Dear {0}, Welcome to Medivise! We all hope you will get well very soon!\n", p.FirstName);
+            TwilioSender sender = new TwilioSender();
+            sender.SendSMS(p.Phone, msg);
+            Trace.WriteLine(msg);
+        }
         // GET: /PatientManager/Edit/5
         public ActionResult Edit(int id)
         {

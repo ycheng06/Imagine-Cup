@@ -20,9 +20,10 @@ namespace MediviseMVC.Controllers
 
         public ActionResult Index()
         {
-            if(User.IsInRole("admin")) return RedirectToAction("Register", "Account");
-            return View(db.Alerts.Include("Patient")
-                                        .Include("AlertType").Where(alert => alert.Patient.RegisteredBy == User.Identity.Name).ToList());
+            //if(User.IsInRole("admin")) return RedirectToAction("Register", "Account");
+            //return View(db.Alerts.Include("Patient")
+            //                            .Include("AlertType").Where(alert => alert.Patient.RegisteredBy == User.Identity.Name).ToList());
+            return View();
         }
         public ViewResult Details(int id)
         {

@@ -1,6 +1,6 @@
 <configuration>
     <connectionStrings>
-        <add name="DefaultConnection" connectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\aspnet.mdf;Integrated Security=True;User Instance=True;MultipleActiveResultSets=True" providerName="System.Data.SqlClient"/>
+        <add name="DefaultConnection" connectionString="Data Source=.\SQLEXPRESS;Initial Catalog=aspnetdb;Integrated Security=True" providerName="System.Data.SqlClient"/>
     </connectionStrings>
     <system.web>
       <profile defaultProvider="DefaultProfileProvider" >

@@ -2,38 +2,47 @@
 @{
     ViewBag.Title = "Alerts";
 }
-
-<h2>ALERTS</h2>
-<table>
-    <tr>
-        <th>
-            Patient Full Name
-        </th>
-        <th>
-            Patient ID
-        </th>
-        <th>
-            Alert Date
-        </th>
-        <th>
-            Alert Type
-        </th>
-    </tr>
-   @foreach (var item in Model)
-   {
+<h2>
+    ALERTS</h2>
+@{
+    if (Model == null)
+    { 
+    <h3>No Alerts</h3>
+    }
+    else
+    {
+    <table>
         <tr>
-            <td>
-               @Html.ActionLink(item.Patient.FirstName + " " + item.Patient.LastName, "Details", "PatientManager", "", "", "", new { id = item.PatientId}, "")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PatientId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AlertDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AlertType.Name)
-            </td>
+            <th>
+                Patient Full Name
+            </th>
+            <th>
+                Patient ID
+            </th>
+            <th>
+                Alert Date
+            </th>
+            <th>
+                Alert Type
+            </th>
         </tr>
-   }
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Patient.FirstName + " " + item.Patient.LastName, "Details", "PatientManager", "", "", "", new { id = item.PatientId }, "")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PatientId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AlertDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AlertType.Name)
+                </td>
+            </tr>
+        }
+    </table>
+    }
+}

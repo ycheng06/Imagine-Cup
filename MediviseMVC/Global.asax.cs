@@ -38,7 +38,7 @@ namespace MediviseMVC
 
         protected void Application_Start()
         {
-            Database.SetInitializer<MediviseEntities>(new Seeder());
+            //Database.SetInitializer<MediviseEntities>(new Seeder());
             Scheduler();
             AreaRegistration.RegisterAllAreas();
             RegisterGlobalFilters(GlobalFilters.Filters);

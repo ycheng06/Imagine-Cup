@@ -10,7 +10,7 @@ using System.Data.Objects.SqlClient;
 
 namespace MediviseMVC.Controllers
 {
-    [Authorize(Roles="user")]
+    [Authorize]
     public class MessageController : Controller
     {
         private MediviseEntities db = new MediviseEntities();

@@ -4,6 +4,11 @@ namespace MediviseMVC.Models
 {
     public class MediviseEntities : DbContext
     {
+        //public MediviseEntities()
+        //    : base("DefaultConnection")
+        //{
+
+        //}
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Drug> Drugs { get; set; }
         public DbSet<DrugInfo> DrugInfos { get; set; }

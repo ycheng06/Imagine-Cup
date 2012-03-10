@@ -9,7 +9,7 @@ using System.Data.Entity;
 
 namespace MediviseMVC.Controllers
 {
-    [Authorize(Roles="user")]
+    [Authorize]
     public class TreatmentPlannerController : Controller
     {
         MediviseEntities trackerDB = new MediviseEntities();

@@ -57,7 +57,6 @@ namespace MediviseMVC.Controllers
 
         //
         // GET: /Account/Register
-        [Authorize(Roles="admin")]
         public ActionResult Register()
         {
             populateTimeZones(null);
@@ -66,7 +65,6 @@ namespace MediviseMVC.Controllers
 
         //
         // POST: /Account/Register
-        [Authorize(Roles="admin")]
         [HttpPost]
         public ActionResult Register(RegisterModel model)
         {
@@ -79,7 +77,7 @@ namespace MediviseMVC.Controllers
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     //FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
-                    Roles.AddUserToRole(model.UserName, "user");
+                    //Roles.AddUserToRole(model.UserName, "user");
 
                     //add profile information
                     var profile = Profile.GetProfile(model.UserName);

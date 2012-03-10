@@ -14,7 +14,7 @@ using Quartz.Impl;
 
 namespace MediviseMVC.Controllers
 { 
-    [Authorize(Roles="user")]
+    [Authorize]
     public class PatientManagerController : Controller
     {
         private TwilioSender twilio = new TwilioSender();

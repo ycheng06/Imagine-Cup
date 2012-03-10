@@ -55,23 +55,22 @@ namespace MediviseMVC
             sched.Start();
 
             //construct job info
-            //JobDetail jobDetail = new JobDetail("MsgSender", null, typeof(MsgSender));
             JobDetail makeAlert = new JobDetail("AlertBuilder", null, typeof(TaskManager));
 
             //Set when to repeat the job
-            Trigger trigger = TriggerUtils.MakeMinutelyTrigger(5);
+            Trigger trigger = TriggerUtils.MakeSecondlyTrigger(100);
             trigger.StartTimeUtc = DateTime.UtcNow; 
             trigger.Name = "Testing";
-            //sched.ScheduleJob(jobDetail, trigger);
-
+            sched.ScheduleJob(makeAlert, trigger);
+        
+            /* To be restored 
             CronExpression alert_first_reminder = new CronExpression("0 0 9 * * ?");
 
             Trigger alertBuilder = new CronTrigger("alertBuilder_first", "group1", "0 0 9,15 * * ?");// don't know what group1 is for
                                                                                                // cron expression is 9:00AM and 3:00AM every day
             alertBuilder.StartTimeUtc = DateTime.UtcNow;
             alertBuilder.Name = "Missed Response";
-            //sched.ScheduleJob(makeAlert, alertBuilder);
-            //sched.ScheduleJob(makeAlert, trigger);
+             * */
         }
     }
 }

@@ -17,21 +17,21 @@ namespace MediviseMVC.Twilio
         private const int us_num_digits = 10;
         TwilioRestClient smsClient = new TwilioRestClient(accountSid, authToken);
 
-        public void SendSMS(string receiver,string msg)
+        public void SendSMS(string receiver, string msg)
         {
             Trace.WriteLine(String.Format("Incoming msg length is {0}", msg.Length));
             if (has_enough_digits(receiver, us_num_digits))
             {
                 if (msg.Length <= MAX_CHARS)
                 {
-                    smsClient.SendSmsMessage(twiliNumber, receiver, msg);
+                    //smsClient.SendSmsMessage(twiliNumber, receiver, msg);
                     Trace.WriteLine(msg);
                 }
                 else
                 {
-                    foreach (var frag in truncateMsg(msg,MAX_CHARS))
+                    foreach (var frag in truncateMsg(msg, MAX_CHARS))
                     {
-                        smsClient.SendSmsMessage(twiliNumber,receiver,frag);
+                        //smsClient.SendSmsMessage(twiliNumber, receiver, frag);
                         Trace.WriteLine(frag);
                         Trace.WriteLine("newlines!!");
                     }
@@ -45,8 +45,15 @@ namespace MediviseMVC.Twilio
         private List<string> truncateMsg(string msg, int max_len)
         {
             List<string> fragments = new List<string>();
-            /* commented out as this does not seem to work properly yet
             string[] strs = msg.Split(new Char[] { '\n' });
+            Trace.WriteLine("Starting split examination");
+            foreach (var s in strs)
+            {
+                Trace.WriteLine("*****************************");
+               Trace.WriteLine(s);
+                Trace.WriteLine("*****************************");
+            }
+            Trace.WriteLine("Ending split examination");
             StringBuilder sb = new StringBuilder();
             foreach (var s in strs)
             {
@@ -60,8 +67,9 @@ namespace MediviseMVC.Twilio
                     fragments.Add(sb.ToString());
                     sb.Clear();
                     sb.Append(s);
+                    sb.AppendLine();
                 }
-                else 
+                else
                 {
                     if (sb.Length != 0)
                     {
@@ -69,15 +77,29 @@ namespace MediviseMVC.Twilio
                         sb.Clear();
                     }
                     int splits = (s.Length / max_len) + 1;
-                    for (int i=0;i<splits;i+=max_len)
+                    for (int i = 0; i < splits; i++)
                     {
-                        string substring = s.Substring(i,max_len);
-                        fragments.Add(substring);
+                        int strip_from = i * max_len;
+                        int strip_by = (strip_from + max_len > s.Length) ? (s.Length - strip_from) : max_len;
+                        try
+                        {
+                            string substring = s.Substring(strip_from, strip_by);
+                            fragments.Add(substring);
+                        }
+                        catch
+                        {
+                            Trace.WriteLine(String.Format("strip starting {0}, and with max_len {1}\n", strip_from, max_len));
+                            Trace.WriteLine(String.Format("Length of string is: {0}, num_splits: {1}", s.Length, splits));
+                            Trace.WriteLine(String.Format("striping by: {0}",strip_by));
+                        }
                     }
                 }
             }
-            */
-            //temporary fix for above code
+            return fragments;
+        }
+    }
+}
+            /*
             int splits;
             if (msg.Length % max_len == 0)
             {
@@ -104,6 +126,4 @@ namespace MediviseMVC.Twilio
 
             return fragments;
         }
-
-    }
-}
+            */

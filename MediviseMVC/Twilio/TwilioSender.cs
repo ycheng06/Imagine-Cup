@@ -46,14 +46,6 @@ namespace MediviseMVC.Twilio
         {
             List<string> fragments = new List<string>();
             string[] strs = msg.Split(new Char[] { '\n' });
-            Trace.WriteLine("Starting split examination");
-            foreach (var s in strs)
-            {
-                Trace.WriteLine("*****************************");
-               Trace.WriteLine(s);
-                Trace.WriteLine("*****************************");
-            }
-            Trace.WriteLine("Ending split examination");
             StringBuilder sb = new StringBuilder();
             foreach (var s in strs)
             {
@@ -81,17 +73,8 @@ namespace MediviseMVC.Twilio
                     {
                         int strip_from = i * max_len;
                         int strip_by = (strip_from + max_len > s.Length) ? (s.Length - strip_from) : max_len;
-                        try
-                        {
-                            string substring = s.Substring(strip_from, strip_by);
-                            fragments.Add(substring);
-                        }
-                        catch
-                        {
-                            Trace.WriteLine(String.Format("strip starting {0}, and with max_len {1}\n", strip_from, max_len));
-                            Trace.WriteLine(String.Format("Length of string is: {0}, num_splits: {1}", s.Length, splits));
-                            Trace.WriteLine(String.Format("striping by: {0}",strip_by));
-                        }
+                        string substring = s.Substring(strip_from, strip_by);
+                        fragments.Add(substring);
                     }
                 }
             }
@@ -99,31 +82,3 @@ namespace MediviseMVC.Twilio
         }
     }
 }
-            /*
-            int splits;
-            if (msg.Length % max_len == 0)
-            {
-                splits = msg.Length / max_len;
-            }
-            else
-            {
-                splits = msg.Length / max_len + 1;
-            }
-
-            for (int i = 0; i < msg.Length; i += max_len)
-            {
-                string substring;
-                if (msg.Length - i < max_len)
-                {
-                    substring = msg.Substring(i, msg.Length - i);
-                }
-                else
-                {
-                    substring = msg.Substring(i, max_len);
-                }
-                fragments.Add(substring);
-            }
-
-            return fragments;
-        }
-            */

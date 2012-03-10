@@ -22,16 +22,12 @@ namespace MediviseMVC.Jobs
         private TimeSpan follow_up_time = new TimeSpan(15, 0, 0); //15:00 = 3:00PM
         private MessageConstructor msg = new MessageConstructor();
         private TwilioSender twilio = new TwilioSender();
-
         public override void Execute(JobExecutionContext context)
         {
             TimeSpan timeFired = TimeZoneInfo.ConvertTimeFromUtc((DateTime)context.FireTimeUtc,userTimeZone).TimeOfDay;
+            
             //testing
-            if (true)
-            {
-                first_reminder();
-            }
-            else if (timeFired.Equals(reminder_time))
+            if (timeFired.Equals(reminder_time))
             {
                 first_reminder();
             }

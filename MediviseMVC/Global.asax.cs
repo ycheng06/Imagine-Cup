@@ -50,6 +50,8 @@ namespace MediviseMVC
 
         private void Scheduler()
         {
+            //DO NOT DELET
+            /* To be restored 
             ISchedulerFactory schedulePool = new StdSchedulerFactory();
             IScheduler sched = schedulePool.GetScheduler();
             sched.Start();
@@ -62,8 +64,6 @@ namespace MediviseMVC
             trigger.StartTimeUtc = DateTime.UtcNow; 
             trigger.Name = "Testing";
             sched.ScheduleJob(makeAlert, trigger);
-        
-            /* To be restored 
             CronExpression alert_first_reminder = new CronExpression("0 0 9 * * ?");
 
             Trigger alertBuilder = new CronTrigger("alertBuilder_first", "group1", "0 0 9,15 * * ?");// don't know what group1 is for

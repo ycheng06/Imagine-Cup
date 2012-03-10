@@ -26,8 +26,8 @@ namespace MediviseMVC.Jobs
                 if (p.ResponseReceived == false)
                 {
                     string warning = "You forgot yesterday's medication!";
-                    //sender.SendSMS(p.Phone, warning);
-                    Trace.WriteLine(warning);
+                    sender.SendSMS(p.Phone, warning);
+                    //Trace.WriteLine(warning);
                     constructAlert(p);
                 }
                   /*  string p1 = "From off a hill whose concave womb reworded" +
@@ -55,8 +55,8 @@ namespace MediviseMVC.Jobs
                 db.Entry(p).State = EntityState.Modified;
                 db.SaveChanges();
                 string message = msgBuilder.ConstructMsg(p);
-                Trace.WriteLine(message);
-                //sender.SendSMS(p.Phone, message+p1+p2);
+                //Trace.WriteLine(message);
+                sender.SendSMS(p.Phone, message);
             }
         }
         private void constructAlert(Patient p)

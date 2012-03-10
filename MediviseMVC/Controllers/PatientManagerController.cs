@@ -78,21 +78,15 @@ namespace MediviseMVC.Controllers
             {
                 JobDetail reminderJob = new JobDetail("AlertBuilder", null, typeof(SendReminderJob));
                 reminderJob.JobDataMap["pid"] = id;
-                Trigger trigger = TriggerUtils.MakeSecondlyTrigger("t1", 10, 0);
-                trigger.StartTimeUtc = TriggerUtils.GetEvenMinuteDate(DateTime.UtcNow);
+                Trigger trigger = TriggerUtils.MakeMinutelyTrigger("t1", 2, 1);
+                trigger.StartTimeUtc = TriggerUtils.GetEvenMinuteDate(DateTime.UtcNow.AddMinutes(1));
                 sched.ScheduleJob(reminderJob, trigger);
                 //set up warning sender
                 JobDetail warningJob = new JobDetail("Warnings", null, typeof(SendWarningJob));
                 warningJob.JobDataMap["pid"] = id;
                 Trigger trigger2 = TriggerUtils.MakeSecondlyTrigger("test2", 10, 0);
-                trigger2.StartTimeUtc = TriggerUtils.GetEvenMinuteDate(DateTime.UtcNow).AddSeconds(30);
+                trigger2.StartTimeUtc = TriggerUtils.GetEvenMinuteDate(DateTime.UtcNow).AddMinutes(2);
                 sched.ScheduleJob(warningJob, trigger2);
-                //set up trigger next day
-                JobDetail nextday = new JobDetail("second day", null, typeof(SendReminderJob));
-                nextday.JobDataMap["pid"] = id;
-                Trigger trigger3 = TriggerUtils.MakeSecondlyTrigger("test3", 10, 0);
-                trigger2.StartTimeUtc = TriggerUtils.GetEvenMinuteDate(DateTime.UtcNow).AddMinutes(1);
-                sched.ScheduleJob(nextday, trigger3);
             }
             catch (Exception e)
             {

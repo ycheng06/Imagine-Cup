@@ -11,6 +11,7 @@ using MediviseMVC.Twilio;
 using Quartz;
 using MediviseMVC.Jobs;
 using Quartz.Impl;
+using MediviseMVC.ActionFilters;
 
 namespace MediviseMVC.Controllers
 { 
@@ -19,26 +20,20 @@ namespace MediviseMVC.Controllers
     {
         private TwilioSender twilio = new TwilioSender();
         private MediviseEntities db = new MediviseEntities();
-        //
         // GET: /PatientManager/
         public ViewResult Index()
         {
             return View(db.Patients.Where(patient => patient.RegisteredBy == User.Identity.Name).ToList());
        }
 
-        //
         // GET: /PatientManager/Details/5
+        [PreventUrlHacking]
         public ActionResult Details(int id)
         {
             Patient patient = db.Patients.Find(id);
-            if (isUrlValid(patient))
-            { 
-                return View(patient);
-            }
-            return RedirectToAction("Index");
+            return View(patient);
         }
 
-        //
         // GET: /PatientManager/Create
         public ActionResult Create()
         {
@@ -47,7 +42,6 @@ namespace MediviseMVC.Controllers
             return View();
         } 
 
-        //
         // POST: /PatientManager/Create
         [HttpPost]
         public ActionResult Create(Patient patient)
@@ -82,7 +76,6 @@ namespace MediviseMVC.Controllers
             return View(patient);
         }
         
-        //
         // GET: /PatientManager/Edit/5
         public ActionResult Edit(int id)
         {
@@ -96,7 +89,6 @@ namespace MediviseMVC.Controllers
             return RedirectToAction("Index");
         }
 
-        //
         // POST: /PatientManager/Edit/5
 
         [HttpPost]
@@ -126,9 +118,7 @@ namespace MediviseMVC.Controllers
             return View(patient);
         }
 
-        //
         // GET: /PatientManager/Delete/5
- 
         public ActionResult Delete(int id)
         {
             Patient patient = db.Patients.Find(id);
@@ -139,9 +129,7 @@ namespace MediviseMVC.Controllers
             return RedirectToAction("Index");
         }
 
-        //
         // POST: /PatientManager/Delete/5
-
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {            
@@ -156,6 +144,8 @@ namespace MediviseMVC.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+        
+        //******************Helper Methods********************
         private void populateTimeZones(string id)
         {
             Dictionary<string, string> timeZones = new Dictionary<string, string>();
@@ -172,6 +162,7 @@ namespace MediviseMVC.Controllers
                 ViewData["TimeZone"] = new SelectList(timeZones, "Key", "Value", id);
             }
         }
+
          private void populateGenderList(string id)
         {
             Dictionary<string, string> genders = new Dictionary<string, string>();
@@ -187,6 +178,7 @@ namespace MediviseMVC.Controllers
                 ViewData["Gender"] = new SelectList(genders, "Key", "Value", id);
             }
         }
+
          private bool isUrlValid(Patient patient)
          {
             //check of url hacking

@@ -14,15 +14,16 @@ namespace MediviseMVC.Controllers
     {
         MediviseEntities trackerDB = new MediviseEntities();
 
-        // GET: /Timeline/Edit/1
+        // GET: /TreatmentPlanner/Edit/1
         public ActionResult Edit(int id) //id == patientId
         {
 
             var patient = trackerDB.Patients.Find(id);
             return View(patient);
         }
-        //****************Drug Messages***************
-        // GET: /MsgTemplate/AddDrug
+
+        //****************Drug***************
+        // GET: /TreatmentPlanner/AddDrug
         public ActionResult AddDrug(int pid)
         {
             ViewData["PatientId"] = pid;
@@ -33,7 +34,8 @@ namespace MediviseMVC.Controllers
                 EndDate = DateTime.UtcNow.AddDays(1)
             });
         }
-        // POST: /MsgTemplate/AddDrug
+
+        // POST: /TreatmentPlanner/AddDrug
         [HttpPost]
         public ActionResult AddDrug(Drug drug)
         {
@@ -46,14 +48,16 @@ namespace MediviseMVC.Controllers
             populateDrugNames(1);
             return View(drug);
         }
-        // GET: /MsgTemplate/EditDrug
+
+        // GET: /TreatmentPlanner/EditDrug
         public ActionResult EditDrug(int id)
         {
             var drug = trackerDB.Drugs.Find(id);
             populateDrugNames(drug.DrugInfoId);
             return View(drug);
         }
-        // POST: /MsgTemplate/EditDrug
+
+        // POST: /TreatmentPlanner/EditDrug
         [HttpPost]
         public ActionResult EditDrug(Drug drug)
         {
@@ -66,12 +70,15 @@ namespace MediviseMVC.Controllers
             populateDrugNames(drug.DrugInfoId);
             return View();
         }
-        // GET: /MsgTemplate/DeleteDrug
+
+        // GET: /TreatmentPlanner/DeleteDrug/3
         public ActionResult DeleteDrug(int id)
         {
             var Drug = trackerDB.Drugs.Find(id);
             return View(Drug);
         }
+
+        // POST: /TreatmentPlanner/DeleteDrug/3
         [HttpPost, ActionName("DeleteDrug")]
         public ActionResult DeleteDrugConfirmed(int id)
         {
@@ -81,6 +88,7 @@ namespace MediviseMVC.Controllers
             trackerDB.SaveChanges();
             return RedirectToAction("Edit", new { id = pid });
         }
+
         //**********************Test Messages***********************************
         public ActionResult AddTest(int pid)
         {
@@ -194,6 +202,15 @@ namespace MediviseMVC.Controllers
                             orderby d.Name
                             select d;
             ViewData["DrugInfoId"] = new SelectList(drugnames, "DrugInfoId","Name", drugInfoId);
+        }
+        private bool isUrlValid(Patient patient)
+        {
+            //check of url hacking
+            if (patient == null || !patient.IsRegistedBy(User.Identity.Name))
+            {
+                return false;
+            }
+            return true;
         }
         protected override void Dispose(bool disposing)
         {

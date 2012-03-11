@@ -20,7 +20,6 @@ namespace MediviseMVC.Jobs
             DateTime now = DateTime.UtcNow;
             StringBuilder msg = ConstructTitle(p);
             int num_drugs = p.Drugs.Count;
-            msg.Append("Please follow the instructions:\n");
             if (num_drugs == 0)
             {
                 msg.Append("No Medicines for today\n");
@@ -32,23 +31,24 @@ namespace MediviseMVC.Jobs
             List<Test> testMessages = p.Tests.ToList().FindAll(t => dateInRange(t.TestDate,now,now.AddDays(10)));
             if (testMessages.Count > 0)
             {
-                msg.Append("You have tests on the following dates: ");
+                msg.Append("Checkups on the following dates: ");
                 foreach (var t in testMessages)
                 {
                     msg.Append(ConstructTestMsg(t));  
                 }
                 msg.Remove(msg.Length - 2, 2);
+                msg.AppendLine();
             }
             List<Message> customMessages = p.Messages.ToList().FindAll(m => dateInRange(now, m.StartDate, m.EndDate));
             if (customMessages.Count > 0)
             {
-                msg.AppendLine();
-                msg.Append("Note:");
+                msg.Append("Note:\n");
                 foreach (var c in customMessages)
                 {
-                    msg.AppendLine();
                     msg.Append(c.MessageText);
+                    msg.AppendLine();
                 }
+                msg.Remove(msg.Length - 1, 1);
             }
             return msg.ToString();
         }
@@ -62,27 +62,12 @@ namespace MediviseMVC.Jobs
         private StringBuilder ConstructTitle(Patient p)
         {
             StringBuilder title = new StringBuilder();
-            switch (p.Gender)
-            {
-                case "Male":
-                    title.Append("Dear Mr. ");
-                    title.Append(p.LastName);
-                    break;
-                case "Female":
-                    title.Append("Dear Ms. ");
-                    title.Append(p.LastName);
-                    break;
-                default:
-                    title.Append("Dear ");
-                    title.Append(p.FirstName);
-                    break;
-            }
-            title.AppendLine();
+            title.AppendFormat("Hi,{0}:\n", p.FirstName);
             return title;
         }
         private bool dateInRange(DateTime now, DateTime from, DateTime to)
         {
-            return (now >= from && now <= to);
+            return (now.Date >= from.Date && now.Date <= to.Date);
         }
          
     }

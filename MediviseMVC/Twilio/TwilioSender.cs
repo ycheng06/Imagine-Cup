@@ -24,14 +24,14 @@ namespace MediviseMVC.Twilio
             {
                 if (msg.Length <= MAX_CHARS)
                 {
-                    //smsClient.SendSmsMessage(twiliNumber, receiver, msg);
+                    smsClient.SendSmsMessage(twiliNumber, receiver, msg);
                     Trace.WriteLine(msg);
                 }
                 else
                 {
                     foreach (var frag in truncateMsg(msg, MAX_CHARS))
                     {
-                        //smsClient.SendSmsMessage(twiliNumber, receiver, frag);
+                        smsClient.SendSmsMessage(twiliNumber, receiver, frag);
                         Trace.WriteLine(frag);
                         Trace.WriteLine("newlines!!");
                     }
@@ -51,11 +51,13 @@ namespace MediviseMVC.Twilio
             {
                 if (sb.Length + s.Length + 1 <= max_len)
                 {
+                    Trace.WriteLine("Eating a new string");
                     sb.Append(s);
                     sb.AppendLine();
                 }
                 else if (s.Length + 1 <= max_len)
                 {
+                    Trace.WriteLine("clearing sb and eating a string");
                     fragments.Add(sb.ToString());
                     sb.Clear();
                     sb.Append(s);
@@ -63,12 +65,13 @@ namespace MediviseMVC.Twilio
                 }
                 else
                 {
+                    Trace.WriteLine("string tooooo long");
                     if (sb.Length != 0)
                     {
                         fragments.Add(sb.ToString());
                         sb.Clear();
                     }
-                    int splits = (s.Length / max_len) + 1;
+                    int splits = (s.Length / max_len) + (s.Length % 2);
                     for (int i = 0; i < splits; i++)
                     {
                         int strip_from = i * max_len;
@@ -77,6 +80,10 @@ namespace MediviseMVC.Twilio
                         fragments.Add(substring);
                     }
                 }
+            }
+            if (sb.Length != 0)
+            {
+                fragments.Add(sb.ToString());
             }
             return fragments;
         }

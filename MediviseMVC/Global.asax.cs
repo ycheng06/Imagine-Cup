@@ -44,33 +44,34 @@ namespace MediviseMVC
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
             ModelBinders.Binders.DefaultBinder = new DateTimeConversionBinder();
-            
-
         }
 
         private void Scheduler()
         {
-            //DO NOT DELET
-            /* To be restored 
             ISchedulerFactory schedulePool = new StdSchedulerFactory();
             IScheduler sched = schedulePool.GetScheduler();
             sched.Start();
 
             //construct job info
-            JobDetail makeAlert = new JobDetail("AlertBuilder", null, typeof(TaskManager));
+            JobDetail makeReminder = new JobDetail("reminder", null, typeof(SendReminderJob));
+            JobDetail makeWarning = new JobDetail("warning", null, typeof(SendWarningJob));
 
-            //Set when to repeat the job
-            Trigger trigger = TriggerUtils.MakeSecondlyTrigger(100);
-            trigger.StartTimeUtc = DateTime.UtcNow; 
-            trigger.Name = "Testing";
-            sched.ScheduleJob(makeAlert, trigger);
-            CronExpression alert_first_reminder = new CronExpression("0 0 9 * * ?");
+           //10 AM in the morning
+            DateTime reminderTime = new DateTime(1, 1, 1, 10, 0, 0);
+            DateTime convertedR = TimeZoneInfo.ConvertTime(reminderTime, TimeZoneInfo.FindSystemTimeZoneById("US Eastern Standard Time"), TimeZoneInfo.Local);
 
-            Trigger alertBuilder = new CronTrigger("alertBuilder_first", "group1", "0 0 9,15 * * ?");// don't know what group1 is for
-                                                                                               // cron expression is 9:00AM and 3:00AM every day
-            alertBuilder.StartTimeUtc = DateTime.UtcNow;
-            alertBuilder.Name = "Missed Response";
-             * */
+            //2 PM in the afternoon
+            DateTime warningTime = new DateTime(1, 1, 1, 14, 0, 0);
+            DateTime convertedW = TimeZoneInfo.ConvertTime(warningTime, TimeZoneInfo.FindSystemTimeZoneById("US Eastern Standard Time"), TimeZoneInfo.Local); 
+
+            //Set up reminder trigger
+            Trigger reminderTrigger = TriggerUtils.MakeDailyTrigger("reminderTrigger", convertedR.Hour , convertedR.Minute);
+            reminderTrigger.StartTimeUtc = DateTime.UtcNow;
+            sched.ScheduleJob(makeReminder, reminderTrigger);
+            //set up warning trigger
+            Trigger warningTrigger = TriggerUtils.MakeDailyTrigger("warningTrigger", convertedW.Hour, convertedW.Minute);
+            warningTrigger.StartTimeUtc = DateTime.UtcNow; 
+            sched.ScheduleJob(makeWarning, warningTrigger);
         }
     }
 }

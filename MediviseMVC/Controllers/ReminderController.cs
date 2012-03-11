@@ -12,21 +12,16 @@ namespace MediviseMVC.Controllers
 {
     public class ReminderController : TwiMLController
     {
-
+        private static string RESPONSE_MESSAGE = "Thank you for taking your medications today";
         private MediviseEntities db = new MediviseEntities();
 
         [HttpPost]
         public ActionResult TextResponse(TextRequest request)
         {
-            //var answer = string.Format("{0} {1}", "Your phone number is ", request.From);
-            //return TwiML(response => response.Sms(answer));
-
             //strip the leading "+1"
             string caller = request.From.Substring(2);
-
-            record_response(caller);
+            //record_response(caller);
             return null; //will not respond to a text
-
         }
 
         [HttpPost]
@@ -34,11 +29,9 @@ namespace MediviseMVC.Controllers
         {
             //strip the leading "+1"
             string caller = request.From.Substring(2);
-
             record_response(caller);
-
             //hang up
-            return TwiML(response => response.Say(request.From).Hangup());
+            return TwiML(response => response.Say(RESPONSE_MESSAGE).Hangup());
         }
 
         //takes in number without the "+1" at the beginning
@@ -48,9 +41,12 @@ namespace MediviseMVC.Controllers
 
             //look up caller in patient table, mark its ResponseReceived as true
             Patient patient = db.Patients.SingleOrDefault(x => x.Phone == caller);
-            patient.ResponseReceived = true;
-            db.Entry(patient).State = EntityState.Modified;
-            db.SaveChanges();
+            if (patient != null) //also need to check the time when the patient calls in
+            {
+                patient.ResponseReceived = true;
+                db.Entry(patient).State = EntityState.Modified;
+                db.SaveChanges();
+            }
         }
     }
 }

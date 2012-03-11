@@ -12,6 +12,7 @@ using Quartz;
 using MediviseMVC.Jobs;
 using Quartz.Impl;
 using MediviseMVC.ActionFilters;
+using System.Diagnostics;
 
 namespace MediviseMVC.Controllers
 { 
@@ -53,7 +54,8 @@ namespace MediviseMVC.Controllers
                 db.Patients.Add(patient);
                 db.SaveChanges();
                 sendRegisterConfirmation(patient);
-                sendDemoReminders(patient.PatientId);
+               // uncomment this call for testing 
+               // sendDemoReminders(patient.PatientId);
                 return RedirectToAction("Index");  
             }
               
@@ -61,6 +63,7 @@ namespace MediviseMVC.Controllers
             populateGenderList(null);
             return View(patient);
         }
+        //for prototype demo
         private void sendDemoReminders(int id)
         {
             ISchedulerFactory schedulePool = new StdSchedulerFactory();

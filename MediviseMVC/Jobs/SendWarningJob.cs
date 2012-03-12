@@ -27,7 +27,7 @@ namespace MediviseMVC.Jobs
             foreach (Patient p in missed_patients)
             {
                 //add warning to the beginning
-                string message = "Please take your medicine, and be sure to respond this time!\n";
+                string message = "Please take your medicine, and be sure to call us back this time!\n";
                 sender.SendSMS(p.Phone, message);
                 //Trace.WriteLine(message);
                 //message = msgBuilder.ConstructMsg(p);

@@ -22,7 +22,7 @@ namespace MediviseMVC.Controllers
         {
             //if(User.IsInRole("admin")) return RedirectToAction("Register", "Account");
             return View(db.Alerts.Include("Patient")
-                                        .Include("AlertType").Where(alert => alert.Patient.RegisteredBy == User.Identity.Name).ToList());
+                                        .Include("AlertType").Where(alert => alert.Patient.RegisteredBy == User.Identity.Name).OrderBy(a => a.AlertDate).ToList());
         }
         public ViewResult Details(int id)
         {

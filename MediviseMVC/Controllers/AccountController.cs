@@ -17,6 +17,10 @@ namespace MediviseMVC.Controllers
         // GET: /Account/LogOn
         public ActionResult LogOn()
         {
+           
+            DateTime reminderTime = new DateTime(2012, 3, 11, 14, 10, 0, DateTimeKind.Local);
+            DateTime convertedR = reminderTime.ToUniversalTime();
+            Trace.WriteLine(convertedR.ToShortTimeString(), "TIME *******************");
             return View();
         }
 

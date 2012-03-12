@@ -46,6 +46,9 @@ namespace MediviseMVC
             ModelBinders.Binders.DefaultBinder = new DateTimeConversionBinder();
         }
 
+        /*
+         * Start the job scheduler. Only supporting EST timezone now, but will eventually handle all timezones 
+         */
         private void Scheduler()
         {
             ISchedulerFactory schedulePool = new StdSchedulerFactory();
@@ -56,16 +59,15 @@ namespace MediviseMVC
             JobDetail makeReminder = new JobDetail("reminder", null, typeof(SendReminderJob));
             JobDetail makeWarning = new JobDetail("warning", null, typeof(SendWarningJob));
 
-           //10 AM in the morning
-            DateTime reminderTime = new DateTime(1, 1, 1, 10, 0, 0);
-            DateTime convertedR = TimeZoneInfo.ConvertTime(reminderTime, TimeZoneInfo.FindSystemTimeZoneById("US Eastern Standard Time"), TimeZoneInfo.Local);
+            DateTime reminderTime = new DateTime(2012, 3, 11, 10, 00, 0);
+            DateTime convertedR = TimeZoneInfo.ConvertTime(reminderTime, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"), TimeZoneInfo.Utc);
 
-            //2 PM in the afternoon
-            DateTime warningTime = new DateTime(1, 1, 1, 14, 0, 0);
-            DateTime convertedW = TimeZoneInfo.ConvertTime(warningTime, TimeZoneInfo.FindSystemTimeZoneById("US Eastern Standard Time"), TimeZoneInfo.Local); 
+
+            DateTime warningTime = new DateTime(2012, 3, 11, 17, 00, 0);
+            DateTime convertedW = TimeZoneInfo.ConvertTime(warningTime, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"), TimeZoneInfo.Utc); 
 
             //Set up reminder trigger
-            Trigger reminderTrigger = TriggerUtils.MakeDailyTrigger("reminderTrigger", convertedR.Hour , convertedR.Minute);
+            Trigger reminderTrigger = TriggerUtils.MakeDailyTrigger("reminderTrigger", convertedR.Hour, convertedR.Minute);
             reminderTrigger.StartTimeUtc = DateTime.UtcNow;
             sched.ScheduleJob(makeReminder, reminderTrigger);
             //set up warning trigger

@@ -130,7 +130,6 @@
     <Compile Include="Jobs\MessageConstructor.cs" />
     <Compile Include="Jobs\SendReminderJob.cs" />
     <Compile Include="Jobs\SendWarningJob.cs" />
-    <Compile Include="Jobs\TaskManager.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\AlertType.cs" />
@@ -268,6 +267,9 @@
     <Content Include="Views\TreatmentPlanner\EditDrug.cshtml" />
     <Content Include="Views\TreatmentPlanner\EditMsg.cshtml" />
     <Content Include="Views\TreatmentPlanner\EditTest.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Alert\Delete.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

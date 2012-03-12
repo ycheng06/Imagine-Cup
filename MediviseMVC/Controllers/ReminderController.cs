@@ -20,8 +20,9 @@ namespace MediviseMVC.Controllers
         {
             //strip the leading "+1"
             string caller = request.From.Substring(2);
-            //record_response(caller);
-            return null; //will not respond to a text
+            record_response(caller);
+            
+            return TwiML(response => response.Sms(RESPONSE_MESSAGE));
         }
 
         [HttpPost]

@@ -98,16 +98,14 @@ namespace MediviseMVC.Controllers
             Trace.WriteLine(msg);
         }
         // GET: /PatientManager/Edit/5
+        [PreventUrlHacking]
         public ActionResult Edit(int id)
         {
             Patient patient = db.Patients.Find(id);
-            if (isUrlValid(patient))
-            {
-                populateTimeZones(patient.TimeZone);
-                populateGenderList(patient.Gender);
-                return View(patient);
-            }
-            return RedirectToAction("Index");
+            populateTimeZones(patient.TimeZone);
+            populateGenderList(patient.Gender);
+
+            return View(patient);
         }
 
         // POST: /PatientManager/Edit/5
@@ -143,11 +141,7 @@ namespace MediviseMVC.Controllers
         public ActionResult Delete(int id)
         {
             Patient patient = db.Patients.Find(id);
-            if (isUrlValid(patient))
-            {
-                return View(patient);
-            }
-            return RedirectToAction("Index");
+            return View(patient);
         }
 
         // POST: /PatientManager/Delete/5
@@ -199,15 +193,5 @@ namespace MediviseMVC.Controllers
                 ViewData["Gender"] = new SelectList(genders, "Key", "Value", id);
             }
         }
-
-         private bool isUrlValid(Patient patient)
-         {
-            //check of url hacking
-            if (patient == null || !patient.IsRegistedBy(User.Identity.Name))
-            {
-                return false; 
-            }
-            return true;
-         }
     }
 }

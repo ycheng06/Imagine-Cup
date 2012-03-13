@@ -6,10 +6,11 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Data.Entity;
 using MediviseMVC.Models;
-using Quartz;
-using Quartz.Impl;
 using System.Diagnostics;
 using Microsoft.WindowsAzure.Diagnostics;
+using Quartz;
+using Quartz.Impl.Triggers;
+using Quartz.Impl;
 using MediviseMVC.Jobs;
 
 namespace MediviseMVC
@@ -39,41 +40,36 @@ namespace MediviseMVC
         protected void Application_Start()
         {
             //Database.SetInitializer<MediviseEntities>(new Seeder());
-            Scheduler();
             AreaRegistration.RegisterAllAreas();
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
             ModelBinders.Binders.DefaultBinder = new DateTimeConversionBinder();
+            Scheduler();
         }
 
-        /*
-         * Start the job scheduler. Only supporting EST timezone now, but will eventually handle all timezones 
-         */
         private void Scheduler()
         {
             ISchedulerFactory schedulePool = new StdSchedulerFactory();
             IScheduler sched = schedulePool.GetScheduler();
             sched.Start();
 
-            //construct job info
-            JobDetail makeReminder = new JobDetail("reminder", null, typeof(SendReminderJob));
-            JobDetail makeWarning = new JobDetail("warning", null, typeof(SendWarningJob));
+            JobDetailImpl makeReminder = new JobDetailImpl("reminder", typeof(SendReminderJob));
+            JobDetailImpl makeWarning = new JobDetailImpl("warning", typeof(SendWarningJob));
 
-            DateTime reminderTime = new DateTime(2012, 3, 11, 10, 00, 0);
-            DateTime convertedR = TimeZoneInfo.ConvertTime(reminderTime, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"), TimeZoneInfo.Utc);
-
-
-            DateTime warningTime = new DateTime(2012, 3, 11, 17, 00, 0);
-            DateTime convertedW = TimeZoneInfo.ConvertTime(warningTime, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"), TimeZoneInfo.Utc); 
-
-            //Set up reminder trigger
-            Trigger reminderTrigger = TriggerUtils.MakeDailyTrigger("reminderTrigger", convertedR.Hour, convertedR.Minute);
+            /*
+             * Only support eastern timezone for prototype
+             */ 
+            CronTriggerImpl reminderTrigger = new CronTriggerImpl("reminderTrigger");
+            reminderTrigger.CronExpressionString = "0 0 14 * * ?";
             reminderTrigger.StartTimeUtc = DateTime.UtcNow;
             sched.ScheduleJob(makeReminder, reminderTrigger);
-            //set up warning trigger
-            Trigger warningTrigger = TriggerUtils.MakeDailyTrigger("warningTrigger", convertedW.Hour, convertedW.Minute);
-            warningTrigger.StartTimeUtc = DateTime.UtcNow; 
+
+            CronTriggerImpl warningTrigger = new CronTriggerImpl("warningTrigger");
+            warningTrigger.CronExpressionString = "0 0 21 * * ?";
+            reminderTrigger.StartTimeUtc = DateTime.UtcNow;
             sched.ScheduleJob(makeWarning, warningTrigger);
+
         }
+
     }
 }

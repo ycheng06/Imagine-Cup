@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Team Name: EOS
+ * Team Memebers: Jason Cheng, Gregory Wong, Xihan Zhang, Wenshiang Chung
+ * E-mail: eos_imaginecup@hotmail.com
+ */
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -56,6 +61,7 @@ namespace MediviseMVC.Controllers
                 sendRegisterConfirmation(patient);
                // uncomment this call for testing 
                // sendDemoReminders(patient.PatientId);
+                Trace.WriteLine(String.Format("Patient has this phone number {0}, {1}, {2}", patient.Phone, patient.FamilyPhone1, patient.FamilyPhone2)); 
                 return RedirectToAction("Index");  
             }
               
@@ -64,35 +70,35 @@ namespace MediviseMVC.Controllers
             return View(patient);
         }
         //for prototype demo
-        private void sendDemoReminders(int id)
-        {
-            ISchedulerFactory schedulePool = new StdSchedulerFactory();
-            IScheduler sched = schedulePool.GetScheduler();
-            sched.Start();
-            //set up reminder sender
-            try
-            {
-                JobDetail reminderJob = new JobDetail("AlertBuilder", null, typeof(SendReminderJob));
-                reminderJob.JobDataMap["pid"] = id;
-                Trigger trigger = TriggerUtils.MakeMinutelyTrigger("t1", 2, 1);
-                trigger.StartTimeUtc = TriggerUtils.GetEvenMinuteDate(DateTime.UtcNow.AddMinutes(1));
-                sched.ScheduleJob(reminderJob, trigger);
-                //set up warning sender
-                JobDetail warningJob = new JobDetail("Warnings", null, typeof(SendWarningJob));
-                warningJob.JobDataMap["pid"] = id;
-                Trigger trigger2 = TriggerUtils.MakeSecondlyTrigger("test2", 10, 0);
-                trigger2.StartTimeUtc = TriggerUtils.GetEvenMinuteDate(DateTime.UtcNow).AddMinutes(2);
-                sched.ScheduleJob(warningJob, trigger2);
-            }
-            catch (Exception e)
-            {
-                Trace.WriteLine(e.Message);
-                throw e;
-            }
-        }
+        //private void sendDemoReminders(int id)
+        //{
+        //    ISchedulerFactory schedulePool = new StdSchedulerFactory();
+        //    IScheduler sched = schedulePool.GetScheduler();
+        //    sched.Start();
+        //    //set up reminder sender
+        //    try
+        //    {
+        //        JobDetail reminderJob = new JobDetail("AlertBuilder", null, typeof(SendReminderJob));
+        //        reminderJob.JobDataMap["pid"] = id;
+        //        Trigger trigger = TriggerUtils.MakeMinutelyTrigger("t1", 2, 1);
+        //        trigger.StartTimeUtc = TriggerUtils.GetEvenMinuteDate(DateTime.UtcNow.AddMinutes(1));
+        //        sched.ScheduleJob(reminderJob, trigger);
+        //        //set up warning sender
+        //        JobDetail warningJob = new JobDetail("Warnings", null, typeof(SendWarningJob));
+        //        warningJob.JobDataMap["pid"] = id;
+        //        Trigger trigger2 = TriggerUtils.MakeSecondlyTrigger("test2", 10, 0);
+        //        trigger2.StartTimeUtc = TriggerUtils.GetEvenMinuteDate(DateTime.UtcNow).AddMinutes(2);
+        //        sched.ScheduleJob(warningJob, trigger2);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Trace.WriteLine(e.Message);
+        //        throw e;
+        //    }
+        //}
         private void sendRegisterConfirmation(Patient p)
         {
-            string msg = String.Format("Dear {0}, Welcome to Medivise! We all hope you will get well very soon!\n", p.FirstName);
+            string msg = String.Format("Dear {0}, welcome to Medivise! Hope you get well soon!\n", p.FirstName);
             TwilioSender sender = new TwilioSender();
             sender.SendSMS(p.Phone, msg);
             Trace.WriteLine(msg);

@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Team Name: EOS
+ * Team Memebers: Jason Cheng, Gregory Wong, Xihan Zhang, Wenshiang Chung
+ * E-mail: eos_imaginecup@hotmail.com
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,7 +20,7 @@ namespace MediviseMVC.Jobs
         private MediviseEntities db = new MediviseEntities();
         private MessageConstructor msgBuilder = new MessageConstructor();
 
-        public void Execute(JobExecutionContext context)
+        public void Execute(IJobExecutionContext context)
         {
             sendWarnings();
         }
@@ -29,7 +34,7 @@ namespace MediviseMVC.Jobs
                 //add warning to the beginning
                 string message = "Please take your medicine, and be sure to call us back this time!\n";
                 sender.SendSMS(p.Phone, message);
-                //Trace.WriteLine(message);
+                Trace.WriteLine(p.Phone);
                 //message = msgBuilder.ConstructMsg(p);
                 //sender.SendSMS(p.Phone, message);
 
@@ -39,8 +44,10 @@ namespace MediviseMVC.Jobs
                     p.Gender == "Male" ? "his" : "her",
                     p.Gender == "Male" ? "him" : "her");
                 sender.SendSMS(p.FamilyPhone1, family_message);
+                Trace.WriteLine(p.FamilyPhone1);
                 if (p.FamilyPhone2 != null)
                 {
+                    Trace.WriteLine(p.FamilyPhone2);
                     sender.SendSMS(p.FamilyPhone2, family_message);
                 }
             }

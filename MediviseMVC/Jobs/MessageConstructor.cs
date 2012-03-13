@@ -1,4 +1,9 @@
-﻿using System.Linq;
+﻿/*
+ * Team Name: EOS
+ * Team Memebers: Jason Cheng, Gregory Wong, Xihan Zhang, Wenshiang Chung
+ * E-mail: eos_imaginecup@hotmail.com
+ */
+using System.Linq;
 using System.Web;
 using System.Text;
 using Quartz;
@@ -22,7 +27,7 @@ namespace MediviseMVC.Jobs
             int num_drugs = p.Drugs.Count;
             if (num_drugs == 0)
             {
-                msg.Append("No Medicines for today\n");
+                msg.Append("No medicines for today\n");
             }
             else
             {
@@ -62,7 +67,7 @@ namespace MediviseMVC.Jobs
         private StringBuilder ConstructTitle(Patient p)
         {
             StringBuilder title = new StringBuilder();
-            title.AppendFormat("Hi,{0}:\n", p.FirstName);
+            title.AppendFormat("Hi {0}:\n", p.FirstName);
             return title;
         }
         private bool dateInRange(DateTime now, DateTime from, DateTime to)

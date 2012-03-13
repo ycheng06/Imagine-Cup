@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Team Name: EOS
+ * Team Memebers: Jason Cheng, Gregory Wong, Xihan Zhang, Wenshiang Chung
+ * E-mail: eos_imaginecup@hotmail.com
+ */
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;

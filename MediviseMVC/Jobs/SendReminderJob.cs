@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Team Name: EOS
+ * Team Memebers: Jason Cheng, Gregory Wong, Xihan Zhang, Wenshiang Chung
+ * E-mail: eos_imaginecup@hotmail.com
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,16 +16,18 @@ namespace MediviseMVC.Jobs
 {
     public class SendReminderJob : IJob
     {
-        private TwilioSender sender = new TwilioSender();
-        private MediviseEntities db = new MediviseEntities();
+        private TwilioSender sender;
+        private MediviseEntities db;
         private MessageConstructor msgBuilder = new MessageConstructor();
-        public void Execute (JobExecutionContext context)
+        public void Execute (IJobExecutionContext context)
         {
+            sender = new TwilioSender();
+            db = new MediviseEntities();
             sendReminders();
         }
         private void sendReminders()
         {
-            var patients = db.Patients.ToList();
+            var patients = db.Patients.ToArray();
             foreach (Patient p in patients)
             {
                 if (p.ResponseReceived == false)
@@ -33,6 +40,7 @@ namespace MediviseMVC.Jobs
                 db.Entry(p).State = EntityState.Modified;
                 db.SaveChanges();
                 string message = msgBuilder.ConstructMsg(p);
+                Trace.WriteLine(p.Phone, "PHONE NUMBER ********************");
                 sender.SendSMS(p.Phone, message);
             }
         }
@@ -47,5 +55,6 @@ namespace MediviseMVC.Jobs
             db.Alerts.Add(a);
             db.SaveChanges();
         }
+
     }
 }

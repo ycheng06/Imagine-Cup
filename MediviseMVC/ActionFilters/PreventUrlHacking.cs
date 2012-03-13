@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Team Name: EOS
+ * Team Memebers: Jason Cheng, Gregory Wong, Xihan Zhang, Wenshiang Chung
+ * E-mail: eos_ImagineCup@hotmail.com
+ */
+using System;
 using System.Diagnostics;
 using System.Web.Mvc;
 using System.Web.Routing;

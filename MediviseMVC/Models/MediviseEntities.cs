@@ -1,4 +1,9 @@
-﻿using System.Data.Entity;
+﻿/*
+ * Team Name: EOS
+ * Team Memebers: Jason Cheng, Gregory Wong, Xihan Zhang, Wenshiang Chung
+ * E-mail: eos_imaginecup@hotmail.com
+ */
+using System.Data.Entity;
 
 namespace MediviseMVC.Models
 {

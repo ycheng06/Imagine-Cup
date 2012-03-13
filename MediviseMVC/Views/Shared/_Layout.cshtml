@@ -10,21 +10,19 @@
     <script src="@Url.Content("~/Scripts/jquery-ui.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/EditorHookup.js")" type="text/javascript"></script>
 </head>
-<body>
-    <div class="page">
-        <div id="header">
-            <div id="title">
-                <h1>Medivise</h1>
+<body id="bodytag">
+    <div id="banner">
+        <div id="metanavi">
+            <div id="logindisplay">
+                @Html.Partial("_LoginStatus")
             </div>
         </div>
-        <div id="logindisplay">
-            @Html.Partial("_LoginStatus")
-        </div>
-        <div id="menucontainer">
-            <ul id="menu">
-                <li>@Html.ActionLink("Alerts", "Index", "Alert")</li>
-                <li>@Html.ActionLink("Patients", "Index", "PatientManager")</li>
-            </ul>
+        <img width="163" height="80" border="0" src="/Content/MediviseLogo.png" alt="logo" />
+    </div>
+    <div id="container">
+        <div id="topnavi">
+            @Html.ActionLink("Alerts", "Index", "Alert")</li>
+            @Html.ActionLink("Patients", "Index", "PatientManager")
         </div>
         <div id="main">
             @RenderBody()
@@ -32,5 +30,6 @@
         <div id="footer">
         </div>
     </div>
+
 </body>
 </html>

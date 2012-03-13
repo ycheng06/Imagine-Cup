@@ -69,7 +69,10 @@ namespace MediviseMVC.Controllers
             populateGenderList(null);
             return View(patient);
         }
-        //for prototype demo
+
+        /*
+         * For Prototype Testing Only 
+         */
         //private void sendDemoReminders(int id)
         //{
         //    ISchedulerFactory schedulePool = new StdSchedulerFactory();

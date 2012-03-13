@@ -20,14 +20,6 @@ namespace MediviseMVC
         public override bool OnStart()
         {
 
-            //schedulePool = new StdSchedulerFactory();
-            //IScheduler sched = schedulePool.GetScheduler();
-            //sched.Start();
-
-            //////construct job info
-            ////JobDetail makeReminder = new JobDetail("reminder", null, typeof(SendReminderJob));
-            ////JobDetail makeWarning = new JobDetail("warning", null, typeof(SendWarningJob));
-
             ////DateTime reminderTime = new DateTime(2012, 3, 11, 21, 0, 0);
             ////DateTime convertedR = TimeZoneInfo.ConvertTime(reminderTime, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"), TimeZoneInfo.Utc);
             ////Trace.WriteLine(convertedR.ToShortTimeString(), "Time ****************");
@@ -44,20 +36,6 @@ namespace MediviseMVC
             ////Trigger warningTrigger = TriggerUtils.MakeDailyTrigger("warningTrigger", convertedW.Hour, convertedW.Minute);
             ////warningTrigger.StartTimeUtc = DateTime.UtcNow; 
             ////sched.ScheduleJob(makeWarning, warningTrigger);
-
-
-            //JobDetailImpl makeReminder = new JobDetailImpl("reminder", typeof(SendReminderJob));
-            //JobDetailImpl makeWarning = new JobDetailImpl("warning", typeof(SendWarningJob));
-
-            //CronTriggerImpl reminderTrigger = new CronTriggerImpl("reminderTrigger");
-            //reminderTrigger.CronExpressionString = "0 28 4 * * ?";
-            //reminderTrigger.StartTimeUtc = DateTime.UtcNow;
-            //sched.ScheduleJob(makeReminder, reminderTrigger);
-
-            //CronTriggerImpl warningTrigger = new CronTriggerImpl("warningTrigger");
-            //warningTrigger.CronExpressionString = "0 31 4 * * ?";
-            //reminderTrigger.StartTimeUtc = DateTime.UtcNow;
-            //sched.ScheduleJob(makeWarning, warningTrigger);
 
             return base.OnStart();
         }

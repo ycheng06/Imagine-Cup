@@ -58,9 +58,11 @@ namespace MediviseMVC
 
             /*
              * Only support eastern timezone for prototype
+             * 10 AM Reminder
+             * 5 PM Warning
              */ 
             CronTriggerImpl reminderTrigger = new CronTriggerImpl("reminderTrigger");
-            reminderTrigger.CronExpressionString = "0 0 14 * * ?";
+            reminderTrigger.CronExpressionString = "0  14 * * ?";
             reminderTrigger.StartTimeUtc = DateTime.UtcNow;
             sched.ScheduleJob(makeReminder, reminderTrigger);
 

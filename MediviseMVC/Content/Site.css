@@ -3,31 +3,33 @@ The base color for this template is #5c87b2. If you'd like
 to use a different color start by replacing all instances of
 #5c87b2 with your new color.
 ----------------------------------------------------------*/
-body {
-    background-color: #5c87b2;
+body 
+{
+    background-color: #404040;
     font-size: .85em;
-    font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
+    font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+    height: 100%;
     margin: 0;
     padding: 0;
     color: #696969;
 }
 
 a:link {
-    color: #034af3;
-    text-decoration: underline;
+    color: #4A6EB8;
+    text-decoration: none;
 }
 
 a:visited {
-    color: #505abc;
+    color: #4A6EB8;
 }
 
 a:hover {
-    color: #1d60ff;
+    color: #3366FF;
     text-decoration: none;
 }
 
 a:active {
-    color: #12eb87;
+    color: #3366FF;
 }
 
 p, ul {
@@ -44,13 +46,14 @@ section {
 
 /* HEADINGS   
 ----------------------------------------------------------*/
+
 h1, h2, h3, h4, h5, h6 {
-    font-size: 1.5em;
+    font-size: 1.3em;
     color: #000;
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 1.5em;
     padding-bottom: 0;
     margin-bottom: 0;
 }
@@ -103,9 +106,6 @@ header h1, #header h1 {
 #main {
     padding: 30px 30px 15px 30px;
     background-color: #fff;
-    border-radius: 4px 0 0 0;
-    -webkit-border-radius: 4px 0 0 0;
-    -moz-border-radius: 4px 0 0 0;
 }
 
 footer, 
@@ -171,7 +171,6 @@ ul#menu li.selected a {
     background-color: #fff;
     color: #000;
 }
-
 /* FORM LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
 
@@ -208,7 +207,7 @@ select {
 }
 
 input[type="submit"] {
-    font-size: 1.2em;
+    font-size: 0.8em;
     padding: 5px;
 }
 
@@ -228,6 +227,9 @@ table td {
 table th {
     padding: 6px 5px;
     text-align: left;
+    font-weight: normal;
+    text-decoration: underline;
+    color: #4A6EB8;
     background-color: #e8eef4;
     border: solid 1px #e8eef4;
 }
@@ -247,7 +249,7 @@ nav,
     margin-top: 40px;
 }
 
-div#title {
+div#logo {
     display: block;
     float: left;
     text-align: left;
@@ -257,7 +259,7 @@ div#title {
     font-size: 1.1em;
     display: block;
     text-align: right;
-    margin: 10px;
+    margin: 60px 20px;
     color: White;
 }
 
@@ -323,3 +325,107 @@ div#title {
 .tri-state {
     width: 6em;
 }
+
+
+/*---------------MY OWN CODE HERE-------------------*/
+#bodytag, body 
+{
+    color: #564b47;
+    font-size: 13px;
+    font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+    padding: 0;
+    margin: 0 0 10px;
+}
+
+/* container to center the layout */
+#container 
+{
+    width: 1100px;
+    border: 2px solid #1F2E4D;
+    margin: 0 auto;
+    border-radius: 0px 15px 0px 15px; /* W3C Standard, Opera */
+    -moz-border-radius: 0px 15px 0px 15px; /* Firefox */
+    -webkit-border-radius: 0px 15px 0px 15px; /* Safari, Chrome */
+}
+
+/* head container for logo and metanavi */
+#banner
+{
+    width: 1100px;
+    margin: 0 auto;
+    padding: 20px 0 10px;
+}
+
+#metanavi 
+{
+    float: right;
+    padding: 5px 15px 0 0;
+    margin: 0;
+}
+
+/* main-navi */
+#topnavi
+{
+    background-color: #4C4C4C;
+    margin: 0;
+    padding: 5px 0;
+    border-bottom: 7px solid #6881B2;
+    border-radius: 0px 15px 0px 0px; /* W3C Standard, Opera */
+    -moz-border-radius: 0px 15px 0px 0px; /* Firefox */
+    -webkit-border-radius: 0px 15px 0px 0px; /* Safari, Chrome */
+}
+#topnavi a
+{ 
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #ffffff;
+    text-decoration: none; 
+    margin-top: 3px;
+    padding: 3px 25px 7px;
+}
+
+#topnavi a:visited {color:#ffffff;}
+#topnavi a:hover {color: #ffffff; background-color: #6881B2;}
+#mainnavi a:active { color:#ffffff; background-color: #6881B2;}
+#container #topnavi a.selected
+{
+    background-color: #6881B2;
+    color: #ffffff;
+}
+
+/* content elements
+-------------------------------------- */
+#content
+{
+    background-color: #ffffff;
+    border-right: 1px solid gray;
+    border-top: 1px solid gray;
+    min-height: 540px;
+    padding: 30px 0;
+    margin-left: 0;
+    margin-right: 400px;
+}
+
+/* footer */
+#footer
+{
+    clear: both;
+    padding: 5px 25px;
+    color: #ffffff;
+    font-size: 10px;
+    margin: 0px;
+    background-color: #4C4C4C;
+    border-radius: 0px 0px 0px 15px; /* W3C Standard, Opera */
+    -moz-border-radius: 0px 0px 0px 15px; /* Firefox */
+    -webkit-border-radius: 0px 0px 0px 15px; /* Safari, Chrome */
+}
+
+#footer a
+{ 
+    color: #F6CFFD;
+    font-weight: bold;
+}
+#footer a:visited {color:#F6CFFD;}
+#footer a:hover {color: #ffffff;}
+#footer a:active { color:#F6CFFD; text-decoration: line-through;}

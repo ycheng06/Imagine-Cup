@@ -1,5 +1,6 @@
 TEAM: EOS
 MEMBERS: Jason Cheng, Gregory Wong, Xihan Zhang, Wenshiang Chung
+SCHOOL: Tufts University
 PROJECT: Medivise
 ================================
 DESIGN
@@ -19,18 +20,25 @@ PROTOTYPE
 This prototype only contains the core features of Medivise. 
 It supports only Eastern Time Zone and has a very basic UI.
 For beta release, the UI will consist more drag and drop functionlities and less of
-HTML forms. 
+HTML forms.In the beta version the register function will also be removed. Hospitals
+subscribed to our service will be given a set of account/password. This will be a better
+way to handle security and maintain our service. 
 
 ================================
 TRYING OUT THE PROTOTYPE
 ==========================
-1. Login with the following account/password
+*Note: If you want to run the project locally, please go to the web.config file in the root 
+ directory and comment out the SQL Azure connection string and uncomment the 
+ SQLEXPRESS connection string. SQL Azure will cannot run locally without my approval of
+	your computer's IP address, so it will not work
+1. go to http:\\eosimaginecupp.cloudapp.net 
+2. Login with the following account/password
    account: xihan
    password: xih@n123
-2. create a patient under your name and phone number
-3. confirmation SMS message will be sent to you
-4. First medicine reminder is set to 10 AM EST
-5. Medicication Warning is set to 5PM EST
-6. A Miss medication alert will be created if you don't reply before the next medicine reminder.
+3. create a patient under your name and phone number
+4. confirmation SMS message will be sent to you
+5. First medicine reminder is set to 10 AM EST
+6. Medicication Warning is set to 5PM EST
+7. A Miss medication alert will be created if you don't reply before the next medicine reminder.
 
 ENJOY !! 

@@ -10,28 +10,35 @@
 <fieldset>
     <legend>Drug</legend>
 
-    <div class="display-label">
-       @Html.LabelFor(model => model.DrugInfo.Name)
-    </div>
-    <div class="display-field">
-       @Html.DisplayFor(model => model.DrugInfo.Name)
-    </div>
-    <div class="display-label">StartDate</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.StartDate)
+    <div class="common-box">
+        <div class="common-label">
+           @Html.LabelFor(model => model.DrugInfo.Name):
+        </div>
+        <div class="common-field">
+           @Html.DisplayFor(model => model.DrugInfo.Name)
+        </div>
     </div>
 
-    <div class="display-label">EndDate</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.EndDate)
+    <div class="common-box">
+        <div class="common-label">StartDate:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.StartDate)
+        </div>
     </div>
 
-
-    <div class="display-label">TimesPerWeek</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TimesPerWeek)
+    <div class="common-box">
+        <div class="common-label">EndDate:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.EndDate)
+        </div>
     </div>
 
+    <div class="common-box">
+        <div class="common-label">TimesPerWeek:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.TimesPerWeek)
+        </div>
+    </div>
 
 </fieldset>
 @using (Html.BeginForm()) {

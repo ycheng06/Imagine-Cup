@@ -25,7 +25,7 @@ namespace MediviseMVC.Controllers
            
             DateTime reminderTime = new DateTime(2012, 3, 11, 14, 10, 0, DateTimeKind.Local);
             DateTime convertedR = reminderTime.ToUniversalTime();
-            Trace.WriteLine(convertedR.ToShortTimeString(), "TIME *******************");
+            //Trace.WriteLine(convertedR.ToShortTimeString(), "TIME *******************");
             return View();
         }
 

@@ -10,13 +10,18 @@
 <fieldset>
     <legend>Test</legend>
 
-    <div class="display-label">Test Name</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TestInfo.Name)
+    <div class="common-box">
+        <div class="common-label">Test Name:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.TestInfo.Name)
+        </div>
     </div>
-    <div class="display-label">TestDate</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TestDate)
+
+    <div class="common-box">
+        <div class="common-label">TestDate:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.TestDate)
+        </div>
     </div>
 
 </fieldset>

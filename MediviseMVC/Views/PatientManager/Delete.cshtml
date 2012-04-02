@@ -10,45 +10,62 @@
 <fieldset>
     <legend>Patient</legend>
 
-    <div class="display-label">FirstName</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FirstName)
+    <div class="common-box">
+        <div class="common-label">FirstName:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.FirstName)
+        </div>
     </div>
 
-    <div class="display-label">LastName</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.LastName)
+    <div class="common-box">
+        <div class="common-label">LastName:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.LastName)
+        </div>
     </div>
 
-    <div class="display-label">Phone</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Phone)
+    <div class="common-box">
+        <div class="common-label">Phone:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.Phone)
+        </div>
     </div>
 
-    <div class="display-label">FamilyPhone1</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FamilyPhone1)
+    <div class="common-box">
+        <div class="common-label">FamilyPhone1:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.FamilyPhone1)
+        </div>
     </div>
 
-    <div class="display-label">FamilyPhone2</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FamilyPhone2)
+    <div class="common-box">
+        <div class="common-label">FamilyPhone2:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.FamilyPhone2)
+        </div>
     </div>
 
-    <div class="display-label">Address</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Address)
+    <div class="common-box">
+        <div class="common-label">Address:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.Address)
+        </div>
     </div>
 
-    <div class="display-label">Time Zone</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TimeZone)
+    <div class="common-box">
+        <div class="common-label">Time Zone:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.TimeZone)
+        </div>
     </div>
 
-    <div class="display-label">Gender</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Gender)
+    <div class="common-box">
+        <div class="common-label">Gender:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.Gender)
+        </div>
     </div>
+
 </fieldset>
 @using (Html.BeginForm()) {
     <p>

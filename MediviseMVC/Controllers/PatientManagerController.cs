@@ -37,6 +37,9 @@ namespace MediviseMVC.Controllers
         public ActionResult Details(int id)
         {
             Patient patient = db.Patients.Find(id);
+            /* pass associated alerts to the view */
+            List<Alert> alerts = db.Alerts.Where(a => a.PatientId == id).ToList();
+            ViewData["alerts"] = alerts;
             return View(patient);
         }
 

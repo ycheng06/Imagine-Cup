@@ -142,19 +142,18 @@ function changeContent
 @using MediviseMVC.Models
 <table>
  <tr>
-   <th></th>
    <th>Alert Type</th>
    <th>Alert Date</th>
  </tr>
  @foreach (var alert in (List<Alert>)ViewData["alerts"])
  {
    <tr>
-     <td>@Html.ActionLink("Delete","deleteAlert",new {id=alert.AlertId})</td>
-     <td>@alert.AlertType</td>
+     <td>@alert.AlertType.Name</td>
      <td>@alert.AlertDate</td>
    </tr>
  }
 </table>
 <p>
-     @Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Edit", "Edit", new { id=Model.PatientId })
+     @Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Edit", "Edit", new { id=Model.PatientId }) |
+     @Html.ActionLink("TimeLine","Edit","TreatmentPlanner",new {id=Model.PatientId},null)
 </p>

@@ -20,10 +20,13 @@ namespace MediviseMVC.Models
         {
             //we probably will want to get the user's time zone from the database later
             TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-            if (propertyDescriptor.PropertyType == typeof(DateTime))
+            if (value != null)//make sure that if an invalid date (ie. 4/31 or 2/31) is submitted, it will be dealt with as such
             {
-                var newTime = (DateTime)value;
-                value = TimeZoneInfo.ConvertTimeToUtc(newTime, userTimeZone);
+                if (propertyDescriptor.PropertyType == typeof(DateTime))
+                {
+                    var newTime = (DateTime)value;
+                    value = TimeZoneInfo.ConvertTimeToUtc(newTime, userTimeZone);
+                }
             }
 
             base.SetProperty(controllerContext, bindingContext,

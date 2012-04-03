@@ -20,10 +20,12 @@ namespace MediviseMVC.Models
         public int MessageId { get; set; }
 
         [DataType(DataType.Date)]
+        [Required]
         public DateTime StartDate { get; set; }
 
         [DataType(DataType.Date)]
         [DateGreaterThanAttribute("StartDate")]
+        [Required]
         public DateTime EndDate { get; set; }
 
         [Required(ErrorMessage="Message is blank")]

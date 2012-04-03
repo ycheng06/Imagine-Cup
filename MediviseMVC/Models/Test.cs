@@ -18,6 +18,7 @@ namespace MediviseMVC.Models
     {
         public int TestId { get; set; }
         [DataType(DataType.Date)]
+        [Required]
         public DateTime TestDate { get; set; }
         public string TestResult { get; set; }
 

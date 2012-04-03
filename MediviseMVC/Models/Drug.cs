@@ -16,9 +16,11 @@ namespace MediviseMVC.Models
     {
         public int DrugId { get; set; }
         [DataType(DataType.Date)]
+        [Required]
         public DateTime StartDate { get; set; }
         [DataType(DataType.Date)]
         [DateGreaterThanAttribute("StartDate")]
+        [Required]
         public DateTime EndDate { get; set; }
         public int TimesPerWeek { get; set; }
         public string Type { get; set; }   //unused for now

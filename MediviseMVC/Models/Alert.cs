@@ -18,6 +18,7 @@ namespace MediviseMVC.Models
     {
         public int AlertId { get; set; }
         [DataType(DataType.Date)]
+        [Required]
         public DateTime AlertDate { get; set; }
 
         public int AlertTypeId { get; set; } //defined in table AlertTypes: 1 = missed medication, 2 = missed checkup

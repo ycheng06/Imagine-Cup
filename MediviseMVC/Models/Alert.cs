@@ -25,6 +25,6 @@ namespace MediviseMVC.Models
         public virtual AlertType AlertType { get; set; }
 
         public int PatientId { get; set; }
-        public Patient Patient { get; set; }
+        public virtual Patient Patient { get; set; }
     }
 }

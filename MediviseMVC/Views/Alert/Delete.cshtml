@@ -30,6 +30,13 @@
             @Html.DisplayFor(model => model.PatientId)
         </div>
     </div>
+    <div class="common-box">
+        <div class="common-label">Patient:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.Patient.FirstName)
+            @Html.DisplayFor(model => model.Patient.LastName)
+        </div>
+    </div>
 
 </fieldset>
 @using (Html.BeginForm()) {

@@ -3,7 +3,7 @@ MEMBERS: Jason Cheng, Gregory Wong, Xihan Zhang, Wenshiang Chung
 SCHOOL: Tufts University
 PROJECT: Medivise
 ================================
-DESIGN
+DESIGN Spec
 =======
 The design for this prototype has two main parts, SQL Azure and ASP.NET MVC3 webrole.
 SQL Azure contains all the patient/user information. ASP.NET MVC3 handles all the

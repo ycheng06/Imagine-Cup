@@ -27,11 +27,15 @@ namespace MediviseMVC.Jobs
             int num_drugs = p.Drugs.Count;
             if (num_drugs == 0)
             {
-                msg.Append("No medicines for today\n");
+                msg.Append("No medicines for today.\n");
+            }
+            else if (num_drugs == 1)
+            {
+                msg.Append("Take 1 medicine as prescribed for you.\n");
             }
             else
             {
-                msg.AppendFormat("Take {0} medicines as prescribed for you\n", num_drugs);
+                msg.AppendFormat("Take {0} medicines as prescribed for you.\n", num_drugs);
             }
             List<Test> testMessages = p.Tests.ToList().FindAll(t => dateInRange(t.TestDate,now,now.AddDays(10)));
             if (testMessages.Count > 0)

@@ -10,20 +10,29 @@
 <fieldset>
     <legend>Message</legend>
 
-    <div class="display-label">MessageText</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.MessageText)
-    </div>
-    <div class="display-label">StartDate</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.StartDate)
+    <div class="common-box">
+        <div class="common-label">MessageText:</div>
     </div>
 
-    <div class="display-label">EndDate</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.EndDate)
+    <div class="common-box">
+        <div class="common-field">
+            @Html.DisplayFor(model => model.MessageText)
+        </div>
     </div>
 
+    <div class="common-box">
+        <div class="common-label">StartDate:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.StartDate)
+        </div>
+    </div>
+
+    <div class="common-box">
+        <div class="common-label">EndDate:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.EndDate)
+        </div>
+    </div>
 
 </fieldset>
 @using (Html.BeginForm()) {

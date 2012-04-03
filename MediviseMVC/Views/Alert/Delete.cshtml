@@ -9,21 +9,28 @@
 <h3>Are you sure you want to delete this?</h3>
 <fieldset>
     <legend>Alert</legend>
-
-    <div class="display-label">AlertDate</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.AlertDate)
+    
+    <div class="common-box">
+        <div class="common-label">AlertDate:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.AlertDate)
+        </div>
     </div>
 
-    <div class="display-label">AlertTypeId</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.AlertTypeId)
+    <div class="common-box">
+        <div class="common-label">AlertTypeId:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.AlertTypeId)
+        </div>
     </div>
 
-    <div class="display-label">PatientId</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.PatientId)
+    <div class="common-box">
+        <div class="common-label">PatientId:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.PatientId)
+        </div>
     </div>
+
 </fieldset>
 @using (Html.BeginForm()) {
     <p>

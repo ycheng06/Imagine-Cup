@@ -49,7 +49,7 @@ namespace MediviseMVC.Jobs
             Alert a = new Alert
             {
                 PatientId = p.PatientId,
-                AlertDate = DateTime.UtcNow,
+                AlertDate = DateTime.UtcNow.AddDays(-1),
                 AlertTypeId = 1 // 1 = "missed medication"
             };
             db.Alerts.Add(a);

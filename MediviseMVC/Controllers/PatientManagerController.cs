@@ -30,7 +30,7 @@ namespace MediviseMVC.Controllers
         public ViewResult Index()
         {
             return View(db.Patients.Where(patient => patient.RegisteredBy == User.Identity.Name).ToList());
-       }
+        }
 
         // GET: /PatientManager/Details/5
         [PreventUrlHacking]
@@ -48,7 +48,12 @@ namespace MediviseMVC.Controllers
         {
             populateTimeZones(null);
             populateGenderList(null);
-            return View();
+
+            return View(new Patient
+            {
+                TreatmentStartDate = DateTime.UtcNow,
+                TreatmentEndDate = DateTime.UtcNow.AddMonths(6)
+            });
         } 
 
         // POST: /PatientManager/Create

@@ -25,6 +25,21 @@ namespace MediviseMVC.Models
         public int TimesPerWeek { get; set; }
         public string Type { get; set; }   //unused for now
 
+        [Required]
+        public bool Monday { get; set; } //whether the drug is needed this day
+        [Required]
+        public bool Tuesday { get; set; }
+        [Required]
+        public bool Wednesday { get; set; }
+        [Required]
+        public bool Thursday { get; set; }
+        [Required]
+        public bool Friday { get; set; }
+        [Required]
+        public bool Saturday { get; set; }
+        [Required]
+        public bool Sunday { get; set; }
+
         public int DrugInfoId { get; set; }
         public virtual DrugInfo DrugInfo { get; set; }
 

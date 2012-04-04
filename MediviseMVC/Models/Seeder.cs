@@ -100,26 +100,28 @@ namespace MediviseMVC.Models
             DrugInfo drugInfo1 = new DrugInfo
             {
                 Name = "Isoniazid (INH)",
-                Description = "..spice and everything nice",
+                Description = "First-line",
             };
 
             DrugInfo drugInfo2 = new DrugInfo
             {
                 Name = "Rifampin (RIF)",
-                Description = "that was easy..",
+                Description = "First-line",
             };
 
             DrugInfo drugInfo3 = new DrugInfo
             {
                 Name = "Ethambutol (EMB)",
-                Description = "cheap and effective",
+                Description = "First-line",
             };
 
             DrugInfo drugInfo4 = new DrugInfo
             {
                 Name = "Pyrazinamide (PZA)",
-                Description = "",
+                Description = "First-line",
             };
+
+
 
             //Drug drug1 = new Drug
             //{
@@ -203,6 +205,84 @@ namespace MediviseMVC.Models
             context.DrugInfos.Add(drugInfo2);
             context.DrugInfos.Add(drugInfo3);
             context.DrugInfos.Add(drugInfo4);
+
+
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Streptomycin (STM)",
+                   Description = "Streptomycin is no longer considered as a first line drug by ATS/IDSA/CDC because of high rates of resistance",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Amikacin (AMK)",
+                   Description = "Second-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Kanamycin (KM)",
+                   Description = "Second-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Capreomycin",
+                   Description = "Second-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Viomycin",
+                   Description = "Second-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Enviomycin",
+                   Description = "Second-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Ciprofloxacin (CIP)",
+                   Description = "Second-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Levofloxacin",
+                   Description = "Second-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Moxifloxacin (MXF)",
+                   Description = "Second-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Ethionamide",
+                   Description = "Second-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Prothionamide",
+                   Description = "Second-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Ribafutin",
+                   Description = "Third-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Clarithromycin (CLR)",
+                   Description = "Third-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Linezolid (LZD)",
+                   Description = "Third-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Thioacetazone (T)",
+                   Description = "Third-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "R207910",
+                   Description = "Third-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Thioridazine",
+                   Description = "Third-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Arginine",
+                   Description = "Third-line",
+               });
+            context.DrugInfos.Add( new DrugInfo {
+                   Name = "Vitamin D",
+                   Description = "Third-line",
+               });
             //context.Drugs.Add(drug1);
             //context.Drugs.Add(drug2);
             //context.Drugs.Add(drug3);

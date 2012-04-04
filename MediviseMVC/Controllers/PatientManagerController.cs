@@ -64,7 +64,6 @@ namespace MediviseMVC.Controllers
                 sendRegisterConfirmation(patient);
                // uncomment this call for testing 
                // sendDemoReminders(patient.PatientId);
-                Trace.WriteLine(String.Format("Patient has this phone number {0}, {1}, {2}", patient.Phone, patient.FamilyPhone1, patient.FamilyPhone2)); 
                 return RedirectToAction("Index");  
             }
               

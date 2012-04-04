@@ -24,21 +24,21 @@ namespace MediviseMVC.Twilio
 
         public void SendSMS(string receiver, string msg)
         {
-            Trace.WriteLine(String.Format("Incoming msg length is {0}", msg.Length));
+            //Trace.WriteLine(String.Format("Incoming msg length is {0}", msg.Length));
             if (has_enough_digits(receiver, us_num_digits))
             {
                 if (msg.Length <= MAX_CHARS)
                 {
                     smsClient.SendSmsMessage(twiliNumber, receiver, msg);
-                    Trace.WriteLine(msg);
+                    //Trace.WriteLine(msg);
                 }
                 else
                 {
                     foreach (var frag in truncateMsg(msg, MAX_CHARS))
                     {
                         smsClient.SendSmsMessage(twiliNumber, receiver, frag);
-                        Trace.WriteLine(frag);
-                        Trace.WriteLine("newlines!!");
+                        //Trace.WriteLine(frag);
+                        //Trace.WriteLine("newlines!!");
                     }
                 }
             }

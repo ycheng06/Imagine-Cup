@@ -77,7 +77,19 @@
             @Html.DropDownList("Gender")
             @Html.ValidationMessageFor(model => model.Gender)
         </div>
-
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TreatmentStartDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TreatmentStartDate)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TreatmentEndDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TreatmentEndDate)
+        </div>
         <p>
             <input type="submit" value="Create" />
         </p>

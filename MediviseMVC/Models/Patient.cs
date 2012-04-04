@@ -11,21 +11,14 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using DataAnnotationsExtensions;
 using System.Data.Entity;
+using MediviseMVC.Validation;
 
 namespace MediviseMVC.Models
 {
-    /*
-    public enum Gender
-    {
-        Female = 0,
-        Male = 1,
-        NotSpecified = -1
-    }
-    */
     public class Patient
     {
         public int PatientId { get; set; }
-        public string Gender { get; set; } //change this to a simpler representation, like int, when you figure out how to make it work
+        public string Gender { get; set; } 
         
         [Required(ErrorMessage="First/Last Name is Required")]
         [DisplayName("First Name")]
@@ -54,7 +47,13 @@ namespace MediviseMVC.Models
         
         [Required]
         public string Address { get; set; }
-
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime TreatmentStartDate { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [DateGreaterThanAttribute("TreatmentStartDate")]
+        public DateTime TreatmentEndDate { get; set; }
         [Required]
         public string TimeZone { get; set; }
 

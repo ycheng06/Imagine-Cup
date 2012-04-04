@@ -1,38 +1,19 @@
 ﻿@model MediviseMVC.Models.Patient
-
 @{
     ViewBag.Title = "Details";
 }
 
+<!-- import the plugin for jQRangeSlider 
+<link rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/css/dev.css")"/>  
+<link rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/style.css")"/>  
+<link rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/css/smoothness/jquery-ui-1.8.10.custom.css")"/>
+<script src="@Url.Content("~/Plugins/jQRangeSlider/lib/jquery-1.7.1.min.js")"></script>
+<script src="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/js/jquery-ui-1.8.16.custom.min.js")"></script>
+<script src="@Url.Content("~/Plugins/jQRangeSlider/lib/jquery.mousewheel.min.js")"></script>
+<script src="@Url.Content("~/Plugins/jQRangeSlider/jQAllRangeSliders-min.js")"></script>
+<!-- may need location change -->
+
 <h2>Details</h2>
-
-<!--
-<div class="layout">
-    <div class="layout-slider" style="width: 100%">
-          Slider <span style="display: inline-block; width: 400px; padding: 0 5px;"><input id="Slider1" type="slider" name="price" value="50" /></span>  in string
-    </div>
-    <script type="text/javascript" charset="utf-8">
-        jQuery("#Slider1").slider({
-            from: -50,
-            to: 200,
-            step: 5,
-            dimension: '%',
-            skin: 'plastic',
-            scale: ['-50', '|', '0', '|', '50', '|', '100', '|', '150', '|', '200']
-        });
-    </script>
-</div>
-
-<script type="text/javascript" charset="utf-8">
-function changeContent
-{
-    var max = 0;
-    var newValue = 0;
-    var rows = $(" ID blah blah here!
-}
-</script>
--->
-
 <fieldset>
     <legend>Patient</legend>
     <div class="common-box">
@@ -92,6 +73,36 @@ function changeContent
     </div>
 </fieldset>
 
+<!--=======================================-->
+@{
+    DateTime min = Model.Drugs.First().StartDate;      //may need to use FirstOrDefault()?
+    DateTime max = Model.Drugs.First().EndDate;
+    foreach (var drug in Model.Drugs)
+    {
+        if (drug.StartDate < min)
+        {
+            min = drug.StartDate;
+        }
+        if (drug.EndDate > max)
+        {
+            max = drug.EndDate;
+        }
+    }
+    @: <p>min value is: @min.ToShortDateString() </p>
+    @: <p>max value is: @max.ToShortDateString() </p>
+}
+
+<!--=======================================-->
+<!--
+<div class="sliders-group">
+    <div id="slider" />
+    <script type="text/javascript">
+        $('#slider').dateRangeSlider();
+    </script>
+</div>
+-->
+<!--=======================================-->
+
 <table title = "Drug Messages">
   <tr>
      <th>Drug Name</th>
@@ -109,6 +120,7 @@ function changeContent
     </tr>
   }
 </table>
+
 <table title = "Test Messages">
   <tr>
     <th>Description</th>

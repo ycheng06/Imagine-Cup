@@ -152,6 +152,7 @@
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="Content\MediviseLogo.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -182,6 +183,66 @@
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Global.asax" />
+    <Content Include="Plugins\jQRangeSlider\css\dev.css" />
+    <Content Include="Plugins\jQRangeSlider\css\icons\.gitignore" />
+    <Content Include="Plugins\jQRangeSlider\css\icons\label.png" />
+    <Content Include="Plugins\jQRangeSlider\css\icons\resultset_next.png" />
+    <Content Include="Plugins\jQRangeSlider\css\icons\resultset_previous.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\dateSliderDemo.js" />
+    <Content Include="Plugins\jQRangeSlider\demo\demo.js" />
+    <Content Include="Plugins\jQRangeSlider\demo\editSliderDemo.js" />
+    <Content Include="Plugins\jQRangeSlider\demo\img\calendar.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\index.html" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\jquery-ui-1.8.10.custom.css" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\js\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Plugins\jQRangeSlider\demo\sliderDemo.js" />
+    <Content Include="Plugins\jQRangeSlider\demo\style.css" />
+    <Content Include="Plugins\jQRangeSlider\GPL-License.txt" />
+    <Content Include="Plugins\jQRangeSlider\jQAllRangeSliders-min.js" />
+    <Content Include="Plugins\jQRangeSlider\jQDateRangeSlider-min.js" />
+    <Content Include="Plugins\jQRangeSlider\jQEditRangeSlider-min.js" />
+    <Content Include="Plugins\jQRangeSlider\jQRangeSlider-min.js" />
+    <Content Include="Plugins\jQRangeSlider\lib\jquery-1.7.1.min.js" />
+    <Content Include="Plugins\jQRangeSlider\lib\jquery.mousewheel.min.js" />
+    <Content Include="Plugins\jQRangeSlider\MIT-License.txt" />
+    <Content Include="Plugins\slider\.gitignore" />
+    <Content Include="Plugins\slider\bin\jquery.slider.min.css" />
+    <Content Include="Plugins\slider\bin\jquery.slider.min.js" />
+    <Content Include="Plugins\slider\css\jslider.blue.css" />
+    <Content Include="Plugins\slider\css\jslider.css" />
+    <Content Include="Plugins\slider\css\jslider.plastic.css" />
+    <Content Include="Plugins\slider\css\jslider.round.css" />
+    <Content Include="Plugins\slider\css\jslider.round.plastic.css" />
+    <Content Include="Plugins\slider\img\jslider.blue.png" />
+    <Content Include="Plugins\slider\img\jslider.plastic.png" />
+    <Content Include="Plugins\slider\img\jslider.png" />
+    <Content Include="Plugins\slider\img\jslider.round.plastic.png" />
+    <Content Include="Plugins\slider\img\jslider.round.png" />
+    <Content Include="Plugins\slider\index.html" />
+    <Content Include="Plugins\slider\js\draggable-0.1.js" />
+    <Content Include="Plugins\slider\js\jquery-1.7.1.js" />
+    <Content Include="Plugins\slider\js\jquery.dependClass-0.1.js" />
+    <Content Include="Plugins\slider\js\jquery.numberformatter-1.2.3.js" />
+    <Content Include="Plugins\slider\js\jquery.slider.js" />
+    <Content Include="Plugins\slider\js\jshashtable-2.1_src.js" />
+    <Content Include="Plugins\slider\js\tmpl.js" />
+    <Content Include="Plugins\slider\MIT-LICENSE.txt" />
+    <Content Include="Plugins\slider\tests\show_hide.html" />
+    <Content Include="Plugins\slider\tests\zero_value.html" />
+    <Content Include="Plugins\slider\tools\yuicompressor-2.4.7.jar" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.5.1.js" />
@@ -277,6 +338,10 @@
     <Content Include="Views\Alert\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Plugins\jQRangeSlider\Readme.md" />
+    <None Include="Plugins\slider\Makefile" />
+    <None Include="Plugins\slider\README.md" />
+    <None Include="Plugins\slider\src\skin.psd" />
     <None Include="Startup\Startup.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

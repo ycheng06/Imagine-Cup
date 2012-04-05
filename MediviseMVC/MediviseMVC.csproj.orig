@@ -200,6 +200,7 @@
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Global.asax" />
+<<<<<<< HEAD
     <Content Include="Plugins\jQRangeSlider\css\dev.css" />
     <Content Include="Plugins\jQRangeSlider\css\icons\.gitignore" />
     <Content Include="Plugins\jQRangeSlider\css\icons\label.png" />
@@ -260,6 +261,9 @@
     <Content Include="Plugins\slider\tests\show_hide.html" />
     <Content Include="Plugins\slider\tests\zero_value.html" />
     <Content Include="Plugins\slider\tools\yuicompressor-2.4.7.jar" />
+=======
+    <Content Include="MediviseService.svc" />
+>>>>>>> c874d27db5c1de438b0ca160c900a38112121d8b
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.5.1.js" />

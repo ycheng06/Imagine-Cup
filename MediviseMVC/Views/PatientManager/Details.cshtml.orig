@@ -1,0 +1,175 @@
+﻿@model MediviseMVC.Models.Patient
+@{
+    ViewBag.Title = "Details";
+}
+
+<!-- import the plugin for jQRangeSlider 
+<link rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/css/dev.css")"/>  
+<link rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/style.css")"/>  
+<link rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/css/smoothness/jquery-ui-1.8.10.custom.css")"/>
+<script src="@Url.Content("~/Plugins/jQRangeSlider/lib/jquery-1.7.1.min.js")"></script>
+<script src="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/js/jquery-ui-1.8.16.custom.min.js")"></script>
+<script src="@Url.Content("~/Plugins/jQRangeSlider/lib/jquery.mousewheel.min.js")"></script>
+<script src="@Url.Content("~/Plugins/jQRangeSlider/jQAllRangeSliders-min.js")"></script>
+<!-- may need location change -->
+
+<h2>Details</h2>
+<fieldset>
+    <legend>Patient</legend>
+    <div class="common-box">
+        <div class="common-label">FirstName:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.FirstName)
+        </div>
+    </div>
+
+    <div class="common-box">
+        <div class="common-label">LastName:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.LastName)
+        </div>
+    </div>
+
+    <div class="common-box">
+        <div class="common-label">Phone:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.Phone)
+        </div>
+    </div>
+
+    <div class="common-box">
+        <div class="common-label">FamilyPhone1:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.FamilyPhone1)
+        </div>
+    </div>
+
+    <div class="common-box">
+        <div class="common-label">FamilyPhone2:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.FamilyPhone2)
+        </div>
+    </div>
+
+    <div class="common-box">
+        <div class="common-label">Address:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.Address)
+        </div>
+    </div>
+
+    <div class="common-box">
+        <div class="common-label">Time Zone:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.TimeZone)
+        </div>
+    </div>
+
+    <div class="common-box">
+        <div class="common-label">Gender:</div>
+        <div class="common-field">
+            @Html.DisplayFor(model => model.Gender)
+        </div>
+    </div>
+</fieldset>
+
+<!--=======================================-->
+@{
+    DateTime min = Model.Drugs.First().StartDate;      //may need to use FirstOrDefault()?
+    DateTime max = Model.Drugs.First().EndDate;
+    foreach (var drug in Model.Drugs)
+    {
+        if (drug.StartDate < min)
+        {
+            min = drug.StartDate;
+        }
+        if (drug.EndDate > max)
+        {
+            max = drug.EndDate;
+        }
+    }
+    @: <p>min value is: @min.ToShortDateString() </p>
+    @: <p>max value is: @max.ToShortDateString() </p>
+}
+
+<!--=======================================-->
+<!--
+<div class="sliders-group">
+    <div id="slider" />
+    <script type="text/javascript">
+        $('#slider').dateRangeSlider();
+    </script>
+</div>
+-->
+<!--=======================================-->
+
+<table title = "Drug Messages">
+  <tr>
+     <th>Drug Name</th>
+     <th>Dosage</th>
+     <th>Start Date</th>
+     <th>End Date</th>
+  </tr>
+  @foreach (var drug in Model.Drugs)
+  {
+    <tr>
+      <td>@drug.DrugInfo.Name</td>
+      <td>@drug.TimesPerWeek Times Per Week</td>
+      <td>@Html.DisplayFor(modelItem => drug.StartDate) </td>
+      <td>@Html.DisplayFor(modelItem => drug.EndDate) </td>
+    </tr>
+  }
+</table>
+
+<table title = "Test Messages">
+  <tr>
+    <th>Description</th>
+    <th>Test Date</th>
+  </tr>
+  @foreach (var test in Model.Tests)
+  {
+      <tr>
+        <td>@test.TestInfo.Name</td>
+        <td>@Html.DisplayFor(modelItem => test.TestDate) </td>
+      </tr>
+  }
+</table>
+
+<table title = "Custom Messages">
+ <tr>
+   <th>Message</th>
+   <th>Start Date</th>
+   <th>End Date</th>
+ </tr>
+ @foreach (var msg in Model.Messages)
+ {
+     <tr>
+       <td>@msg.MessageText</td>
+       <td>@Html.DisplayFor(modelItem => msg.StartDate) </td>
+       <td>@Html.DisplayFor(modelItem => msg.EndDate) </td>
+     </tr>
+ }
+</table>
+<!-- access alerts through ViewData["alerts"] -->
+@using MediviseMVC.Models
+<table>
+ <tr>
+   <th>Alert Type</th>
+   <th>Alert Date</th>
+ </tr>
+ @foreach (var alert in (List<Alert>)ViewData["alerts"])
+ {
+   <tr>
+     <td>@alert.AlertType.Name</td>
+     <td>@alert.AlertDate</td>
+   </tr>
+ }
+</table>
+<p>
+<<<<<<< Updated upstream
+     @Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Edit", "Edit", new { id=Model.PatientId }) |
+     @Html.ActionLink("TimeLine","Edit","TreatmentPlanner",new {id=Model.PatientId},null)
+=======
+     @Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Edit", "Edit", new { id = Model.PatientId })
+>>>>>>> Stashed changes
+</p>

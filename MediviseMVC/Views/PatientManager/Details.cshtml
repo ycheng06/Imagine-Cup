@@ -3,7 +3,7 @@
     ViewBag.Title = "Details";
 }
 
-<!-- import the plugin for jQRangeSlider 
+<!-- import the plugin for jQRangeSlider -->
 <link rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/css/dev.css")"/>  
 <link rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/style.css")"/>  
 <link rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/css/smoothness/jquery-ui-1.8.10.custom.css")"/>
@@ -75,32 +75,63 @@
 
 <!--=======================================-->
 @{
-    DateTime min = Model.Drugs.First().StartDate;      //may need to use FirstOrDefault()?
-    DateTime max = Model.Drugs.First().EndDate;
-    foreach (var drug in Model.Drugs)
+    DateTime min = new DateTime(0);
+    DateTime max = new DateTime(0);
+    
+    if (Model.Drugs.Count() != 0)
     {
-        if (drug.StartDate < min)
+        min = Model.Drugs.First().StartDate;      //may need to use FirstOrDefault()?
+        max = Model.Drugs.First().EndDate;
+        foreach (var drug in Model.Drugs)
         {
-            min = drug.StartDate;
+            if (drug.StartDate < min)
+            {
+                min = drug.StartDate;
+            }
+            if (drug.EndDate > max)
+            {
+                max = drug.EndDate;
+            }
         }
-        if (drug.EndDate > max)
-        {
-            max = drug.EndDate;
-        }
+        /*
+        @: <p>min value is: @min.ToShortDateString() </p>
+        @: <p>min value is: @min.Year </p>
+        @: <p>min value is: @min.Month </p>
+        @: <p>min value is: @min.Day </p>
+        @: <p>max value is: @max.ToShortDteString() </p>
+        */
     }
-    @: <p>min value is: @min.ToShortDateString() </p>
-    @: <p>max value is: @max.ToShortDateString() </p>
 }
 
 <!--=======================================-->
-<!--
+
 <div class="sliders-group">
-    <div id="slider" />
-    <script type="text/javascript">
-        $('#slider').dateRangeSlider();
-    </script>
+    @{
+        int countHelper = 0;
+        foreach (var drug in Model.Drugs)
+        {
+            <text>
+                @drug.DrugInfo.Name
+                <div id="slider@(countHelper)"></div>
+                <script type="text/javascript">
+                    var slider = $('#slider@(countHelper)');
+                    //note: month 0 = janurary
+                    slider.dateRangeSlider({
+                        arrows: false,
+                        bounds: { min: new Date(@(min.Year), @(min.Month - 1), @(min.Day)), 
+                                    max: new Date(@(max.Year), @(max.Month - 1), @(max.Day)) },
+                        defaultValues: { min: new Date(@(drug.StartDate.Year), @(drug.StartDate.Month - 1), @(drug.StartDate.Day)), 
+                                            max: new Date(@(drug.EndDate.Year), @(drug.EndDate.Month - 1), @(drug.EndDate.Day)) },
+                        valueLabels: "change"
+                    });
+                </script>
+            </text>
+        
+            countHelper++;
+        }
+    }
 </div>
--->
+
 <!--=======================================-->
 
 <table title = "Drug Messages">
@@ -166,6 +197,6 @@
  }
 </table>
 <p>
-     @Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Edit", "Edit", new { id=Model.PatientId }) |
+     @Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Edit", "Edit", new { id = Model.PatientId }) |
      @Html.ActionLink("TimeLine","Edit","TreatmentPlanner",new {id=Model.PatientId},null)
 </p>

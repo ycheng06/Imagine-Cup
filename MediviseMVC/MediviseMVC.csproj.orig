@@ -54,17 +54,14 @@
     <Reference Include="Microsoft.Data.OData, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.OData.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Data.Services, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Services.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Data.Services.Client, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Services.Client.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <Private>True</Private>
@@ -203,6 +200,7 @@
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Global.asax" />
+<<<<<<< HEAD
     <Content Include="Plugins\jQRangeSlider\css\dev.css" />
     <Content Include="Plugins\jQRangeSlider\css\icons\.gitignore" />
     <Content Include="Plugins\jQRangeSlider\css\icons\label.png" />
@@ -263,6 +261,9 @@
     <Content Include="Plugins\slider\tests\show_hide.html" />
     <Content Include="Plugins\slider\tests\zero_value.html" />
     <Content Include="Plugins\slider\tools\yuicompressor-2.4.7.jar" />
+=======
+    <Content Include="MediviseService.svc" />
+>>>>>>> c874d27db5c1de438b0ca160c900a38112121d8b
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.5.1.js" />

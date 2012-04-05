@@ -347,6 +347,11 @@ div#logo {
 
 
 /*---------------MY OWN CODE HERE-------------------*/
+.sliders-group
+{
+    display: block;
+}
+
 #bodytag, body 
 {
     color: #564b47;

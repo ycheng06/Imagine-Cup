@@ -44,7 +44,7 @@ namespace MediviseMVC
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
             ModelBinders.Binders.DefaultBinder = new DateTimeConversionBinder();
-            Scheduler();
+            //Scheduler();
         }
 
         private void Scheduler()

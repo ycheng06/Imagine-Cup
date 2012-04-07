@@ -11,9 +11,11 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using DataAnnotationsExtensions;
+using System.Data.Services.Common;
 
 namespace MediviseMVC.Models
 {
+    [DataServiceKey("TestId")]
     public class Test
     {
         public int TestId { get; set; }
@@ -28,6 +30,7 @@ namespace MediviseMVC.Models
         public virtual Patient Patient { get; set; }
     }
 
+    [DataServiceKey("TestInfoId")]
     public class TestInfo
     {
         public int TestInfoId { get; set; }

@@ -12,9 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using DataAnnotationsExtensions;
 using System.Data.Entity;
 using MediviseMVC.Validation;
+using System.Data.Services.Common;
 
 namespace MediviseMVC.Models
 {
+    [DataServiceKey("PatientId")]
     public class Patient
     {
         public int PatientId { get; set; }

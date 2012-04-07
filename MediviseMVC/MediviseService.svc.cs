@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Services;
-using System.Data.Services.Common;
-
 using System.Linq;
 using System.ServiceModel.Web;
 using System.Web;
 using MediviseMVC.Models;
+using System.Data.Services;
+using System.Data.Services.Common;
+using System.Data.Entity.Infrastructure;
 
 namespace MediviseMVC
 {
@@ -31,7 +31,14 @@ namespace MediviseMVC
             config.SetEntitySetAccessRule("DrugInfos", EntitySetRights.AllRead);
             config.SetEntitySetAccessRule("TestInfos", EntitySetRights.AllRead);
             config.SetEntitySetAccessRule("AlertTypes", EntitySetRights.AllRead);
-            config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V3;
+            config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V2;
+        }
+
+        protected override MediviseEntities CreateDataSource()
+        {
+            var context = base.CreateDataSource();
+            ((IObjectContextAdapter) context).ObjectContext.ContextOptions.ProxyCreationEnabled = false;
+            return context;
         }
     }
 }

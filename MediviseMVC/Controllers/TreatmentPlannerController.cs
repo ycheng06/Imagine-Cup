@@ -36,7 +36,14 @@ namespace MediviseMVC.Controllers
             return View(new Drug
             {
                 StartDate = DateTime.UtcNow,
-                EndDate = DateTime.UtcNow.AddDays(1)
+                EndDate = DateTime.UtcNow.AddDays(1),
+                Monday = true,
+                Tuesday = true,
+                Wednesday = true,
+                Thursday = true,
+                Friday = true,
+                Saturday = true,
+                Sunday = true,
             });
         }
 
@@ -46,6 +53,8 @@ namespace MediviseMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                drug.TimesPerWeek = getTimesPerWeek(drug);
+                updatePatientTreatmentDuration(drug);
                 trackerDB.Patients.Find(drug.PatientId).Drugs.Add(drug);
                 trackerDB.SaveChanges();
                 return RedirectToAction("Edit", new { id = drug.PatientId });
@@ -68,12 +77,49 @@ namespace MediviseMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                drug.TimesPerWeek = getTimesPerWeek(drug);
+                updatePatientTreatmentDuration(drug);
                 trackerDB.Entry(drug).State = EntityState.Modified;
                 trackerDB.SaveChanges();
                 return RedirectToAction("Edit", new { id = drug.PatientId });
             }
             populateDrugNames(drug.DrugInfoId);
             return View();
+        }
+
+        private int getTimesPerWeek(Drug drug) //done every time a drug is modified/added (and NOT every time it is displayed)
+        {
+            int total = 0;
+
+            if (drug.Monday)
+                total++;
+            if (drug.Tuesday)
+                total++;
+            if (drug.Wednesday)
+                total++;
+            if (drug.Thursday)
+                total++;
+            if (drug.Friday)
+                total++;
+            if (drug.Saturday)
+                total++;
+            if (drug.Sunday)
+                total++;
+
+            return total;
+        }
+
+        private void updatePatientTreatmentDuration(Drug drug)  //done every time a drug is modified/added (and NOT every time it is displayed)
+        {
+            //look up corresponding patient
+            var patient = trackerDB.Patients.Find(drug.PatientId);
+
+            if (drug.EndDate > patient.TreatmentEndDate)
+            {
+                patient.TreatmentEndDate = drug.EndDate;
+                trackerDB.Entry(patient).State = EntityState.Modified;
+                trackerDB.SaveChanges();
+            }
         }
 
         // GET: /TreatmentPlanner/DeleteDrug/3
@@ -107,6 +153,7 @@ namespace MediviseMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                updatePatientTreatmentDuration(test);
                 trackerDB.Patients.Find(test.PatientId).Tests.Add(test);
                 trackerDB.SaveChanges();
                 return RedirectToAction("Edit", new { id = test.PatientId });
@@ -125,12 +172,25 @@ namespace MediviseMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                updatePatientTreatmentDuration(test);
                 trackerDB.Entry(test).State = EntityState.Modified;
                 trackerDB.SaveChanges();
                 return RedirectToAction("Edit", new { id=test.PatientId});
             }
             populateTestNames();
             return View(test);
+        }
+        private void updatePatientTreatmentDuration(Test test)  //done every time a drug is modified/added (and NOT every time it is displayed)
+        {
+            //look up corresponding patient
+            var patient = trackerDB.Patients.Find(test.PatientId);
+
+            if (test.TestDate > patient.TreatmentEndDate)
+            {
+                patient.TreatmentEndDate = test.TestDate;
+                trackerDB.Entry(patient).State = EntityState.Modified;
+                trackerDB.SaveChanges();
+            }
         }
         public ActionResult DeleteTest(int id)
         {
@@ -158,6 +218,7 @@ namespace MediviseMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                updatePatientTreatmentDuration(msg);
                 trackerDB.Patients.Find(msg.PatientId).Messages.Add(msg);
                 trackerDB.SaveChanges();
                 return RedirectToAction("Edit", new { id = msg.PatientId });
@@ -174,11 +235,24 @@ namespace MediviseMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                updatePatientTreatmentDuration(msg);
                 trackerDB.Entry(msg).State = EntityState.Modified;
                 trackerDB.SaveChanges();
                 return RedirectToAction("Edit", new { id=msg.PatientId});
             }
             return View(msg);
+        }
+        private void updatePatientTreatmentDuration(Message message)  //done every time a drug is modified/added (and NOT every time it is displayed)
+        {
+            //look up corresponding patient
+            var patient = trackerDB.Patients.Find(message.PatientId);
+
+            if (message.EndDate > patient.TreatmentEndDate)
+            {
+                patient.TreatmentEndDate = message.EndDate;
+                trackerDB.Entry(patient).State = EntityState.Modified;
+                trackerDB.SaveChanges();
+            }
         }
         public ActionResult DeleteMsg(int id)
         {

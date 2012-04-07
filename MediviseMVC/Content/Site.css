@@ -347,9 +347,33 @@ div#logo {
 
 
 /*---------------MY OWN CODE HERE-------------------*/
-.sliders-group
+.drug-timeline
 {
     display: block;
+    height: auto;
+    position: relative;
+    margin: 0 0 1.5em;
+}
+
+#progressbar
+{
+    z-index: 1;
+    opacity: .30;
+    filter: alpha(opacity=30);
+}
+
+.sliders-group
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+.slider-box
+{
+    margin: 5px 0 20px;
 }
 
 #bodytag, body 

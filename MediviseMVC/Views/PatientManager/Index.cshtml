@@ -23,6 +23,8 @@
            grid.Column("TimeZone", "Time Zone"),
            grid.Column("Gender","Gender"),
            grid.Column("ResponseReceived","Responded"),
+           grid.Column("TreatmentStartDate","Treatment Start", format: (item) => string.Format("{0:MM/dd/yyyy}", item.TreatmentStartDate)),
+           grid.Column("TreatmentEndDate","Treatment End", format: (item) => string.Format("{0:MM/dd/yyyy}", item.TreatmentEndDate)),
            grid.Column(columnName :"",format: @<text>@Html.ActionLink("Details", "Details", new { id=item.PatientId})</text>),
            grid.Column(columnName :"",format: @<text>@Html.ActionLink("Delete", "Delete", new { id=item.PatientId})</text>)
            

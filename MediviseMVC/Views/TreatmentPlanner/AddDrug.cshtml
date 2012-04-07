@@ -43,13 +43,51 @@
             @Html.EditorFor(model => model.EndDate)
             @Html.ValidationMessageFor(model => model.EndDate)
         </div>
+
+        @* days of the week *@
         <div class="editor-label">
-            @Html.LabelFor(model => model.TimesPerWeek)
+            @Html.LabelFor(model => model.Monday)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.TimesPerWeek)
-            @Html.ValidationMessageFor(model => model.TimesPerWeek)
+            @Html.CheckBoxFor(model => model.Monday)
         </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tuesday)
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.Tuesday)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Wednesday)
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.Wednesday)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Thursday)
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.Thursday)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Friday)
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.Friday)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Saturday)
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.Saturday)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Sunday)
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.Sunday)
+        </div>
+        @* days of the week *@
 
         <div class="editor-field">
             @Html.Hidden("PatientId")

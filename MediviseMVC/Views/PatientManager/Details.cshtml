@@ -4,13 +4,13 @@
 }
 
 <!-- import the plugin for jQRangeSlider -->
-<link rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/css/dev.css")"/>  
-<link rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/style.css")"/>  
-<link rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/css/smoothness/jquery-ui-1.8.10.custom.css")"/>
-<script src="@Url.Content("~/Plugins/jQRangeSlider/lib/jquery-1.7.1.min.js")"></script>
-<script src="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/js/jquery-ui-1.8.16.custom.min.js")"></script>
-<script src="@Url.Content("~/Plugins/jQRangeSlider/lib/jquery.mousewheel.min.js")"></script>
-<script src="@Url.Content("~/Plugins/jQRangeSlider/jQAllRangeSliders-min.js")"></script>
+<link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/css/dev.css")"/>  
+<link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/style.css")"/>  
+<link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/css/smoothness/jquery-ui-1.8.10.custom.css")"/>
+<script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/lib/jquery-1.7.1.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/js/jquery-ui-1.8.16.custom.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/lib/jquery.mousewheel.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/jQAllRangeSliders-min.js")"></script>
 <!-- may need location change -->
 
 <h2>Details</h2>
@@ -105,30 +105,57 @@
 
 <!--=======================================-->
 
-<div class="sliders-group">
+<div class="drug-timeline">
+    <div id="progressbar"></div>
     @{
+        //figuring out progress on progressbar
+        DateTime today = DateTime.Today;
+        float progress = 0;
+        if(max <= today){
+            progress = 100;
+        }
+        else if(min >= today){
+            progress = 0;
+        }
+        else{
+            progress = ((float)((today - min).Days) / (float)((max - min).Days)) * 100;
+        }
+
+        //show the progress bar
+        <text>
+            <script type="text/javascript">
+                $("#progressbar").progressbar({ value: @(progress) });
+                $("#progressbar").height( 60 * @(Model.Drugs.Count) );
+            </script>
+        </text>
+        
         int countHelper = 0;
+        
+        @:<div class="sliders-group">
         foreach (var drug in Model.Drugs)
         {
             <text>
-                @drug.DrugInfo.Name
-                <div id="slider@(countHelper)"></div>
-                <script type="text/javascript">
-                    var slider = $('#slider@(countHelper)');
-                    //note: month 0 = janurary
-                    slider.dateRangeSlider({
-                        arrows: false,
-                        bounds: { min: new Date(@(min.Year), @(min.Month - 1), @(min.Day)), 
-                                    max: new Date(@(max.Year), @(max.Month - 1), @(max.Day)) },
-                        defaultValues: { min: new Date(@(drug.StartDate.Year), @(drug.StartDate.Month - 1), @(drug.StartDate.Day)), 
-                                            max: new Date(@(drug.EndDate.Year), @(drug.EndDate.Month - 1), @(drug.EndDate.Day)) },
-                        valueLabels: "change"
-                    });
-                </script>
+                <div class="slider-box">
+                @(drug.DrugInfo.Name) - @(drug.TimesPerWeek) times/week | @Html.DisplayFor(modelItem => drug.StartDate) to @Html.DisplayFor(modelItem => drug.EndDate)
+                    <div id="slider@(countHelper)"></div>
+                    <script type="text/javascript">
+                        var slider = $('#slider@(countHelper)');
+                        //note: month 0 = janurary
+                        slider.dateRangeSlider({
+                            arrows: false,
+                            bounds: { min: new Date(@(min.Year), @(min.Month - 1), @(min.Day)), 
+                                        max: new Date(@(max.Year), @(max.Month - 1), @(max.Day)) },
+                            defaultValues: { min: new Date(@(drug.StartDate.Year), @(drug.StartDate.Month - 1), @(drug.StartDate.Day)), 
+                                                max: new Date(@(drug.EndDate.Year), @(drug.EndDate.Month - 1), @(drug.EndDate.Day)) },
+                            valueLabels: "change"
+                        });
+                    </script>
+                </div>
             </text>
         
             countHelper++;
         }
+        @:</div>
     }
 </div>
 

@@ -77,35 +77,6 @@ namespace MediviseMVC.Controllers
             return View(patient);
         }
 
-        /*
-         * For Prototype Testing Only 
-         */
-        //private void sendDemoReminders(int id)
-        //{
-        //    ISchedulerFactory schedulePool = new StdSchedulerFactory();
-        //    IScheduler sched = schedulePool.GetScheduler();
-        //    sched.Start();
-        //    //set up reminder sender
-        //    try
-        //    {
-        //        JobDetail reminderJob = new JobDetail("AlertBuilder", null, typeof(SendReminderJob));
-        //        reminderJob.JobDataMap["pid"] = id;
-        //        Trigger trigger = TriggerUtils.MakeMinutelyTrigger("t1", 2, 1);
-        //        trigger.StartTimeUtc = TriggerUtils.GetEvenMinuteDate(DateTime.UtcNow.AddMinutes(1));
-        //        sched.ScheduleJob(reminderJob, trigger);
-        //        //set up warning sender
-        //        JobDetail warningJob = new JobDetail("Warnings", null, typeof(SendWarningJob));
-        //        warningJob.JobDataMap["pid"] = id;
-        //        Trigger trigger2 = TriggerUtils.MakeSecondlyTrigger("test2", 10, 0);
-        //        trigger2.StartTimeUtc = TriggerUtils.GetEvenMinuteDate(DateTime.UtcNow).AddMinutes(2);
-        //        sched.ScheduleJob(warningJob, trigger2);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Trace.WriteLine(e.Message);
-        //        throw e;
-        //    }
-        //}
         private void sendRegisterConfirmation(Patient p)
         {
             string msg = String.Format("Dear {0}, welcome to Medivise! Hope you get well soon!\n", p.FirstName);
@@ -120,8 +91,14 @@ namespace MediviseMVC.Controllers
             Patient patient = db.Patients.Find(id);
             populateTimeZones(patient.TimeZone);
             populateGenderList(patient.Gender);
-
-            return View(patient);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("PatientEdit", patient);
+            }
+            else
+            {
+                return View(patient);
+            }
         }
 
         // POST: /PatientManager/Edit/5
@@ -129,16 +106,21 @@ namespace MediviseMVC.Controllers
         [HttpPost]
         public ActionResult Edit(Patient patient)
         {
+            bool isAjax = Request.IsAjaxRequest();
             if (ModelState.IsValid)
             {
                 patient.RegisteredBy = User.Identity.Name;
                 db.Entry(patient).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                if (isAjax)
+                {
+                    return PartialView("PatientView", patient);
+                }
+                return RedirectToAction("Details", new { id = patient.PatientId });
             }
             populateTimeZones(patient.TimeZone);
             populateGenderList(patient.Gender);
-            return View(patient);
+            return isAjax ? View("PatientEdit",patient) : View(patient);
         }
 
         [HttpPost]

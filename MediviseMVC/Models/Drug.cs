@@ -9,11 +9,9 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using MediviseMVC.Validation;
-using System.Data.Services.Common;
 
 namespace MediviseMVC.Models
 {
-    [DataServiceKey("DrugId")]
     public class Drug
     {
         public int DrugId { get; set; }
@@ -49,7 +47,6 @@ namespace MediviseMVC.Models
         public virtual Patient Patient { get; set; }
     }
 
-    [DataServiceKey("DrugInfoId")]
     public class DrugInfo
     {
         public int DrugInfoId { get; set; }

@@ -96,6 +96,7 @@ namespace MediviseMVC.Models
             //context.Alerts.Add(alert2);
             context.AlertTypes.Add(alertType1);
             context.AlertTypes.Add(alertType2);
+            context.AlertTypes.Add(alertType3);
             //context.Messages.Add(message1);
             //context.Messages.Add(message2);
             //context.Messages.Add(message3);

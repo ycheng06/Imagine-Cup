@@ -15,7 +15,6 @@ using System.Data.Services.Common;
 
 namespace MediviseMVC.Models
 {
-    [DataServiceKey("AlertTypeId")]
     public class AlertType
     {
         public int AlertTypeId { get; set; }

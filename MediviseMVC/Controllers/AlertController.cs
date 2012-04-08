@@ -96,9 +96,16 @@ namespace MediviseMVC.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
+            bool isAjax = Request.IsAjaxRequest();
             var alert = db.Alerts.Find(id);
             db.Alerts.Remove(alert);
             db.SaveChanges();
+            if (isAjax)
+            {
+                var pid = alert.PatientId;
+                IEnumerable<Alert> alerts = db.Alerts.Where(a => a.PatientId == pid).ToList();
+                return PartialView("AlertList", alerts);
+            }
             return RedirectToAction("Index");
         }
 

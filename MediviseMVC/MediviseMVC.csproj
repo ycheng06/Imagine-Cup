@@ -223,9 +223,6 @@
     <Compile Include="Jobs\MessageConstructor.cs" />
     <Compile Include="Jobs\SendReminderJob.cs" />
     <Compile Include="Jobs\SendWarningJob.cs" />
-    <Compile Include="MediviseService.svc.cs">
-      <DependentUpon>MediviseService.svc</DependentUpon>
-    </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\AlertType.cs" />
@@ -273,7 +270,6 @@
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Global.asax" />
-    <Content Include="MediviseService.svc" />
     <Content Include="Plugins\jQRangeSlider\css\dev.css" />
     <Content Include="Plugins\jQRangeSlider\css\icons\.gitignore" />
     <Content Include="Plugins\jQRangeSlider\css\icons\label.png" />

@@ -76,38 +76,59 @@ namespace MediviseMVC.Jobs
             var patients = db.Patients.ToArray();
             foreach (Patient p in patients)
             {
-                List<Drug> drugsToday = DrugsNeededToday(p);
-                if (drugsToday.Count > 0) //treatment needed today
+                if (treatmentCompleted(p))
                 {
-                    if (p.ResponseReceived == false)
-                    {
-                        string warning = "You forgot yesterday's medication!";
-                        sender.SendSMS(p.Phone, warning);
-                        constructAlert(p);
-                    }
-                    p.ResponseReceived = false;
-                    db.Entry(p).State = EntityState.Modified;
-                    db.SaveChanges();
-                    string message = msgBuilder.ConstructMsg(p,drugsToday.Count);
-                    Trace.WriteLine(p.Phone, "PHONE NUMBER ********************");
-                    sender.SendSMS(p.Phone, message);
+                    messageIfCompletedToday(p);
                 }
-                else //treatment not needed today
+                else
                 {
-                    if (p.ResponseReceived == false)
+                    List<Drug> drugsToday = DrugsNeededToday(p);
+                    if (drugsToday.Count > 0) //treatment needed today
                     {
-                        string warning = "You forgot yesterday's medication!";
-                        sender.SendSMS(p.Phone, warning);
-                        constructAlert(p);
-                        p.ResponseReceived = true; //so we don't penalize them again
+                        if (p.ResponseReceived == false)
+                        {
+                            string warning = "You forgot yesterday's medication!";
+                            sender.SendSMS(p.Phone, warning);
+                            constructAlert(p);
+                        }
+                        p.ResponseReceived = false;
                         db.Entry(p).State = EntityState.Modified;
                         db.SaveChanges();
-                        string message = msgBuilder.ConstructMsg(p,drugsToday.Count);
+                        string message = msgBuilder.ConstructMsg(p, drugsToday.Count);
                         Trace.WriteLine(p.Phone, "PHONE NUMBER ********************");
                         sender.SendSMS(p.Phone, message);
                     }
-                    //else leave it as it is
+                    else //treatment not needed today
+                    {
+                        if (p.ResponseReceived == false)
+                        {
+                            string warning = "You forgot yesterday's medication!";
+                            sender.SendSMS(p.Phone, warning);
+                            constructAlert(p);
+                            p.ResponseReceived = true; //so we don't penalize them again
+                            db.Entry(p).State = EntityState.Modified;
+                            db.SaveChanges();
+                            string message = msgBuilder.ConstructMsg(p, drugsToday.Count);
+                            Trace.WriteLine(p.Phone, "PHONE NUMBER ********************");
+                            sender.SendSMS(p.Phone, message);
+                        }
+                        //else leave it as it is
+                    }
                 }
+            }
+        }
+        private bool treatmentCompleted(Patient p)
+        {
+            return (p.TreatmentEndDate >= DateTime.UtcNow);
+        }
+        private void messageIfCompletedToday(Patient p) //send message on day of completion
+        {
+            if (p.TreatmentEndDate.Date == DateTime.UtcNow.Date)
+            {
+                string congrats = "Congratulations! You have successfully completed the treatment!";
+                Trace.WriteLine(p.Phone, "PHONE NUMBER ********************");
+                sender.SendSMS(p.Phone, congrats);
+                completionAlert(p);
             }
         }
         private void constructAlert(Patient p)
@@ -121,6 +142,18 @@ namespace MediviseMVC.Jobs
             db.Alerts.Add(a);
             db.SaveChanges();
         }
+        private void completionAlert(Patient p)
+        {
+            Alert a = new Alert
+            {
+                PatientId = p.PatientId,
+                AlertDate = DateTime.UtcNow,
+                AlertTypeId = 3 // 3 = "Completed Treatment"
+            };
+            db.Alerts.Add(a);
+            db.SaveChanges();
+        }
+
 
     }
 }

@@ -63,6 +63,11 @@ namespace MediviseMVC.Models
                 AlertTypeId = 2,
                 Name = "Missed Checkup"
             };
+            AlertType alertType3 = new AlertType
+            {
+                AlertTypeId = 3,
+                Name = "Completed Treatment"
+            };
             //Message message1 = new Message
             //{
             //    StartDate = DateTime.UtcNow,

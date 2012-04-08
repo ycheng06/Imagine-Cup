@@ -108,11 +108,10 @@ namespace MediviseMVC.Jobs
                             p.ResponseReceived = true; //so we don't penalize them again
                             db.Entry(p).State = EntityState.Modified;
                             db.SaveChanges();
+                        }
                             string message = msgBuilder.ConstructMsg(p, drugsToday.Count);
                             Trace.WriteLine(p.Phone, "PHONE NUMBER ********************");
                             sender.SendSMS(p.Phone, message);
-                        }
-                        //else leave it as it is
                     }
                 }
             }

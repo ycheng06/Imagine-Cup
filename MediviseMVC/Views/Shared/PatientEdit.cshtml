@@ -1,0 +1,93 @@
+﻿@model MediviseMVC.Models.Patient
+
+@using (Ajax.BeginForm("Edit",new AjaxOptions {UpdateTargetId="PatientInfo"})) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Patient</legend>
+
+        @Html.HiddenFor(model => model.PatientId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FirstName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Phone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Phone)
+            @Html.ValidationMessageFor(model => model.Phone)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FamilyPhone1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FamilyPhone1)
+            @Html.ValidationMessageFor(model => model.FamilyPhone1)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FamilyPhone2)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FamilyPhone2)
+            @Html.ValidationMessageFor(model => model.FamilyPhone2)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TimeZone)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("TimeZone")
+            @Html.ValidationMessageFor(model => model.TimeZone)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Gender)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Gender")
+            @Html.ValidationMessageFor(model => model.Gender)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TreatmentStartDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TreatmentStartDate)
+            @Html.ValidationMessageFor(model => model.TreatmentStartDate)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TreatmentEndDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TreatmentEndDate)
+            @Html.ValidationMessageFor(model => model.TreatmentEndDate)
+        </div>
+        <p>
+            <input type="submit" value="Save"/>
+            <input type="reset" value="Cancel" />
+        </p>
+    </fieldset>
+}

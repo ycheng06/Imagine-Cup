@@ -223,9 +223,6 @@
     <Compile Include="Jobs\MessageConstructor.cs" />
     <Compile Include="Jobs\SendReminderJob.cs" />
     <Compile Include="Jobs\SendWarningJob.cs" />
-    <Compile Include="MediviseService.svc.cs">
-      <DependentUpon>MediviseService.svc</DependentUpon>
-    </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\AlertType.cs" />
@@ -377,6 +374,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\PatientEdit.cshtml" />
+    <Content Include="Views\Shared\PatientView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

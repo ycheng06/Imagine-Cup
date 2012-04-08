@@ -20,11 +20,11 @@ namespace MediviseMVC.Jobs
     public class MessageConstructor
     {
         
-        public string ConstructMsg(Patient p)
+        public string ConstructMsg(Patient p, int num_drugs)
         {
             DateTime now = DateTime.UtcNow;
             StringBuilder msg = ConstructTitle(p);
-            int num_drugs = p.Drugs.Count;
+            //int num_drugs = p.Drugs.Count;
             if (num_drugs == 0)
             {
                 msg.Append("No medicines for today.\n");

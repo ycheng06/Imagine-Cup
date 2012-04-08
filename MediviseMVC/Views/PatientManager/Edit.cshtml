@@ -15,7 +15,7 @@
         <legend>Patient</legend>
 
         @Html.HiddenFor(model => model.PatientId)
-
+        @Html.HiddenFor(model => model.TreatmentStartDate)
         <div class="editor-label">
             @Html.LabelFor(model => model.FirstName)
         </div>
@@ -79,6 +79,22 @@
             @Html.DropDownList("Gender")
             @Html.ValidationMessageFor(model => model.Gender)
         </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TreatmentStartDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TreatmentStartDate)
+            @Html.ValidationMessageFor(model => model.TreatmentStartDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TreatmentEndDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TreatmentEndDate)
+            @Html.ValidationMessageFor(model => model.TreatmentEndDate)
+        </div>
+
 
         <p>
             <input type="submit" value="Save" />

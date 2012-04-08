@@ -8,71 +8,14 @@
 <link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/style.css")"/>  
 <link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/css/smoothness/jquery-ui-1.8.10.custom.css")"/>
 <script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/lib/jquery-1.7.1.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/js/jquery-ui-1.8.16.custom.min.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/lib/jquery.mousewheel.min.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/jQAllRangeSliders-min.js")"></script>
 <!-- may need location change -->
-
-<h2>Details</h2>
-<fieldset>
-    <legend>Patient</legend>
-    <div class="common-box">
-        <div class="common-label">FirstName:</div>
-        <div class="common-field">
-            @Html.DisplayFor(model => model.FirstName)
-        </div>
-    </div>
-
-    <div class="common-box">
-        <div class="common-label">LastName:</div>
-        <div class="common-field">
-            @Html.DisplayFor(model => model.LastName)
-        </div>
-    </div>
-
-    <div class="common-box">
-        <div class="common-label">Phone:</div>
-        <div class="common-field">
-            @Html.DisplayFor(model => model.Phone)
-        </div>
-    </div>
-
-    <div class="common-box">
-        <div class="common-label">FamilyPhone1:</div>
-        <div class="common-field">
-            @Html.DisplayFor(model => model.FamilyPhone1)
-        </div>
-    </div>
-
-    <div class="common-box">
-        <div class="common-label">FamilyPhone2:</div>
-        <div class="common-field">
-            @Html.DisplayFor(model => model.FamilyPhone2)
-        </div>
-    </div>
-
-    <div class="common-box">
-        <div class="common-label">Address:</div>
-        <div class="common-field">
-            @Html.DisplayFor(model => model.Address)
-        </div>
-    </div>
-
-    <div class="common-box">
-        <div class="common-label">Time Zone:</div>
-        <div class="common-field">
-            @Html.DisplayFor(model => model.TimeZone)
-        </div>
-    </div>
-
-    <div class="common-box">
-        <div class="common-label">Gender:</div>
-        <div class="common-field">
-            @Html.DisplayFor(model => model.Gender)
-        </div>
-    </div>
-</fieldset>
-
+<div id="PatientInfo">
+    @Html.Partial("PatientView",Model,ViewData)
+</div>
 <!--=======================================-->
 @{
     DateTime min = new DateTime(0);

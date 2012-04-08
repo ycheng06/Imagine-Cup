@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.ComponentModel;
 
+
 namespace MediviseMVC.Models
 {
     public class DateTimeConversionBinder: DefaultModelBinder
@@ -18,8 +19,15 @@ namespace MediviseMVC.Models
       ModelBindingContext bindingContext,
       System.ComponentModel.PropertyDescriptor propertyDescriptor, object value)
         {
-            //we probably will want to get the user's time zone from the database later
+            /*
+            string userTimeZoneStr = Profile.GetProfile(HttpContext.Current.User.Identity.Name).TimeZone;
+            if (userTimeZoneStr == "")
+            {
+                userTimeZoneStr = "UTC";
+            }
+            */
             TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+            //TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById(userTimeZoneStr);
             if (value != null)//make sure that if an invalid date (ie. 4/31 or 2/31) is submitted, it will be dealt with as such
             {
                 if (propertyDescriptor.PropertyType == typeof(DateTime))
@@ -40,8 +48,16 @@ namespace MediviseMVC.Models
         {
             var submittedValue = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
 
-            //we probably will want to get the user's time zone from the database later
+            /*
+            string userTimeZoneStr = Profile.GetProfile(HttpContext.Current.User.Identity.Name).TimeZone;
+            if (userTimeZoneStr == "")
+            {
+                userTimeZoneStr = "UTC";
+            }
+            */
             TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+            //TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById(userTimeZoneStr);
+
             /*
             if (propertyDescriptor.PropertyType == typeof(DateTime))
             {

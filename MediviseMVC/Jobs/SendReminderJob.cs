@@ -119,11 +119,11 @@ namespace MediviseMVC.Jobs
         }
         private bool treatmentCompleted(Patient p)
         {
-            return (p.TreatmentEndDate >= DateTime.UtcNow);
+            return (DateTime.UtcNow >= p.TreatmentEndDate.AddDays(1));
         }
         private void messageIfCompletedToday(Patient p) //send message on day of completion
         {
-            if (p.TreatmentEndDate.Date == DateTime.UtcNow.Date)
+            if (DateTime.UtcNow.Date == p.TreatmentEndDate.AddDays(1).Date)
             {
                 string congrats = "Congratulations! You have successfully completed the treatment!";
                 Trace.WriteLine(p.Phone, "PHONE NUMBER ********************");

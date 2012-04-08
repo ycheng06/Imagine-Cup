@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Profile;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Security;
 
 namespace MediviseMVC.Models
 {
@@ -28,7 +29,12 @@ namespace MediviseMVC.Models
 
        public static Profile GetProfile(string username)
        {
-           return Create(username) as Profile;
+           return (Profile)Create(username);
+       }
+
+       public static Profile GetCurrent()
+       {
+           return (Profile)Create(Membership.GetUser().UserName);
        }
 
     }

@@ -31,14 +31,14 @@ namespace MediviseMVC
             config.SetEntitySetAccessRule("DrugInfos", EntitySetRights.AllRead);
             config.SetEntitySetAccessRule("TestInfos", EntitySetRights.AllRead);
             config.SetEntitySetAccessRule("AlertTypes", EntitySetRights.AllRead);
-            config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V2;
+            config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V3;
         }
 
-        protected override MediviseEntities CreateDataSource()
-        {
-            var context = base.CreateDataSource();
-            ((IObjectContextAdapter) context).ObjectContext.ContextOptions.ProxyCreationEnabled = false;
-            return context;
-        }
+        //protected override MediviseEntities CreateDataSource()
+        //{
+        //    var context = base.CreateDataSource();
+        //    ((IObjectContextAdapter) context).ObjectContext.ContextOptions.ProxyCreationEnabled = false;
+        //    return context;
+        //}
     }
 }

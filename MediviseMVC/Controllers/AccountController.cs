@@ -91,10 +91,10 @@ namespace MediviseMVC.Controllers
                     //Roles.AddUserToRole(model.UserName, "user");
 
                     //add profile information
-                    var profile = Profile.GetProfile(model.UserName);
+                    Profile profile = Profile.GetProfile(model.UserName);
                     profile.TimeZone = model.TimeZone;
                     profile.Save();
-                    return RedirectToAction("RegisterSuccess");
+                    return RedirectToAction("LogOn");
                 }
                 else
                 {

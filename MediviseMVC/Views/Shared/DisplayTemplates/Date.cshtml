@@ -4,8 +4,8 @@
 
 @model DateTime
 @{
-    //we probably will want to get the user's time zone from the database later
-    TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+    string userTimeZoneStr = (string)Context.Profile.GetPropertyValue("TimeZone");
+    TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById(userTimeZoneStr);
     var modelTime = (DateTime)Model;
     var newTime = TimeZoneInfo.ConvertTimeFromUtc(modelTime, userTimeZone);
 }

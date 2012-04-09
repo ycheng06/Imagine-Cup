@@ -19,6 +19,7 @@ namespace MediviseMVC.Jobs
         private TwilioSender sender;
         private MediviseEntities db;
         private MessageConstructor msgBuilder = new MessageConstructor();
+        private int reminderHour = 14; //send reminders at 14:00 or 2pm
         public void Execute (IJobExecutionContext context)
         {
             sender = new TwilioSender();
@@ -76,42 +77,49 @@ namespace MediviseMVC.Jobs
             var patients = db.Patients.ToArray();
             foreach (Patient p in patients)
             {
-                if (treatmentCompleted(p))
+                //see what time it is in user TimeZone
+                TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById(p.TimeZone);
+                DateTime timeInUserTimeZone = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, userTimeZone);
+
+                if (timeInUserTimeZone.Hour == reminderHour)
                 {
-                    messageIfCompletedToday(p);
-                }
-                else
-                {
-                    List<Drug> drugsToday = DrugsNeededToday(p);
-                    if (drugsToday.Count > 0) //treatment needed today
+                    if (treatmentCompleted(p))
                     {
-                        if (p.ResponseReceived == false)
-                        {
-                            string warning = "You forgot yesterday's medication!";
-                            sender.SendSMS(p.Phone, warning);
-                            constructAlert(p);
-                        }
-                        p.ResponseReceived = false;
-                        db.Entry(p).State = EntityState.Modified;
-                        db.SaveChanges();
-                        string message = msgBuilder.ConstructMsg(p, drugsToday.Count);
-                        Trace.WriteLine(p.Phone, "PHONE NUMBER ********************");
-                        sender.SendSMS(p.Phone, message);
+                        messageIfCompletedToday(p);
                     }
-                    else //treatment not needed today
+                    else
                     {
-                        if (p.ResponseReceived == false)
+                        List<Drug> drugsToday = DrugsNeededToday(p);
+                        if (drugsToday.Count > 0) //treatment needed today
                         {
-                            string warning = "You forgot yesterday's medication!";
-                            sender.SendSMS(p.Phone, warning);
-                            constructAlert(p);
-                            p.ResponseReceived = true; //so we don't penalize them again
+                            if (p.ResponseReceived == false)
+                            {
+                                string warning = "You forgot yesterday's medication!";
+                                sender.SendSMS(p.Phone, warning);
+                                constructAlert(p);
+                            }
+                            p.ResponseReceived = false;
                             db.Entry(p).State = EntityState.Modified;
                             db.SaveChanges();
-                        }
                             string message = msgBuilder.ConstructMsg(p, drugsToday.Count);
                             Trace.WriteLine(p.Phone, "PHONE NUMBER ********************");
                             sender.SendSMS(p.Phone, message);
+                        }
+                        else //treatment not needed today
+                        {
+                            if (p.ResponseReceived == false)
+                            {
+                                string warning = "You forgot yesterday's medication!";
+                                sender.SendSMS(p.Phone, warning);
+                                constructAlert(p);
+                                p.ResponseReceived = true; //so we don't penalize them again
+                                db.Entry(p).State = EntityState.Modified;
+                                db.SaveChanges();
+                            }
+                            string message = msgBuilder.ConstructMsg(p, drugsToday.Count);
+                            Trace.WriteLine(p.Phone, "PHONE NUMBER ********************");
+                            sender.SendSMS(p.Phone, message);
+                        }
                     }
                 }
             }

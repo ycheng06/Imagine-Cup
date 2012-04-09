@@ -61,6 +61,7 @@ namespace MediviseMVC
              * 10 AM Reminder
              * 5 PM Warning
              */ 
+            /*
             CronTriggerImpl reminderTrigger = new CronTriggerImpl("reminderTrigger");
             reminderTrigger.CronExpressionString = "0 0 14 * * ?";
             reminderTrigger.StartTimeUtc = DateTime.UtcNow;
@@ -70,6 +71,17 @@ namespace MediviseMVC
             warningTrigger.CronExpressionString = "0 0 21 * * ?";
             reminderTrigger.StartTimeUtc = DateTime.UtcNow;
             sched.ScheduleJob(makeWarning, warningTrigger);
+            */
+
+            //Set when to repeat the job
+            //check every hour (since we are using different timezones)
+            CalendarIntervalTriggerImpl reminderTrigger = new CalendarIntervalTriggerImpl("reminderTrigger", Quartz.IntervalUnit.Hour, 1);
+            reminderTrigger.StartTimeUtc = DateTime.UtcNow;
+            sched.ScheduleJob(makeReminder, reminderTrigger);
+
+            CalendarIntervalTriggerImpl warningTrigger = new CalendarIntervalTriggerImpl("warningTrigger", Quartz.IntervalUnit.Hour, 1);
+            warningTrigger.StartTimeUtc = DateTime.UtcNow;
+            sched.ScheduleJob(makeReminder, warningTrigger);
 
         }
 

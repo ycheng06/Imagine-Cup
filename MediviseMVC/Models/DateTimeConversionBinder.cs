@@ -19,18 +19,11 @@ namespace MediviseMVC.Models
       ModelBindingContext bindingContext,
       System.ComponentModel.PropertyDescriptor propertyDescriptor, object value)
         {
-            string userTimeZoneStr = Profile.GetCurrent().TimeZone;
-            /*
-            if (userTimeZoneStr == "")
+            if (propertyDescriptor.PropertyType == typeof(DateTime))
             {
-                userTimeZoneStr = "UTC";
-            }
-            */
-            //TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-            TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById(userTimeZoneStr);
-            if (value != null)//make sure that if an invalid date (ie. 4/31 or 2/31) is submitted, it will be dealt with as such
-            {
-                if (propertyDescriptor.PropertyType == typeof(DateTime))
+                string userTimeZoneStr = Profile.GetCurrent().TimeZone;
+                TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById(userTimeZoneStr);
+                if (value != null)//make sure that if an invalid date (ie. 4/31 or 2/31) is submitted, it will be dealt with as such
                 {
                     var newTime = (DateTime)value;
                     value = TimeZoneInfo.ConvertTimeToUtc(newTime, userTimeZone);
@@ -40,33 +33,33 @@ namespace MediviseMVC.Models
             base.SetProperty(controllerContext, bindingContext,
                                 propertyDescriptor, value);
         }
-        
+
         //probably will not be used
-        protected override object GetPropertyValue( ControllerContext controllerContext,
-    ModelBindingContext bindingContext,
-    PropertyDescriptor propertyDescriptor, IModelBinder propertyBinder)
-        {
-            var submittedValue = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+    //    protected override object GetPropertyValue(ControllerContext controllerContext,
+    //ModelBindingContext bindingContext,
+    //PropertyDescriptor propertyDescriptor, IModelBinder propertyBinder)
+    //    {
+    //        var submittedValue = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
 
-            string userTimeZoneStr = Profile.GetCurrent().TimeZone;
-            /*
-            if (userTimeZoneStr == "")
-            {
-                userTimeZoneStr = "UTC";
-            }
-            */
-            //TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-            TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById(userTimeZoneStr);
+    //        string userTimeZoneStr = Profile.GetCurrent().TimeZone;
+    //        /*
+    //        if (userTimeZoneStr == "")
+    //        {
+    //            userTimeZoneStr = "UTC";
+    //        }
+    //        */
+    //        //TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+    //        TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById(userTimeZoneStr);
 
-            /*
-            if (propertyDescriptor.PropertyType == typeof(DateTime))
-            {
-                var newTime = (DateTime)submittedValue.ConvertTo(typeof(DateTime));
-                return TimeZoneInfo.ConvertTimeFromUtc(newTime, userTimeZone);
-            }
-            */
+    //        /*
+    //        if (propertyDescriptor.PropertyType == typeof(DateTime))
+    //        {
+    //            var newTime = (DateTime)submittedValue.ConvertTo(typeof(DateTime));
+    //            return TimeZoneInfo.ConvertTimeFromUtc(newTime, userTimeZone);
+    //        }
+    //        */
 
-            return base.GetPropertyValue(controllerContext, bindingContext, propertyDescriptor, propertyBinder);
-        }
+    //        return base.GetPropertyValue(controllerContext, bindingContext, propertyDescriptor, propertyBinder);
+    //    }
     }
 }

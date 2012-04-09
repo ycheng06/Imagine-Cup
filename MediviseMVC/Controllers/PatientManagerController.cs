@@ -46,13 +46,13 @@ namespace MediviseMVC.Controllers
         // GET: /PatientManager/Create
         public ActionResult Create()
         {
-            populateTimeZones(null);
+            populateTimeZones(Profile.GetCurrent().TimeZone);
             populateGenderList(null);
 
             return View(new Patient
             {
                 TreatmentStartDate = DateTime.UtcNow,
-                TreatmentEndDate = DateTime.UtcNow.AddMonths(6)
+                TreatmentEndDate = DateTime.UtcNow.AddMonths(6),
             });
         } 
 
@@ -72,8 +72,22 @@ namespace MediviseMVC.Controllers
                 return RedirectToAction("Index");  
             }
               
-            populateTimeZones(null);
-            populateGenderList(null);
+            if (patient.TimeZone != null)
+            {
+                populateTimeZones(patient.TimeZone);
+            }
+            else
+            {
+                populateTimeZones(Profile.GetCurrent().TimeZone);
+            }
+            if (patient.Gender != null)
+            {
+                populateGenderList(patient.Gender);
+            }
+            else
+            {
+                populateGenderList(null);
+            }
             return View(patient);
         }
 

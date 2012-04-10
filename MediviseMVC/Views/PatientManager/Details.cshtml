@@ -16,6 +16,8 @@
 <div id="PatientInfo">
     @Html.Partial("PatientView",Model,ViewData)
 </div>
+<!-- access alerts through ViewData["alerts"] -->
+@Html.Partial("AlertList",ViewData["alerts"])
 <!--=======================================-->
 @{
     DateTime min = new DateTime(0);
@@ -151,8 +153,6 @@
      </tr>
  }
 </table>
-<!-- access alerts through ViewData["alerts"] -->
-@Html.Partial("AlertList",ViewData["alerts"])
 <p>
      @Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Edit", "Edit", new { id = Model.PatientId }) |
      @Html.ActionLink("TimeLine","Edit","TreatmentPlanner",new {id=Model.PatientId},null)

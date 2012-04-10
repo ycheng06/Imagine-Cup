@@ -171,7 +171,8 @@ namespace MediviseMVC.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
-        
+        //*******JSON Data Feeds for AJAX*********************
+ 
         //******************Helper Methods********************
         private void populateTimeZones(string id)
         {

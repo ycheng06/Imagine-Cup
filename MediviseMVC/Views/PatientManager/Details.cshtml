@@ -3,18 +3,46 @@
     ViewBag.Title = "Details";
 }
 
-<!-- import the plugin for jQRangeSlider -->
-<link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/css/dev.css")"/>  
-<link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/style.css")"/>  
-<link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/css/smoothness/jquery-ui-1.8.10.custom.css")"/>
-<script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/lib/jquery-1.7.1.min.js")"></script>
+@section MyOtherJavascript {
+    <!-- jQRangeSlider -->
+    <link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/css/dev.css")"/>  
+    <link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/style.css")"/>  
+    <link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/css/smoothness/jquery-ui-1.8.10.custom.css")"/>
+    <script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/lib/jquery-1.7.1.min.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/js/jquery-ui-1.8.16.custom.min.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/lib/jquery.mousewheel.min.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/jQAllRangeSliders-min.js")"></script>
-<!-- may need location change -->
+    <script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/js/jquery-ui-1.8.16.custom.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/lib/jquery.mousewheel.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/jQAllRangeSliders-min.js")"></script>
 <div id="PatientInfo">
+    <!-- progressbar -->
     @Html.Partial("PatientView",Model,ViewData)
+    <script type="text/javascript" src="@Url.Content("~/Plugins/jquery.progressbar/js/jquery.progressbar.js")"></script>
+
+    <script type="text/javascript">
+    @{
+        for (int i = 0; i < Model.Tests.Count; i++){
+            <text>
+                $(function () {
+                    var moveLeft = 20;
+                    var moveDown = 10;
+                    var hoverDiv = $("#myHandle@(i)");
+                    hoverDiv.hover(function (e) {
+                        $('#test-pop@(i)').show();
+                    }, function () {
+                        $('#test-pop@(i)').hide();
+                    });
+                    hoverDiv.mousemove(function (e) {
+                        $('#test-pop@(i)').css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+                    });
+                });
+            </text>
+        }
+    }
+    </script>
+}
+
+<h2 class="test">Details</h2>
+
 </div>
 <!-- access alerts through ViewData["alerts"] -->
 @Html.Partial("AlertList",ViewData["alerts"])
@@ -22,89 +50,121 @@
 @{
     DateTime min = new DateTime(0);
     DateTime max = new DateTime(0);
-    
-    if (Model.Drugs.Count() != 0)
-    {
-        min = Model.Drugs.First().StartDate;      //may need to use FirstOrDefault()?
+
+    if (Model.Drugs.Count() != 0){
+        min = Model.Drugs.First().StartDate;
         max = Model.Drugs.First().EndDate;
-        foreach (var drug in Model.Drugs)
-        {
-            if (drug.StartDate < min)
-            {
-                min = drug.StartDate;
-            }
-            if (drug.EndDate > max)
-            {
-                max = drug.EndDate;
-            }
+        foreach (var drug in Model.Drugs){
+            if (drug.StartDate < min) { min = drug.StartDate; }
+            if (drug.EndDate > max) { max = drug.EndDate; }
         }
-        /*
-        @: <p>min value is: @min.ToShortDateString() </p>
-        @: <p>min value is: @min.Year </p>
-        @: <p>min value is: @min.Month </p>
-        @: <p>min value is: @min.Day </p>
-        @: <p>max value is: @max.ToShortDteString() </p>
-        */
     }
 }
-
 <!--=======================================-->
-
 <div class="drug-timeline">
-    <div id="progressbar"></div>
     @{
         //figuring out progress on progressbar
         DateTime today = DateTime.Today;
-        float progress = 0;
-        if(max <= today){
-            progress = 100;
+        int progressDays = 0;
+        int totalDays = 1;
+        if (max <= today){
+            progressDays = 1;
         }
-        else if(min >= today){
-            progress = 0;
+        else if (min >= today){
+            progressDays = 0;
         }
         else{
-            progress = ((float)((today - min).Days) / (float)((max - min).Days)) * 100;
+            totalDays = (max - min).Days;
+            progressDays = (today - (min.AddDays(0))).Days;
         }
 
-        //show the progress bar
+                    //show the progress bar
         <text>
+            <div id="progressbar"></div>
             <script type="text/javascript">
-                $("#progressbar").progressbar({ value: @(progress) });
-                $("#progressbar").height( 60 * @(Model.Drugs.Count) );
+                $("#progressbar").progressBar( @(progressDays + 1), {
+                    steps: @(totalDays),
+                    max: @(totalDays),
+                    width: $("#progressbar").width(),
+                    height: 59 * @(Model.Drugs.Count) + 50,
+                    showText: false,
+                    barImage: '../../../Plugins/jquery.progressbar/images/progressbar_custom.gif',
+                    boxImage: '../../../Plugins/jquery.progressbar/images/progressborder_blank.gif'
+                });
+
             </script>
         </text>
         
         int countHelper = 0;
-        
         @:<div class="sliders-group">
-        foreach (var drug in Model.Drugs)
-        {
+        foreach (var drug in Model.Drugs){
             <text>
                 <div class="slider-box">
-                @(drug.DrugInfo.Name) - @(drug.TimesPerWeek) times/week | @Html.DisplayFor(modelItem => drug.StartDate) to @Html.DisplayFor(modelItem => drug.EndDate)
+                    <div class="slider-text">
+                        @(drug.DrugInfo.Name) - @(drug.TimesPerWeek) times/week | @Html.DisplayFor(modelItem => drug.StartDate) to @Html.DisplayFor(modelItem => drug.EndDate)
+                    </div>
                     <div id="slider@(countHelper)"></div>
                     <script type="text/javascript">
                         var slider = $('#slider@(countHelper)');
                         //note: month 0 = janurary
                         slider.dateRangeSlider({
                             arrows: false,
-                            bounds: { min: new Date(@(min.Year), @(min.Month - 1), @(min.Day)), 
+                            bounds: {   min: new Date(@(min.Year), @(min.Month - 1), @(min.Day)), 
                                         max: new Date(@(max.Year), @(max.Month - 1), @(max.Day)) },
-                            defaultValues: { min: new Date(@(drug.StartDate.Year), @(drug.StartDate.Month - 1), @(drug.StartDate.Day)), 
+                            defaultValues: {    min: new Date(@(drug.StartDate.Year), @(drug.StartDate.Month - 1), @(drug.StartDate.Day)), 
                                                 max: new Date(@(drug.EndDate.Year), @(drug.EndDate.Month - 1), @(drug.EndDate.Day)) },
                             valueLabels: "change"
                         });
                     </script>
                 </div>
             </text>
-        
             countHelper++;
         }
+
+        //calculating positions for testDates
+        <text>
+            <div class="mySliderContainer">
+                Checkup Dates
+                <div class="mySlider" id="mySliderId">            
+                @{
+                    int counterHelper2 = 0;
+                    foreach (var test in Model.Tests)
+                    {
+                        <text>
+                            <div class="myHandle" id="myHandle@(counterHelper2)"></div>
+                            <script type="text/javascript">
+                                var progressDate = @((Model.Tests.ElementAt(counterHelper2).TestDate - min).Days);
+                                var position = ($('#mySliderId').width() / @(totalDays)) * progressDate;    //(barwidth / totaldays) * progressdays
+                                $('#myHandle@(counterHelper2)').css("left", position + 10);
+                            </script>
+                        </text>
+                        counterHelper2++;
+                    }
+                }
+                </div>
+            </div>
+        </text>
         @:</div>
     }
 </div>
 
 <!--=======================================-->
+
+<!-- popup div -->
+
+@{
+    for (int i = 0; i < Model.Tests.Count; i++){
+        var test = Model.Tests.ElementAt(i);
+        <text>
+            <div class="test-pop" id="test-pop@(i)">
+                <h3>@(test.TestInfo.Name)</h3>
+                <p>
+                    @(test.TestDate)
+                </p>
+            </div>
+        </text>
+    }
+}
 
 <table title = "Drug Messages">
   <tr>
@@ -155,5 +215,5 @@
 </table>
 <p>
      @Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Edit", "Edit", new { id = Model.PatientId }) |
-     @Html.ActionLink("TimeLine","Edit","TreatmentPlanner",new {id=Model.PatientId},null)
+     @Html.ActionLink("TimeLine", "Edit", "TreatmentPlanner", new { id = Model.PatientId }, null)
 </p>

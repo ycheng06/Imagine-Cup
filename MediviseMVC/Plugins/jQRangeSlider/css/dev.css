@@ -9,22 +9,23 @@
 
 .ui-rangeSlider .ui-rangeSlider-innerBar{
 	height:16px;
-	margin:3px 6px;
-	background:#DDD;
+	margin:3px 1px 0 1px; /*changed here: margin:3px 6px*/
+	
+	background:#A6A6A6;
 }
 
 .ui-rangeSlider .ui-rangeSlider-handle{
-	width:6px;
+	width:3px;      /*changed here: 6px*/
 	height:22px;
 	background:#AAA;
-	background:rgba(100,100,100, 0.3);
+	background:rgba(100,100,100, 0.6);
 	cursor:col-resize;
 }
 
 .ui-rangeSlider .ui-rangeSlider-bar{
 	margin: 1px 0;
 	background:#CCC;
-	background:rgba(100,100,150, 0.2);
+	background:rgba(100,100,150, 0.6);
 	height:20px;
 	cursor:move;
 	cursor:grab;
@@ -62,8 +63,9 @@
 	margin:0 11px;
 }
 
-.ui-rangeSlider-noArrow .ui-rangeSlider-container{
-	margin:0;
+.ui-rangeSlider-noArrow .ui-rangeSlider-container
+{
+	margin:0 6px 0 6px; /* changed here: margin: 0;*/
 }
 
 .ui-rangeSlider-label{
@@ -72,7 +74,7 @@
 	background-image:url('icons/label.png');
 	background-position:bottom center;
 	background-repeat:no-repeat;
-        white-space: nowrap;
+    white-space: nowrap;
 }
 
 /*

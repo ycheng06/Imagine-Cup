@@ -9,13 +9,12 @@
     <link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/style.css")"/>  
     <link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/css/smoothness/jquery-ui-1.8.10.custom.css")"/>
     <script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/lib/jquery-1.7.1.min.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/demo/lib/jquery-ui/js/jquery-ui-1.8.16.custom.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/lib/jquery.mousewheel.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Plugins/jQRangeSlider/jQAllRangeSliders-min.js")"></script>
-<div id="PatientInfo">
+
     <!-- progressbar -->
-    @Html.Partial("PatientView",Model,ViewData)
     <script type="text/javascript" src="@Url.Content("~/Plugins/jquery.progressbar/js/jquery.progressbar.js")"></script>
 
     <script type="text/javascript">
@@ -42,8 +41,9 @@
 }
 
 <h2 class="test">Details</h2>
-
-</div>
+    <div id="PatientInfo">
+        @Html.Partial("PatientView", Model, ViewData)
+    </div>
 <!-- access alerts through ViewData["alerts"] -->
 @Html.Partial("AlertList",ViewData["alerts"])
 <!--=======================================-->

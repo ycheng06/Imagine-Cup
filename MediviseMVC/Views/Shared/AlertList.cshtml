@@ -1,6 +1,4 @@
 ﻿@model IEnumerable<MediviseMVC.Models.Alert>
-
-<fieldset>
     <div id="AlertInfo">
     <table>
      <tr>
@@ -10,12 +8,11 @@
      </tr>
      @foreach (var alert in Model)
      {
-       <tr>
+       <tr class="alertRow">
          <td>@alert.AlertType.Name</td>
          <td>@alert.AlertDate</td>
-         <td>@Ajax.ActionLink("Delete", "DeleteConfirmed", "AlertController", new {id=alert.AlertId}, new AjaxOptions { UpdateTargetId = "AlertInfo",HttpMethod="Post"})</td>
+         <td>@Ajax.ActionLink("Delete", "DeleteConfirmed", "AlertController", new { id = alert.AlertId }, new AjaxOptions { UpdateTargetId = "AlertInfo", HttpMethod = "Post" })</td>
        </tr>
      }
     </table>
     </div>
-</fieldset>

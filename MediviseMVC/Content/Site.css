@@ -234,6 +234,10 @@ table th {
     border: solid 1px #e8eef4;
 }
 
+table tr 
+{
+}
+
 /* MISC  
 ----------------------------------------------------------*/
 .clear {
@@ -347,6 +351,50 @@ div#logo {
 
 
 /*---------------MY OWN CODE HERE-------------------*/
+
+.alert-type1
+{
+    background-color: #FFADAD;
+}
+
+.alert-type2
+{
+    background-color: #94FFB8;
+}
+
+.alert-type3
+{
+    background-color: #
+}
+
+
+#AlertInfo
+{
+    width: 460px;
+    height: 313px;
+    overflow-y: scroll;
+}
+
+#boxes
+{
+    display: block;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+#patientBox
+{
+    width: 48%;
+    height: 350px;
+    float:left;
+    margin-right: 4%;
+}
+
+#alertBox
+{
+    width: 48%;
+}
+
 .myHandle
 {
     position: absolute;
@@ -400,6 +448,10 @@ div#logo {
     height: auto;
     position: relative;
     margin: 0 0 1.5em;
+    
+    border-style: inset;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 #progressbar
@@ -409,10 +461,8 @@ div#logo {
     filter: alpha(opacity=50);
     margin-left: 3px;
     margin-right: 3px;
-    border-style: inset;
     height: auto;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    
 }
 
 .sliders-group

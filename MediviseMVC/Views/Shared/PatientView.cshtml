@@ -1,6 +1,4 @@
 ﻿@model MediviseMVC.Models.Patient
-<fieldset>
-    <legend>Patient</legend>
     <div class="common-box">
         <div class="common-label">FirstName:</div>
         <div class="common-field">
@@ -71,4 +69,3 @@
     <div id="AjaxActions">
       @Ajax.ActionLink("Edit","Edit",new {id=Model.PatientId},new AjaxOptions {UpdateTargetId="PatientInfo"})
     </div>
-</fieldset>

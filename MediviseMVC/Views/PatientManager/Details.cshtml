@@ -41,11 +41,23 @@
 }
 
 <h2 class="test">Details</h2>
-    <div id="PatientInfo">
-        @Html.Partial("PatientView", Model, ViewData)
+<div id="boxes">
+    <div id="patientBox">
+        <fieldset>
+            <legend>Patient</legend>    
+            @Html.Partial("PatientView", Model, ViewData)
+        </fieldset>
     </div>
-<!-- access alerts through ViewData["alerts"] -->
-@Html.Partial("AlertList",ViewData["alerts"])
+
+    <!-- access alerts through ViewData["alerts"] -->
+    <div id="alertBox">
+        <fieldset>
+            <legend>Alerts</legend>
+            @Html.Partial("AlertList",ViewData["alerts"])
+        </fieldset>
+    </div>
+</div>
+
 <!--=======================================-->
 @{
     DateTime min = new DateTime(0);

@@ -20,7 +20,7 @@ namespace MediviseMVC.ActionFilters
             MediviseEntities db = new MediviseEntities();
             int patientId = Convert.ToInt32(filterContext.ActionParameters["id"].ToString());
             Patient patient = db.Patients.Find(patientId);
-            if (patient == null || !patient.IsRegistedBy(filterContext.RequestContext.HttpContext.User.Identity.Name))
+            if (patient == null || !patient.IsRegisteredBy(filterContext.RequestContext.HttpContext.User.Identity.Name))
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary {{"controller", "PatientManager"},
                     {"action", "Index"}});

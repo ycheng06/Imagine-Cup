@@ -285,7 +285,7 @@ namespace MediviseMVC.Controllers
         private bool isUrlValid(Patient patient)
         {
             //check of url hacking
-            if (patient == null || !patient.IsRegistedBy(User.Identity.Name))
+            if (patient == null || !patient.IsRegisteredBy(User.Identity.Name))
             {
                 return false;
             }

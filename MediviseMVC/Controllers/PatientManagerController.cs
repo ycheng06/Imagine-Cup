@@ -165,14 +165,114 @@ namespace MediviseMVC.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        //*******JSON Data Feeds for AJAX*********************
+        [HttpPost]
+        public JsonResult PatientList(int jtStartIndex,int jtPageSize)
+        {
+            try
+            {
+                //reconsider this part
+                List<Patient> patients = db.Patients.ToList();
+                List<Patient> currentPage = patients.Skip((jtStartIndex-1)*jtPageSize).Take(jtPageSize).ToList();
+                var jsonData = currentPage.Select(p => JsonizePatient(p));
+                return Json(new { Result = "OK", Records = jsonData,TotalRecordCount = patients.Count});
+            }
+            catch (Exception ex)
+            {
+                return Json(new {Result = "ERROR",Message = ex.Message});
+            }
+        }
+        [HttpPost]
+        public JsonResult CreatePatient(Patient patient)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return Json(new { Result = "ERROR", Message = "Form Not Valid" });
+                }
+                patient.RegisteredBy = User.Identity.Name;
+                db.Patients.Add(patient);
+                db.SaveChanges();
+                return Json(new { Result = "OK", Record = JsonizePatient(patient) });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+        [HttpPost]
+        public JsonResult UpdatePatient(Patient patient)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return Json(new { Result = "ERROR", Message = "Form Not Valid" });
+                }
+                patient.RegisteredBy = User.Identity.Name;
+                db.Entry(patient).State = EntityState.Modified;
+                db.SaveChanges();
+                return Json(new { Result = "OK" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message }); 
+            }
+        }
+        [HttpPost]
+        public JsonResult DeletePatient(int PatientId)
+        {
+            try
+            {
+                Patient patient = db.Patients.Find(PatientId);
+                db.Patients.Remove(patient);
+                db.SaveChanges();
+                Trace.WriteLine("Ajax delete working!!!");
+                return Json(new { Result = "OK" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+        [HttpPost]
+        public JsonResult TimeZoneList()
+        {
+            try
+            {
+                var jsonData = TimeZoneInfo.GetSystemTimeZones().Select(t => new {
+                    DisplayText = t.DisplayName, 
+                    Value = t.Id
+                });
+                return Json(new { Result = "OK", Options = jsonData });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+        private Object JsonizePatient(Patient p)
+        {
+                return new {
+                        PatientId = p.PatientId,
+                        Gender    = p.Gender,
+                        FirstName = p.FirstName,
+                        LastName  = p.LastName,
+                        Address   = p.Address,
+                        Phone     = p.Phone,
+                        FamilyPhone1 = p.FamilyPhone1,
+                        FamilyPhone2 = p.FamilyPhone2,
+                        TreatmentStartDate = p.TreatmentStartDate.ToShortDateString(),
+                        TreatmentEndDate = p.TreatmentEndDate.ToShortDateString(),
+                        TimeZone = p.TimeZone
+                };
+        }
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
             base.Dispose(disposing);
         }
-        //*******JSON Data Feeds for AJAX*********************
- 
         //******************Helper Methods********************
         private void populateTimeZones(string id)
         {

@@ -1,33 +1,95 @@
 ﻿@model IEnumerable<MediviseMVC.Models.Patient>
+<link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jQueryValidation/css/validationEngine.jquery.css")" />
+<link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jtable/themes/standard/blue/jtable_blue.css")" />
+<script type="text/javascript" src="@Url.Content("~/Plugins/jtable/jquery.jtable.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Plugins/jQueryValidation/js/jquery.validationEngine.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Plugins/jQueryValidation/js/languages/jquery.validationEngine-en.js")"></script>
+
 
 @{
     ViewBag.Title = "Patient Manager";
-    var grid = new WebGrid(source: Model, defaultSort: "FirstName",rowsPerPage:30);
 }
-<h2>PATIENTS</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<div id="grid">
-    @grid.GetHtml(
-        tableStyle:"grid",
-        headerStyle:"head",
-        alternatingRowStyle:"alt",
-        columns: grid.Columns(
-           grid.Column("FirstName","First Name"),
-           grid.Column("LastName","Last Name"),
-           grid.Column("Phone"),
-           grid.Column("FamilyPhone1","Family Phone 1"),
-           grid.Column("FamilyPhone2","Family Phone 2"),
-           grid.Column("Address"),
-           grid.Column("TimeZone", "Time Zone"),
-           grid.Column("Gender","Gender"),
-           grid.Column("ResponseReceived","Responded"),
-           grid.Column("TreatmentStartDate","Treatment Start", format: (item) => string.Format("{0:MM/dd/yyyy}", item.TreatmentStartDate)),
-           grid.Column("TreatmentEndDate","Treatment End", format: (item) => string.Format("{0:MM/dd/yyyy}", item.TreatmentEndDate)),
-           grid.Column(columnName :"",format: @<text>@Html.ActionLink("Details", "Details", new { id=item.PatientId})</text>),
-           grid.Column(columnName :"",format: @<text>@Html.ActionLink("Delete", "Delete", new { id=item.PatientId})</text>)
-           
-       )
-    )
-</div>
+
+<div id="PatientList"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#PatientList").jtable({
+            title: 'Patients',
+            selecting: true,
+            selectingCheckboxes: true,
+            paging: true,
+            pageSize: 1,
+            actions: {
+                listAction: '/PatientManager/PatientList',
+                updateAction: '/PatientManager/UpdatePatient',
+                deleteAction: '/PatientManager/DeletePatient',
+                createAction: '/PatientManager/CreatePatient'
+            },
+            fields: {
+                PatientId: {
+                    key: true,
+                    create: false,
+                    edit: false,
+                    list: false
+                },
+                FirstName: {
+                    title: 'First Name',
+                    display: function (data) {
+                        return '<a href="/PatientManager/Details/' + data.record.PatientId + '">' + data.record.FirstName + '</a>';
+                    },
+                    inputClass: 'validate[required]'
+                },
+                LastName: {
+                    title: 'Last Name',
+                    inputClass: 'validate[required]'
+                },
+                Gender: {
+                    title: 'Gender',
+                    options: { Male: 'Male', Female: 'Female', Unspecified: 'Unspecified' },
+                    inputClass: 'validate[required]'
+                },
+                Phone: {
+                    title: 'Phone',
+                    inputClass: 'validate[required,custom[phone],maxSize[10]]'
+                },
+                FamilyPhone1: {
+                    title: 'Family Phone 1',
+                    inputClass: 'validate[required,custom[phone],maxSize[10]]'
+                },
+                FamilyPhone2: {
+                    title: 'Family Phone 2',
+                    inputClass: 'validate[custom[phone],maxSize[10]]'
+                },
+                Address: {
+                    title: 'Address',
+                    inputClass: 'validate[required]'
+                },
+                TreatmentStartDate: {
+                    title: 'Treatment Starts',
+                    type: 'date',
+                    inputClass: 'validate[required,custom[date]]'
+                },
+                TreatmentEndDate: {
+                    title: 'Treatment Ends',
+                    type: 'date',
+                    inputClass: 'validate[required,custom[date]]'
+                },
+                TimeZone: {
+                    title: 'Time Zone',
+                    options: '/PatientManager/TimeZoneList'
+                }
+            },
+            formCreated: function (event, data) {
+                data.form.validationEngine({ autoHidePrompt: true, autoHideDelay: 2000, autoPositionUpdate: true });
+            },
+            formSubmitting: function (event, data) {
+                return data.form.validationEngine('validate');
+            },
+            formClosed: function (event, data) {
+                data.form.validationEngine('hide');
+                data.form.validationEngine('detach');
+            }
+        });
+        $("#PatientList").jtable('load');
+    });
+</script>

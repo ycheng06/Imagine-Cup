@@ -66,7 +66,7 @@ namespace MediviseMVC.Models
         public virtual ICollection<Alert> Alerts { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
 
-        public bool IsRegistedBy(string userName)
+        public bool IsRegisteredBy(string userName)
         {
             return RegisteredBy.Equals(userName);
         }

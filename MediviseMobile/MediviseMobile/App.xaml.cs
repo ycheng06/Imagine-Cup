@@ -19,7 +19,7 @@ namespace MediviseMobile
     public partial class App : Application
     {
         private static MainViewModel viewModel = null;
-
+        private static PatientViewModel patientViewModel = null;
         /// <summary>
         /// A static ViewModel used by the views to bind against.
         /// </summary>
@@ -31,6 +31,15 @@ namespace MediviseMobile
                 // Delay creation of the view model until necessary
                 if (viewModel == null) viewModel = new MainViewModel();
                 return viewModel;
+            }
+        }
+
+        public static PatientViewModel PatientViewModel
+        {
+            get
+            {
+                if (patientViewModel == null) patientViewModel = new PatientViewModel();
+                return patientViewModel;
             }
         }
 
@@ -90,7 +99,19 @@ namespace MediviseMobile
             // Ensure that application state is restored appropriately
             if (!App.ViewModel.IsDataLoaded)
             {
-                App.ViewModel.LoadData();
+                if (PhoneApplicationService.Current.State.ContainsKey("ApplicationState"))
+                {
+                    // Get back the serialized data service state from the dictionary
+                    string appState =
+                        PhoneApplicationService.Current.State["ApplicationState"] as string;
+
+                    //use the returned dictionary to restore the state of the data service.
+                    App.ViewModel.RestoreState(appState);
+                }
+                else
+                {
+                    App.ViewModel.LoadData();
+                }
             }
         }
 
@@ -98,6 +119,9 @@ namespace MediviseMobile
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            //store application state in teh state dictionary
+            PhoneApplicationService.Current.State["AplicationState"]
+                = ViewModel.SaveState();
         }
 
         // Code to execute when the application is closing (eg, user hit Back)

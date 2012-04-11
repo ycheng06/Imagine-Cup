@@ -210,12 +210,14 @@
     <Content Include="Content\themes\base\jquery-ui-1.8.18.custom.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_skyblue.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
     <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_lightblue_1x100.png" />
     <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
@@ -247,6 +249,8 @@
     <Content Include="Plugins\jQRangeSlider\demo\editSliderDemo.js" />
     <Content Include="Plugins\jQRangeSlider\demo\img\calendar.png" />
     <Content Include="Plugins\jQRangeSlider\demo\index.html" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\handle.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\handlehover.png" />
     <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -288,6 +292,22 @@
     <Content Include="Plugins\jtable\themes\standard\column-desc.png" />
     <Content Include="Plugins\jtable\themes\standard\column-sortable.png" />
     <Content Include="Plugins\jtable\themes\standard\delete.png" />
+    <Content Include="Plugins\jquery.progressbar\demo.html" />
+    <Content Include="Plugins\jquery.progressbar\demo.txt" />
+    <Content Include="Plugins\jquery.progressbar\images\progressbar.gif" />
+    <Content Include="Plugins\jquery.progressbar\images\progressbar_custom.gif" />
+    <Content Include="Plugins\jquery.progressbar\images\progressbg_black.gif" />
+    <Content Include="Plugins\jquery.progressbar\images\progressbg_green.gif" />
+    <Content Include="Plugins\jquery.progressbar\images\progressbg_orange.gif" />
+    <Content Include="Plugins\jquery.progressbar\images\progressbg_red.gif" />
+    <Content Include="Plugins\jquery.progressbar\images\progressbg_yellow.gif" />
+    <Content Include="Plugins\jquery.progressbar\images\progressborder_blank.gif" />
+    <Content Include="Plugins\jquery.progressbar\js\1.2\jquery.js" />
+    <Content Include="Plugins\jquery.progressbar\js\1.2\jquery.progressbar.js" />
+    <Content Include="Plugins\jquery.progressbar\js\1.2\jquery.progressbar.min.js" />
+    <Content Include="Plugins\jquery.progressbar\js\jquery.js" />
+    <Content Include="Plugins\jquery.progressbar\js\jquery.progressbar.js" />
+    <Content Include="Plugins\jquery.progressbar\js\jquery.progressbar.min.js" />
     <Content Include="Plugins\jtable\themes\standard\edit.png" />
     <Content Include="Plugins\jtable\themes\standard\green\header-bg.gif" />
     <Content Include="Plugins\jtable\themes\standard\green\jtable_green.css" />
@@ -485,6 +505,7 @@
   <ItemGroup>
     <None Include="Plugins\jQRangeSlider\Readme.md" />
     <None Include="Plugins\jQueryValidation\README.md" />
+    <None Include="Plugins\jquery.progressbar\demo.php" />
     <None Include="Plugins\jQueryValidation\runDemo.bat" />
     <None Include="Plugins\jQueryValidation\runDemo.sh" />
     <None Include="Plugins\jQueryValidation\test\AjaxTestServer%24AjaxValidationFieldResponse.class" />

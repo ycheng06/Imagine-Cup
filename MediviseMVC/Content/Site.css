@@ -347,6 +347,53 @@ div#logo {
 
 
 /*---------------MY OWN CODE HERE-------------------*/
+.myHandle
+{
+    position: absolute;
+    height: 20px;
+    width: 10px;
+    background-color: #7A297A;
+    margin: -2px;
+    z-index: 2;
+    
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.mySliderContainer
+{
+    height: 20px;
+    margin: 0 6px;
+}
+
+.mySlider
+{
+    height: 16px;
+    margin: 6px 1px 0;
+    background-color: rgb(166, 166, 166);
+    z-index: 1;
+}
+
+.test-pop
+{
+  display: none;
+  position: absolute;
+  width: 280px;
+  padding: 10px;
+  background: #eeeeee;
+  color: #000000;
+  border: 1px solid #1a1a1a;
+  font-size: 90%;
+  z-index: 3;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.test-slider
+{
+    margin: 0 6px 0 6px;
+}
+
 .drug-timeline
 {
     display: block;
@@ -358,8 +405,14 @@ div#logo {
 #progressbar
 {
     z-index: 1;
-    opacity: .30;
-    filter: alpha(opacity=30);
+    opacity: .50;
+    filter: alpha(opacity=50);
+    margin-left: 3px;
+    margin-right: 3px;
+    border-style: inset;
+    height: auto;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .sliders-group
@@ -369,6 +422,11 @@ div#logo {
     left: 0;
     width: 100%;
     z-index: 2;
+}
+
+.slider-text
+{
+    margin-left: 10px;
 }
 
 .slider-box

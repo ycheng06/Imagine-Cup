@@ -24,11 +24,6 @@ namespace MediviseMobile
         private DataServiceCollection<Patient> patients;
         private DataServiceCollection<Alert> alerts;
 
-        public MainViewModel()
-        {
-            context = new MediviseEntities(rootUri);
-        }
-
         //Gets and sets the collection of Patient objects from teh feed.
         //This collection is used to bind to the UI
         public DataServiceCollection<Patient> Patients
@@ -66,41 +61,40 @@ namespace MediviseMobile
         //used to determine whether the data is loaded.
         public bool IsDataLoaded { get; private set; }
 
-        public void LoadPatient()
-        {
-            patients = new DataServiceCollection<Patient>(context);
-            //specify an OData query taht returns all patients
-            var query = from p in context.Patients
-                        orderby p.FirstName
-                        select p;
-
-            patients.LoadAsync(query);
-        }
-
-        
-
         //Loads data when the application is initialized
         public void LoadData()
         {
             Debug.WriteLine("loading Data");
             //Instantiate the context and binding collection.
             context = new MediviseEntities(rootUri);
-            //LoadPatient();
+            LoadPatient();
             LoadAlert();
         }
 
         public void LoadAlert()
         {
-            Debug.WriteLine(context.ToString());
-            alerts = new DataServiceCollection<Alert>(context);
+            if (context == null) context = new MediviseEntities(rootUri);
+            Alerts = new DataServiceCollection<Alert>(context);
 
             var query = from a in context.Alerts.Expand("Patient").Expand("AlertType")
-                        orderby a.AlertDate
+                        orderby a.AlertDate descending
                         select a;
             Debug.WriteLine(query.ToString());
-            alerts.LoadAsync(query);
+            Alerts.LoadAsync(query);
         }
 
+        public void LoadPatient()
+        {
+            if (context == null) context = new MediviseEntities(rootUri);
+            Patients = new DataServiceCollection<Patient>(context);
+            
+            //specify an OData query that returns all patients
+            var query = from p in context.Patients
+                        orderby p.FirstName
+                        select p;
+            Debug.WriteLine(query.ToString());
+            Patients.LoadAsync(query);
+        }
         //Displays data from teh stored data context and binding collection
         public void LoadData(MediviseEntities c, DataServiceCollection<Patient> patients,
             DataServiceCollection<Alert> alerts)
@@ -120,7 +114,7 @@ namespace MediviseMobile
             {
                 Patients.LoadNextPartialSetAsync();
             }
-            
+           
             IsDataLoaded = true;
         }
 
@@ -132,16 +126,17 @@ namespace MediviseMobile
             {
                 Alerts.LoadNextPartialSetAsync();
             }
+            Debug.WriteLine("alert loaded");
             IsDataLoaded = true;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(String propertyName)
+        private void NotifyPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (null != handler)
+            var propertyChanged = PropertyChanged;
+            if (propertyChanged != null)
             {
-                handler(this, new PropertyChangedEventArgs(propertyName));
+                propertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -173,7 +168,7 @@ namespace MediviseMobile
         {
             //create a dictionary to hold any stored binding collections.
             Dictionary<string, object> collections;
-
+            Debug.WriteLine("restoring state");
             if (!string.IsNullOrEmpty(appState))
             {
                 // Deserialize the DataServiceState object.
@@ -190,12 +185,25 @@ namespace MediviseMobile
                 DataServiceCollection<Alert> alerts
                     = collections["Alerts"] as DataServiceCollection<Alert>;
 
-
                 // Initialize the application with stored data. 
                 App.ViewModel.LoadData(context, customers, alerts);
             }
         }
 
-        
+        /*
+         * Application bar functions
+         */
+        public void Refresh()
+        {
+            MergeOption cachedOption = context.MergeOption;
+            context.MergeOption = MergeOption.OverwriteChanges;
+
+            //Reload data 
+            this.LoadData();
+
+            //Reset the merge option
+            context.MergeOption = cachedOption;
+        }
+
     }
 }

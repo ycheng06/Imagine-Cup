@@ -96,7 +96,7 @@ namespace MediviseMVC.Controllers
             string msg = String.Format("Dear {0}, welcome to Medivise! Hope you get well soon!\n", p.FirstName);
             TwilioSender sender = new TwilioSender();
             sender.SendSMS(p.Phone, msg);
-            Trace.WriteLine(msg);
+            //Trace.WriteLine(msg);
         }
         // GET: /PatientManager/Edit/5
         [PreventUrlHacking]

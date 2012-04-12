@@ -33,38 +33,49 @@ namespace MediviseMobile
                 App.ViewModel.LoadAlert();
             }
         }
-
-        //load pivot on demand
-        private void PivotSelectionChanged(Object sender, SelectionChangedEventArgs e)
+        
+        //loading pivot on demand
+        private void OnLoadingPivotItem(Object sender, PivotItemEventArgs e)
         {
-            Debug.WriteLine(Pivot1.SelectedIndex.ToString());
-            switch (Pivot1.SelectedIndex)
+
+            if (e.Item.Content != null)
             {
-                case 0:
-                    App.ViewModel.LoadAlert();
-                    break;
-                case 1:
-                    App.ViewModel.LoadPatient();
-                    break;
+                return;
+            }
+            Pivot p = (Pivot)sender;
+
+            if (e.Item == p.Items[0])
+            {
+                App.ViewModel.LoadAlert();
+                e.Item.Content = new AlertListUserControl();
+                Debug.WriteLine("item 0");
+            }
+            else if (e.Item == p.Items[1])
+            {
+                App.ViewModel.LoadPatient();
+                e.Item.Content = new PatientListUserControl();
+                Debug.WriteLine("item 1");
             }
         }
 
+      
+ 
         //Handle selection changed on ListBox
-        private void SecondListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //If selected index is -1 (no selection) do nothing
-            if (SecondListBox.SelectedIndex == -1) return;
+        //private void SecondListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    //If selected index is -1 (no selection) do nothing
+        //    if (SecondListBox.SelectedIndex == -1) return;
 
-            int id = App.ViewModel.Patients[SecondListBox.SelectedIndex].PatientId;
-            string firstName = App.ViewModel.Patients[SecondListBox.SelectedIndex].FirstName;
-            string lastName = App.ViewModel.Patients[SecondListBox.SelectedIndex].LastName;
-            //Navigate to new page
-            NavigationService.Navigate(new Uri("/PatientPage.xaml?id=" + id + 
-                "&firstName=" + firstName + "&lastName=" + lastName, UriKind.Relative));
+        //    int id = App.ViewModel.Patients[SecondListBox.SelectedIndex].PatientId;
+        //    string firstName = App.ViewModel.Patients[SecondListBox.SelectedIndex].FirstName;
+        //    string lastName = App.ViewModel.Patients[SecondListBox.SelectedIndex].LastName;
+        //    //Navigate to new page
+        //    NavigationService.Navigate(new Uri("/PatientPage.xaml?id=" + id + 
+        //        "&firstName=" + firstName + "&lastName=" + lastName, UriKind.Relative));
 
-            //Reset selected index to -1 (no selection)
-            SecondListBox.SelectedIndex = -1;
-        }
+        //    //Reset selected index to -1 (no selection)
+        //    SecondListBox.SelectedIndex = -1;
+        //}
 
         private void AppBarRefresh_Click(object sender, EventArgs e)
         {

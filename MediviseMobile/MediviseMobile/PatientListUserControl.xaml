@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="MediviseMobile.PatientListUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+    
+    <Grid x:Name="LayoutRoot">
+        <!--Triple line list no text wrapping-->
+        <ListBox x:Name="SecondListBox" Margin="0,0,-12,0" ItemsSource="{Binding Patients}" SelectionChanged="SecondListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="0,0,0,17" Orientation="Horizontal">
+                        <TextBlock Text="{Binding FirstName, StringFormat='\{0\} '}" VerticalAlignment="Bottom" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                        <TextBlock Text="{Binding LastName}" VerticalAlignment="Bottom" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

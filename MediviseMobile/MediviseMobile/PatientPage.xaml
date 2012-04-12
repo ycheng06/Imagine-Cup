@@ -14,19 +14,31 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" d:DesignHeight="696" d:DesignWidth="480">
+    shell:SystemTray.IsVisible="True" d:DesignHeight="768" d:DesignWidth="480">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <controls:Pivot x:Name="Pivot2" LoadedPivotItem="LoadingPivotItem">
+        <controls:Pivot x:Name="Pivot2" LoadingPivotItem="OnLoadingPivotItem" SelectionChanged="PivotSelectionChanged">
             <!--Pivot item one-->
-            <controls:PivotItem Header="profile">
-                <ListBox x:Name="ProfileListBox" Margin="0,0,-12,0" ItemsSource="{Binding Patients}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                    <Grid x:Name="ContentPanel" Margin="12,0,12,0">
+            <controls:PivotItem Header="profile"/>
+
+            <!--Pivot item two-->
+            <controls:PivotItem Header="drugs"/>
+
+            <!--Pivot Item three-->
+            <controls:PivotItem Header="tests"/>
+
+            <!--Pivot Item four-->
+            <controls:PivotItem Header="messages">
+
+            </controls:PivotItem>
+        </controls:Pivot>
+    </Grid>
+</phone:PhoneApplicationPage>
+
+
+<!--<Grid x:Name="ContentPanel" Margin="12,0,12,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
@@ -44,69 +56,34 @@
                                             <ColumnDefinition Width="165"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="First name:" Style="{StaticResource PhoneTextNormalStyle}" 
+                                        <TextBlock Text="First name:" Style="{StaticResource PhoneTextLargeStyle}" 
                     VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
-                                        <TextBlock Text="Last name:" Style="{StaticResource PhoneTextNormalStyle}" 
+                                        <TextBlock Text="Last name:" Style="{StaticResource PhoneTextLargeStyle}" 
                     VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
-                                        <TextBlock Text="Phone number:" Style="{StaticResource PhoneTextNormalStyle}" 
+                                        <TextBlock Text="Phone number:" Style="{StaticResource PhoneTextLargeStyle}" 
                     VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
-                                        <TextBlock Text="Family phone 1:" Style="{StaticResource PhoneTextNormalStyle}" 
+                                        <TextBlock Text="Family phone 1:" Style="{StaticResource PhoneTextLargeStyle}" 
                     VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
-                                        <TextBlock Text="Family phone 2:" Style="{StaticResource PhoneTextNormalStyle}" 
+                                        <TextBlock Text="Family phone 2:" Style="{StaticResource PhoneTextLargeStyle}" 
                     VerticalAlignment="Center" Grid.Row="4" Grid.Column="0"/>
-                                        <TextBlock Text="Address:" Style="{StaticResource PhoneTextNormalStyle}" 
+                                        <TextBlock Text="Address:" Style="{StaticResource PhoneTextLargeStyle}" 
                     VerticalAlignment="Center" Grid.Row="5" Grid.Column="0"/>
-                                        <TextBlock Text="Time Zone:" Style="{StaticResource PhoneTextNormalStyle}" 
+                                        <TextBlock Text="Time Zone:" Style="{StaticResource PhoneTextLargeStyle}" 
                     VerticalAlignment="Center" Grid.Row="6" Grid.Column="0"/>
-                                        <TextBlock Text="Gender:" Style="{StaticResource PhoneTextNormalStyle}" 
+                                        <TextBlock Text="Gender:" Style="{StaticResource PhoneTextLargeStyle}" 
                     VerticalAlignment="Center" Grid.Row="7" Grid.Column="0"/>
-                                        <TextBlock Text="Treatment Start Date:" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}" 
+                                        <TextBlock Text="Treatment Start Date:" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" 
                     VerticalAlignment="Center" Grid.Row="8" Grid.Column="0"/>
-                                        <TextBlock Text="Treatment End Date:" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}" 
+                                        <TextBlock Text="Treatment End Date:" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" 
                     VerticalAlignment="Center" Grid.Row="9" Grid.Column="0"/>
-                                        <TextBlock Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1"/>
-                                        <TextBox Text="{Binding LastName, Mode=TwoWay}" Grid.Row="1" Grid.Column="1"/>
-                                        <TextBox Text="{Binding Phone, Mode=TwoWay}" Grid.Row="2" Grid.Column="1"/>
-                                        <TextBox Text="{Binding FamilyPhone1, Mode=TwoWay}" Grid.Row="3" Grid.Column="1"/>
-                                        <TextBox Text="{Binding FamilyPhone2, Mode=TwoWay}" Grid.Row="4" Grid.Column="1"/>
-                                        <TextBox Text="{Binding Address, Mode=TwoWay}" Grid.Row="5" Grid.Column="1"/>
-                                        <TextBox Text="{Binding TimeZone, Mode=OneWay}" Grid.Row="6" Grid.Column="1"/>
-                                        <TextBox Text="{Binding Gender, Mode=OneWay}" Grid.Row="7" Grid.Column="1" />
-                                        <toolkit:DatePicker Value="{Binding TreatmentStartDate, Mode=TwoWay}" Grid.Row="8" Grid.Column="1"/>
-                                        <toolkit:DatePicker Value="{Binding TreatmentEndDate, Mode=TwoWay}" Grid.Row="9" Grid.Column="1"/>
-                                    </Grid>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-               
-             
-            </controls:PivotItem>
-
-            <!--Pivot item two-->
-            <controls:PivotItem Header="drugs">
-                <Grid/>
-            </controls:PivotItem>
-            
-            <!--Pivot Item three-->
-            <controls:PivotItem Header="tests">
-                
-            </controls:PivotItem>
-            
-            <!--Pivot Item four-->
-            <controls:PivotItem Header="messages">
-                
-            </controls:PivotItem>
-        </controls:Pivot>
-    </Grid>
-
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="AppBarRefresh.png" 
-                  Text="Refresh" Click="AppBarRefresh_Click"/>
-            <shell:ApplicationBarIconButton IconUri="AppBarSave.png"
-                  Text="Save" Click="AppBarSave_Click"/>
-            </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
-
-</phone:PhoneApplicationPage>
+                                    <TextBlock Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                    <TextBlock Text="{Binding LastName}" Grid.Row="1" Grid.Column="1" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                    <TextBlock Text="{Binding Phone}" Grid.Row="2" Grid.Column="1" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                    <TextBlock Text="{Binding FamilyPhone1}" Grid.Row="3" Grid.Column="1" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                    <TextBlock Text="{Binding FamilyPhone2}" Grid.Row="4" Grid.Column="1" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                    <TextBlock Text="{Binding Address}" Grid.Row="5" Grid.Column="1" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                    <TextBlock Text="{Binding TimeZone}" Grid.Row="6" Grid.Column="1" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                    <TextBlock Text="{Binding Gender}" Grid.Row="7" Grid.Column="1"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                                    <TextBlock Text="{Binding TreatmentStartDate}" Grid.Row="8" Grid.Column="1" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                    <TextBlock Text="{Binding TreatmentEndDate}" Grid.Row="9" Grid.Column="1" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                    </Grid>-->

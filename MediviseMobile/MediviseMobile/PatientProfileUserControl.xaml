@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="MediviseMobile.PatientProfileUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+    
+    <Grid x:Name="LayoutRoot">
+        <ListBox x:Name="ProfileListBox" Margin="0,0,-12,0" ItemsSource="{Binding Patients}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid x:Name="ContentPanel" Margin="12,0,12,0">
+                        <StackPanel>
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="first name"  Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding FirstName}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="last name"  Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding LastName}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="phone"  Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding Phone}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="family phone 1"  Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding FamilyPhone1}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="family phone 2"  Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding FamilyPhone2}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="address"  Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding Address}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="time zone"  Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding TimeZone}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="gender"  Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding Gender}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="treatment start date"  Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding TreatmentStartDate, StringFormat='MM/dd/yy'}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="treatment end date"  Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding TreatmentEndDate, StringFormat='MM/dd/yy'}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

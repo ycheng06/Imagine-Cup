@@ -17,6 +17,7 @@ namespace MediviseMobile
         private MediviseEntities context = null;
 
         private DataServiceCollection<Patient> patients;
+        private DataServiceCollection<Drug> drugs;
 
         public DataServiceCollection<Patient> Patients
         {
@@ -31,6 +32,17 @@ namespace MediviseMobile
 
                 //Raise the PropertyChanged evetns.
                 NotifyPropertyChanged("Patients");
+            }
+        }
+
+        public DataServiceCollection<Drug> Drugs
+        {
+            get { return drugs; }
+            private set
+            {
+                drugs = value;
+                drugs.LoadCompleted += OnDrugsLoaded;
+                NotifyPropertyChanged("Drugs");
             }
         }
 
@@ -50,6 +62,18 @@ namespace MediviseMobile
             Patients.LoadAsync(query);
         }
 
+        public void LoadDrug(int patientId)
+        {
+            context = new MediviseEntities(rootUri);
+            Drugs = new DataServiceCollection<Drug>(context);
+
+            var query = from d in context.Drugs.Expand("DrugInfo")
+                        where d.PatientId == patientId
+                        select d;
+            Debug.WriteLine(query.ToString());
+            Drugs.LoadAsync(query);
+        }
+
         public void LoadData(MediviseEntities c, DataServiceCollection<Patient> patients)
         {
             context = c;
@@ -67,6 +91,16 @@ namespace MediviseMobile
                 Patients.LoadNextPartialSetAsync();
             }
           
+            IsDataLoaded = true;
+        }
+
+        private void OnDrugsLoaded(object sender, LoadCompletedEventArgs e)
+        {
+            if (Drugs.Continuation != null)
+            {
+                Drugs.LoadNextPartialSetAsync();
+            }
+
             IsDataLoaded = true;
         }
 

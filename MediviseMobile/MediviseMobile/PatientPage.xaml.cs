@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using System.Diagnostics;
 using MediviseMobile.Medivise;
+using Microsoft.Phone.Shell;
 
 namespace MediviseMobile
 {
@@ -34,28 +35,12 @@ namespace MediviseMobile
                 string fullName = String.Format("{0} {1}", firstName, lastName);
                 this.Pivot2.Title = fullName.ToUpper();
                 id = int.Parse(patientId);
-                App.PatientViewModel.LoadPatient(id);
+                //App.PatientViewModel.LoadPatient(id);
             }
             base.OnNavigatedTo(e);
         }
 
-        //private void PivotSelectionChanged(Object sender, SelectionChangedEventArgs e)
-        //{
-        //    switch (Pivot2.SelectedIndex)
-        //    {
-        //        case 0:
-        //            App.PatientViewModel.LoadPatient(id);
-        //            break;
-        //        case 1:
-        //            break;
-        //        case 2:
-        //            break;
-        //        case 3:
-        //            break;
-        //    }
-        //}
-
-        private void LoadingPivotItem(Object sender, PivotItemEventArgs e)
+        private void OnLoadingPivotItem(Object sender, PivotItemEventArgs e)
         {
             if(e.Item.Content != null) return;
 
@@ -64,9 +49,12 @@ namespace MediviseMobile
             if (e.Item == p.Items[0])
             {
                 App.PatientViewModel.LoadPatient(id);
+                e.Item.Content = new PatientProfileUserControl();
             }
             else if (e.Item == p.Items[1])
             {
+                App.PatientViewModel.LoadDrug(id);
+                e.Item.Content = new PatientDrugUserControl();
             }
             else if (e.Item == p.Items[2])
             {
@@ -74,9 +62,25 @@ namespace MediviseMobile
             else if (e.Item == p.Items[3])
             { 
             }
+        }
 
-
-            
+        private void PivotSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (((Pivot)sender).SelectedIndex)
+            {
+                case 0:
+                    ApplicationBar = ((ApplicationBar)Application.Current.Resources["ProfileAppBar"]);
+                    ApplicationBarIconButton refresh = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
+                    refresh.Click += AppBarRefresh_Click;
+                    ApplicationBarIconButton edit = (ApplicationBarIconButton)ApplicationBar.Buttons[1];
+                    edit.Click += AppBarEdit_Click;
+                    break;
+                default:
+                    ApplicationBar = ((ApplicationBar)Application.Current.Resources["DefaultAppBar"]);
+                    ApplicationBarIconButton refresh2 = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
+                    refresh2.Click += AppBarRefresh_Click;
+                    break;
+            }
         }
 
         private void AppBarRefresh_Click(object sender, EventArgs e)
@@ -84,10 +88,9 @@ namespace MediviseMobile
             App.PatientViewModel.Refresh(id);
         }
 
-        private void AppBarSave_Click(object sender, EventArgs e)
+        private void AppBarEdit_Click(object sender, EventArgs e)
         {
-            App.PatientViewModel.SaveChanges();
+            NavigationService.Navigate(new Uri("/ProfileEdit.xaml", UriKind.Relative));
         }
-
     }
 }

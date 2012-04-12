@@ -17,42 +17,11 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <controls:Pivot x:Name="Pivot1" Title="MEDIVISE" SelectionChanged="PivotSelectionChanged">
+        <controls:Pivot x:Name="Pivot1" Title="MEDIVISE" LoadingPivotItem="OnLoadingPivotItem"> 
             <!--Pivot item one-->
-            <controls:PivotItem Header="alerts">
-                <!--Double line list with text wrapping-->
-                <ListBox x:Name="FirstListBox" Margin="0,0,-12,0" ItemsSource="{Binding Alerts}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel Width="450" Height="65" Orientation="Horizontal">
-                                    <StackPanel Orientation="Horizontal" Width="300" >
-                                        <TextBlock Text="{Binding Patient.FirstName, StringFormat='\{0\} '}" VerticalAlignment="Bottom" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                        <TextBlock Text="{Binding Patient.LastName}" VerticalAlignment="Bottom" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    </StackPanel>
-                                    <TextBlock Text="{Binding AlertDate, StringFormat='MM/dd/yyyy'}" TextWrapping="Wrap"  HorizontalAlignment="Right" VerticalAlignment="Bottom" TextAlignment="Right" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                </StackPanel>
-                                <TextBlock Text="{Binding AlertType.Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </controls:PivotItem>
-
+            <controls:PivotItem x:Name="alerts" Header="alerts"/>
             <!--Pivot item two-->
-            <controls:PivotItem Header="patients">
-                <!--Triple line list no text wrapping-->
-                    <ListBox x:Name="SecondListBox" Margin="0,0,-12,0" ItemsSource="{Binding Patients}" SelectionChanged="SecondListBox_SelectionChanged">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Margin="0,0,0,17" Orientation="Horizontal">
-                                <TextBlock Text="{Binding FirstName, StringFormat='\{0\} '}" VerticalAlignment="Bottom" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                <TextBlock Text="{Binding LastName}" VerticalAlignment="Bottom" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </controls:PivotItem>
+            <controls:PivotItem Header="patients"/>
         </controls:Pivot>
     </Grid>
 

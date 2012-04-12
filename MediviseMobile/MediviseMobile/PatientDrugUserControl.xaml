@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="MediviseMobile.PatientDrugUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+    
+    <Grid x:Name="LayoutRoot">
+        <ListBox x:Name="DrugListBox" Margin="0,0,-12,0" ItemsSource="{Binding Drugs}" SelectionChanged="DrugListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <StackPanel Margin="0,0,0,20">
+                            <TextBlock Text="{Binding DrugInfo.Name}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding StartDate, StringFormat='MM/dd/yyyy'}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                                <TextBlock Text="to" Style="{StaticResource PhoneTextNormalStyle}"/>
+                                <TextBlock Text="{Binding EndDate, StringFormat='MM/dd/yyyy'}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

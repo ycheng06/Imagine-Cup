@@ -7,6 +7,16 @@
 
     <!--Application Resources-->
     <Application.Resources>
+        <shell:ApplicationBar x:Key="ProfileAppBar" IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="AppBarRefresh.png" 
+                  Text="Refresh"/>
+            <shell:ApplicationBarIconButton IconUri="AppBarEdit.png"
+                  Text="Edit"/>
+        </shell:ApplicationBar>
+        <shell:ApplicationBar x:Key="DefaultAppBar" IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="AppBarRefresh.png" 
+                  Text="Refresh"/>
+        </shell:ApplicationBar>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

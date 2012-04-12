@@ -108,6 +108,42 @@ namespace MediviseMVC.Controllers
             }
             return RedirectToAction("Index");
         }
-
+    //****JSON actions****************
+        public JsonResult DeleteAlert(int AlertId)
+        {
+            try
+            {
+                Alert alert = db.Alerts.Find(AlertId);
+                db.Alerts.Remove(alert);
+                db.SaveChanges();
+                return Json(new { Result = "OK" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+        [HttpPost]
+        public JsonResult ListAlertsFor(int PatientId)
+        {
+            try
+            {
+                List<Alert> alerts = db.Patients.Find(PatientId).Alerts.ToList();
+                var jsonData = alerts.Select(a => JsonizeAlert(a));
+                return Json(new { Result = "OK", Records = jsonData });
+            }
+            catch (Exception ex){
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+        private Object JsonizeAlert(Alert a)
+        {
+            return new
+            {
+                AlertId = a.AlertId,
+                AlertDate = a.AlertDate,
+                AlertType = a.AlertType.Name
+            };
+        }
     }
 }

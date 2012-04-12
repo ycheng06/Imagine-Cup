@@ -12,13 +12,42 @@
 
 <div id="PatientList"></div>
 <script type="text/javascript">
+    var bindAlertsChildTable = function (elem,persondata) {
+        elem.click(function () {
+            $('#PatientList').jtable('openChildTable', elem.closest('tr'),
+               {
+                   title: 'Alerts',
+                   actions: {
+				      listAction: '/Alert/ListAlertsFor?PatientId=' + persondata.record.PatientId,
+                      deleteAction: '/Alert/DeleteAlert'
+                   },
+                   fields: {
+				      AlertId: {
+					     key: true,
+						 create: false,
+						 edit: false,
+						 list: false
+					  },
+					  AlertDate:{
+					     title: 'Date',
+						 type: 'date'
+					  },
+					  AlertType: {
+					     title: 'Type'
+					  }
+                   },				   
+               }, function (data) {
+                   data.childTable.jtable('load');
+               });
+        });
+    };
     $(document).ready(function () {
         $("#PatientList").jtable({
             title: 'Patients',
             selecting: true,
             selectingCheckboxes: true,
             paging: true,
-            pageSize: 1,
+            pageSize: 20,
             actions: {
                 listAction: '/PatientManager/PatientList',
                 updateAction: '/PatientManager/UpdatePatient',
@@ -32,6 +61,16 @@
                     edit: false,
                     list: false
                 },
+                Alerts: {
+                    title: 'Alerts',
+                    create: false,
+                    edit: false,
+                    display: function (data) {
+                        var $alerts = $('<button id="AlertsChildTable">Alerts</button>');
+                        bindAlertsChildTable($alerts,data);
+                        return $alerts;
+                    }
+                },    
                 FirstName: {
                     title: 'First Name',
                     display: function (data) {

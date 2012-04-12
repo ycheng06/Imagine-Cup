@@ -228,7 +228,6 @@ namespace MediviseMVC.Controllers
                 Patient patient = db.Patients.Find(PatientId);
                 db.Patients.Remove(patient);
                 db.SaveChanges();
-                Trace.WriteLine("Ajax delete working!!!");
                 return Json(new { Result = "OK" });
             }
             catch (Exception ex)

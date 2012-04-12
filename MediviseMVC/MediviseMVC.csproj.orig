@@ -54,40 +54,6 @@
     <Reference Include="Microsoft.CSharp">
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Data.Edm, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Edm.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Data.OData, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.OData.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Data.Services, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Services.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Data.Services.Client, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Services.Client.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Data.Services.Design, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Services.Design.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Data.Spatial, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Spatial.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.VsDesigner.DataServices.Adapter, Version=10.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.VsDesigner.DataServices.Adapter.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <Private>True</Private>
     </Reference>
@@ -223,9 +189,6 @@
     <Compile Include="Jobs\MessageConstructor.cs" />
     <Compile Include="Jobs\SendReminderJob.cs" />
     <Compile Include="Jobs\SendWarningJob.cs" />
-    <Compile Include="MediviseService.svc.cs">
-      <DependentUpon>MediviseService.svc</DependentUpon>
-    </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\AlertType.cs" />
@@ -244,14 +207,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\MediviseLogo.png" />
+    <Content Include="Content\themes\base\jquery-ui-1.8.18.custom.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_skyblue.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
     <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_lightblue_1x100.png" />
     <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
@@ -273,7 +239,6 @@
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Global.asax" />
-    <Content Include="MediviseService.svc" />
     <Content Include="Plugins\jQRangeSlider\css\dev.css" />
     <Content Include="Plugins\jQRangeSlider\css\icons\.gitignore" />
     <Content Include="Plugins\jQRangeSlider\css\icons\label.png" />
@@ -284,6 +249,8 @@
     <Content Include="Plugins\jQRangeSlider\demo\editSliderDemo.js" />
     <Content Include="Plugins\jQRangeSlider\demo\img\calendar.png" />
     <Content Include="Plugins\jQRangeSlider\demo\index.html" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\handle.png" />
+    <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\handlehover.png" />
     <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Plugins\jQRangeSlider\demo\lib\jquery-ui\css\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -309,6 +276,111 @@
     <Content Include="Plugins\jQRangeSlider\lib\jquery-1.7.1.min.js" />
     <Content Include="Plugins\jQRangeSlider\lib\jquery.mousewheel.min.js" />
     <Content Include="Plugins\jQRangeSlider\MIT-License.txt" />
+<<<<<<< HEAD
+    <Content Include="Plugins\jtable\extensions\jquery.jtable.aspnetpagemethods.js" />
+    <Content Include="Plugins\jtable\extensions\jquery.jtable.aspnetpagemethods.min.js" />
+    <Content Include="Plugins\jtable\external\json2.js" />
+    <Content Include="Plugins\jtable\external\json2.min.js" />
+    <Content Include="Plugins\jtable\jquery.jtable.js" />
+    <Content Include="Plugins\jtable\jquery.jtable.min.js" />
+    <Content Include="Plugins\jtable\themes\empty\jtable_empty.css" />
+    <Content Include="Plugins\jtable\themes\standard\blue\header-bg.gif" />
+    <Content Include="Plugins\jtable\themes\standard\blue\jtable_blue.css" />
+    <Content Include="Plugins\jtable\themes\standard\blue\loading.gif" />
+    <Content Include="Plugins\jtable\themes\standard\blue\title-bg.png" />
+    <Content Include="Plugins\jtable\themes\standard\close.png" />
+    <Content Include="Plugins\jtable\themes\standard\column-asc.png" />
+    <Content Include="Plugins\jtable\themes\standard\column-desc.png" />
+    <Content Include="Plugins\jtable\themes\standard\column-sortable.png" />
+    <Content Include="Plugins\jtable\themes\standard\delete.png" />
+    <Content Include="Plugins\jtable\themes\standard\edit.png" />
+    <Content Include="Plugins\jtable\themes\standard\green\header-bg.gif" />
+    <Content Include="Plugins\jtable\themes\standard\green\jtable_green.css" />
+    <Content Include="Plugins\jtable\themes\standard\green\loading.gif" />
+    <Content Include="Plugins\jtable\themes\standard\green\title-bg.png" />
+    <Content Include="Plugins\jtable\themes\standard\jtable_standard_base.css" />
+    <Content Include="Plugins\jtable\themes\standard\purple\jtable_purple.css" />
+    <Content Include="Plugins\jtable\themes\standard\purple\loading.gif" />
+    <Content Include="Plugins\jtable\themes\standard\red\header-bg.gif" />
+    <Content Include="Plugins\jtable\themes\standard\red\jtable_red.css" />
+    <Content Include="Plugins\jtable\themes\standard\red\loading.gif" />
+    <Content Include="Plugins\jtable\themes\standard\red\title-bg.png" />
+    <Content Include="Plugins\jQueryValidation\.gitignore" />
+    <Content Include="Plugins\jQueryValidation\css\screenshot.png" />
+    <Content Include="Plugins\jQueryValidation\css\template.css" />
+    <Content Include="Plugins\jQueryValidation\css\validationEngine.jquery.css" />
+    <Content Include="Plugins\jQueryValidation\demos\demoAdjustments.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoAjaxInlinePHP.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoAjaxJAVA.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoAjaxSubmitPHP.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoAttr.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoAutoHide.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoCheckBox.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoDatepicker.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoFieldTypes.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoGlobalSettings.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoHooks.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoLiveEvent.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoMultipleForms.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoOverflown.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoPerFieldPromptDirection.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoPositioning.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoRegExp.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoShowPrompt.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoValidationComplete.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoValidators.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoValidators.ja.html" />
+    <Content Include="Plugins\jQueryValidation\demos\demoWithoutId.html" />
+    <Content Include="Plugins\jQueryValidation\demos\phpajax\ajaxValidateFieldName.php" />
+    <Content Include="Plugins\jQueryValidation\demos\phpajax\ajaxValidateFieldUser.php" />
+    <Content Include="Plugins\jQueryValidation\demos\phpajax\ajaxValidateSubmit.php" />
+    <Content Include="Plugins\jQueryValidation\index.html" />
+    <Content Include="Plugins\jQueryValidation\js\contrib\other-validations.js" />
+    <Content Include="Plugins\jQueryValidation\js\jquery-1.6.min.js" />
+    <Content Include="Plugins\jQueryValidation\js\jquery.validationEngine.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-cz.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-da.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-de.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-en.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-es.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-et.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-fa.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-fi.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-fr.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-hr.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-hu.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-it.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-ja.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-nl.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-pl.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-pt.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-pt_BR.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-ro.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-ru.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-sv.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-tr.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-zh_CN.js" />
+    <Content Include="Plugins\jQueryValidation\js\languages\jquery.validationEngine-zh_TW.js" />
+    <Content Include="Plugins\jQueryValidation\test\AjaxTestServer.java" />
+    <Content Include="Plugins\jQueryValidation\test\NanoHTTPD.java" />
+=======
+    <Content Include="Plugins\jquery.progressbar\demo.html" />
+    <Content Include="Plugins\jquery.progressbar\demo.txt" />
+    <Content Include="Plugins\jquery.progressbar\images\progressbar.gif" />
+    <Content Include="Plugins\jquery.progressbar\images\progressbar_custom.gif" />
+    <Content Include="Plugins\jquery.progressbar\images\progressbg_black.gif" />
+    <Content Include="Plugins\jquery.progressbar\images\progressbg_green.gif" />
+    <Content Include="Plugins\jquery.progressbar\images\progressbg_orange.gif" />
+    <Content Include="Plugins\jquery.progressbar\images\progressbg_red.gif" />
+    <Content Include="Plugins\jquery.progressbar\images\progressbg_yellow.gif" />
+    <Content Include="Plugins\jquery.progressbar\images\progressborder_blank.gif" />
+    <Content Include="Plugins\jquery.progressbar\js\1.2\jquery.js" />
+    <Content Include="Plugins\jquery.progressbar\js\1.2\jquery.progressbar.js" />
+    <Content Include="Plugins\jquery.progressbar\js\1.2\jquery.progressbar.min.js" />
+    <Content Include="Plugins\jquery.progressbar\js\jquery.js" />
+    <Content Include="Plugins\jquery.progressbar\js\jquery.progressbar.js" />
+    <Content Include="Plugins\jquery.progressbar\js\jquery.progressbar.min.js" />
+>>>>>>> f671ad8a3074d17093384d59625717238f448fa8
     <Content Include="Plugins\slider\.gitignore" />
     <Content Include="Plugins\slider\bin\jquery.slider.min.css" />
     <Content Include="Plugins\slider\bin\jquery.slider.min.js" />
@@ -334,19 +406,21 @@
     <Content Include="Plugins\slider\tests\show_hide.html" />
     <Content Include="Plugins\slider\tests\zero_value.html" />
     <Content Include="Plugins\slider\tools\yuicompressor-2.4.7.jar" />
-    <Content Include="Scripts\EditorHookup.js" />
-    <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.5.1.js" />
-    <Content Include="Scripts\jquery-1.5.1.min.js" />
-    <Content Include="Scripts\jquery-ui-1.8.11.js" />
-    <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
-    <Content Include="Scripts\jquery-ui.js" />
-    <Content Include="Scripts\jquery-ui.min.js" />
-    <Content Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\modernizr-1.7.js" />
-    <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Scripts\Scripts\EditorHookup.js" />
+    <Content Include="Scripts\Scripts\jquery-1.5.1-vsdoc.js" />
+    <Content Include="Scripts\Scripts\jquery-1.5.1.js" />
+    <Content Include="Scripts\Scripts\jquery-1.5.1.min.js" />
+    <Content Include="Scripts\Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\Scripts\jquery-ui-1.8.11.js" />
+    <Content Include="Scripts\Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\Scripts\jquery-ui-1.8.18.custom.min.js" />
+    <Content Include="Scripts\Scripts\jquery-ui.js" />
+    <Content Include="Scripts\Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Scripts\jquery.validate.js" />
+    <Content Include="Scripts\Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\Scripts\modernizr-1.7.js" />
+    <Content Include="Scripts\Scripts\modernizr-1.7.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -359,16 +433,16 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\MicrosoftAjax.js" />
-    <Content Include="Scripts\MicrosoftAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Scripts\Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
@@ -379,17 +453,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\PatientEdit.cshtml" />
     <Content Include="Views\Shared\PatientView.cshtml" />
-<<<<<<< HEAD
-=======
     <Content Include="Views\Shared\AlertList.cshtml" />
-    <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
-    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
-    <None Include="_bin_deployableAssemblies\System.Web.WebPages.dll" />
-    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Deployment.dll" />
-    <None Include="_bin_deployableAssemblies\System.Web.Razor.dll" />
-    <None Include="_bin_deployableAssemblies\System.Web.Helpers.dll" />
-    <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
->>>>>>> stash
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -443,6 +507,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Plugins\jQRangeSlider\Readme.md" />
+<<<<<<< HEAD
+    <None Include="Plugins\jQueryValidation\README.md" />
+    <None Include="Plugins\jQueryValidation\runDemo.bat" />
+    <None Include="Plugins\jQueryValidation\runDemo.sh" />
+    <None Include="Plugins\jQueryValidation\test\AjaxTestServer%24AjaxValidationFieldResponse.class" />
+    <None Include="Plugins\jQueryValidation\test\AjaxTestServer%24AjaxValidationFormResponse.class" />
+    <None Include="Plugins\jQueryValidation\test\AjaxTestServer.class" />
+    <None Include="Plugins\jQueryValidation\test\NanoHTTPD%24HTTPSession.class" />
+    <None Include="Plugins\jQueryValidation\test\NanoHTTPD%24Response.class" />
+    <None Include="Plugins\jQueryValidation\test\NanoHTTPD.class" />
+    <None Include="Plugins\jQueryValidation\TODO" />
+=======
+    <None Include="Plugins\jquery.progressbar\demo.php" />
+>>>>>>> f671ad8a3074d17093384d59625717238f448fa8
     <None Include="Plugins\slider\Makefile" />
     <None Include="Plugins\slider\README.md" />
     <None Include="Plugins\slider\src\skin.psd" />

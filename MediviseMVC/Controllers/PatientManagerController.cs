@@ -262,8 +262,8 @@ namespace MediviseMVC.Controllers
                         Phone     = p.Phone,
                         FamilyPhone1 = p.FamilyPhone1,
                         FamilyPhone2 = p.FamilyPhone2,
-                        TreatmentStartDate = p.TreatmentStartDate.ToShortDateString(),
-                        TreatmentEndDate = p.TreatmentEndDate.ToShortDateString(),
+                        TreatmentStartDate = p.TreatmentStartDate,
+                        TreatmentEndDate = p.TreatmentEndDate,
                         TimeZone = p.TimeZone
                 };
         }

@@ -2,51 +2,39 @@
 @{
     ViewBag.Title = "Alerts";
 }
-<h2>
-    ALERTS </h2>
-@{
-    if (Model == null)
-    { 
-    <h3>No Alerts</h3>
-    }
-    else
-    {
-    <table>
-        <tr>
-            <th>
-                Patient Full Name
-            </th>
-            <th>
-                Patient ID
-            </th>
-            <th>
-                Alert Date
-            </th>
-            <th>
-                Alert Type
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.ActionLink(item.Patient.FirstName + " " + item.Patient.LastName, "Details", "PatientManager", "", "", "", new { id = item.PatientId }, "")
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PatientId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AlertDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AlertType.Name)
-                </td>
-                <td>
-                   @Html.ActionLink("Delete","Delete",new {id=item.AlertId})
-                </td>
-            </tr>
-        }
-    </table>
-    }
-}
+
+<link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jtable/themes/standard/blue/jtable_blue.css")" />
+<script type="text/javascript" src="@Url.Content("~/Plugins/jtable/jquery.jtable.min.js")"></script>
+<div id="AlertList"></div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#AlertList').jtable({
+            title: 'Alerts',
+            selecting: true,
+            selectingCheckboxes: true,
+            paging: true,
+            pageSize: 20,
+            actions: {
+                listAction: '/Alert/AlertList',
+                deleteAction: '/Alert/DeleteAlert'
+            },
+            fields: {
+                AlertId: {
+                    key: true,
+                    create: false,
+                    edit: false,
+                    list: false
+                },
+                AlertDate: {
+                    title: 'Date',
+                    type: 'date'
+                },
+                AlertType: {
+                    title: 'Type'
+                }
+            }
+        });
+        $('#AlertList').jtable('load');
+    });
+</script>

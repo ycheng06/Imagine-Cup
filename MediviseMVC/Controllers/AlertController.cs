@@ -109,6 +109,22 @@ namespace MediviseMVC.Controllers
             return RedirectToAction("Index");
         }
     //****JSON actions****************
+        [HttpPost]
+        public JsonResult AlertList(int jtStartIndex,int jtPageSize)
+        {
+            try
+            {
+                List<Alert> alerts = db.Alerts.ToList();
+                List<Alert> currentPage = alerts.Skip((jtStartIndex - 1) * jtPageSize).Take(jtPageSize).ToList();
+                var jsonData = currentPage.Select(a => JsonizeAlert(a));
+                return Json(new { Result = "OK", Records = jsonData, TotalRecordCount = alerts.Count });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+        [HttpPost]
         public JsonResult DeleteAlert(int AlertId)
         {
             try

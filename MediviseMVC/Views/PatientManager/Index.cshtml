@@ -12,6 +12,40 @@
 
 <div id="PatientList"></div>
 <script type="text/javascript">
+    var bindPhonesChildTable = function (elem,phones) {
+        elem.click(function () {
+            $('#PatientList').jtable('openChildTable',elem.closest('tr'),
+              {
+                title: 'Phones',
+                actions: {},
+                fields: {
+                  Phone: {
+                     title: 'Phone',
+                     display: function (data) {
+                        return phones.Phone;
+                     }
+                  },
+                  FamilyPhone1: {
+                     title: 'Family Phone 1',
+                     display: function (data) {
+                        return phones.FamilyPhoneOne;
+                     }
+                  },
+                  FamilyPhone2: {
+                     title: 'Family Phone 2',
+                     display: function (data) {
+                        return phones.FamilyPhoneTwo;
+                     }
+                  }
+                }
+              }, function (data) {
+                    data.childTable.jtable('addRecord', 
+                    { record: {Phone:phones.Phone,FamilyPhone1:phones.FamilyPhoneOne,FamilyPhone2:phones.FamilyPhoneTwo},
+                      clientOnly:true,
+                    });
+              });
+        });
+    };
     var bindAlertsChildTable = function (elem,persondata) {
         elem.click(function () {
             $('#PatientList').jtable('openChildTable', elem.closest('tr'),
@@ -89,14 +123,25 @@
                 },
                 Phone: {
                     title: 'Phone',
+                    display: function(data) {
+                       var $phones = $('<div id="PhoneChildTable">'+data.record.Phone+'</div>');
+                       var phones = {};
+                       phones.Phone = data.record.Phone;
+                       phones.FamilyPhoneOne = data.record.FamilyPhone1;
+                       phones.FamilyPhoneTwo = data.record.FamilyPhone2;
+                       bindPhonesChildTable($phones,phones);
+                       return $phones; 
+                    },
                     inputClass: 'validate[required,custom[phone],maxSize[10]]'
                 },
                 FamilyPhone1: {
                     title: 'Family Phone 1',
+                    list: false,
                     inputClass: 'validate[required,custom[phone],maxSize[10]]'
                 },
                 FamilyPhone2: {
                     title: 'Family Phone 2',
+                    list:false,
                     inputClass: 'validate[custom[phone],maxSize[10]]'
                 },
                 Address: {
@@ -115,6 +160,7 @@
                 },
                 TimeZone: {
                     title: 'Time Zone',
+                    list: false,
                     options: '/PatientManager/TimeZoneList'
                 }
             },

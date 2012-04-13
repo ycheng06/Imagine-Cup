@@ -11,6 +11,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MediviseMVC.Models;
+using System.Diagnostics;
 
 namespace MediviseMVC.Controllers
 {
@@ -110,12 +111,27 @@ namespace MediviseMVC.Controllers
         }
     //****JSON actions****************
         [HttpPost]
-        public JsonResult AlertList(int jtStartIndex,int jtPageSize)
+        public JsonResult AlertList(int jtStartIndex,int jtPageSize,string jtSorting=null)
         {
             try
             {
                 List<Alert> alerts = db.Alerts.ToList();
                 List<Alert> currentPage = alerts.Skip((jtStartIndex - 1) * jtPageSize).Take(jtPageSize).ToList();
+                switch (jtSorting)
+                {
+                    case "AlertDate ASC":
+                        currentPage = currentPage.OrderBy(a => a.AlertDate).ToList();
+                        foreach (var a in currentPage)
+                        {
+                            Trace.WriteLine("Date: " + a.AlertDate.ToShortDateString());
+                        }
+                        break;
+                    case "AlertDate DESC":
+                        currentPage = currentPage.OrderByDescending(a => a.AlertDate).ToList();
+                        break;
+                    default:
+                        break;
+                }
                 var jsonData = currentPage.Select(a => JsonizeAlert(a));
                 return Json(new { Result = "OK", Records = jsonData, TotalRecordCount = alerts.Count });
             }
@@ -157,6 +173,8 @@ namespace MediviseMVC.Controllers
             return new
             {
                 AlertId = a.AlertId,
+                PatientId = a.PatientId,
+                FullName = a.Patient.FirstName + " " + a.Patient.LastName,
                 AlertDate = a.AlertDate,
                 AlertType = a.AlertType.Name
             };

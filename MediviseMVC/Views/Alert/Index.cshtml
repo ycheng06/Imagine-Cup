@@ -11,8 +11,9 @@
     $(document).ready(function () {
         $('#AlertList').jtable({
             title: 'Alerts',
+            sorting: true,
+            defaultSorting: 'AlertDate ASC',
             selecting: true,
-            selectingCheckboxes: true,
             paging: true,
             pageSize: 20,
             actions: {
@@ -26,12 +27,23 @@
                     edit: false,
                     list: false
                 },
+                PatientId: {
+                    list: false
+                },
+                FullName: {
+                    title: 'Patient',
+                    sorting:false,
+                    display: function (data) {
+                        return '<a href="/PatientManager/Details/' + data.record.PatientId + '">' + data.record.FullName + '</a>';
+                    }
+                },
                 AlertDate: {
                     title: 'Date',
                     type: 'date'
                 },
                 AlertType: {
-                    title: 'Type'
+                    title: 'Type',
+                    sorting:false
                 }
             }
         });

@@ -11,7 +11,7 @@
        <tr class="alertRow">
          <td>@alert.AlertType.Name</td>
          <td>@alert.AlertDate</td>
-         <td>@Ajax.ActionLink("Delete", "DeleteConfirmed", "AlertController", new { id = alert.AlertId }, new AjaxOptions { UpdateTargetId = "AlertInfo", HttpMethod = "Post" })</td>
+         @*<td>@Ajax.ActionLink("Delete", "Delete", "Alert", new { id = alert.AlertId }, new AjaxOptions { UpdateTargetId = "AlertInfo", HttpMethod = "Post" })</td>*@
        </tr>
      }
     </table>

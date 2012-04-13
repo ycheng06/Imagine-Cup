@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<MediviseMVC.Models.Patient>
-<link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jQueryValidation/css/validationEngine.jquery.css")" />
-<link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jtable/themes/standard/blue/jtable_blue.css")" />
-<script type="text/javascript" src="@Url.Content("~/Plugins/jtable/jquery.jtable.min.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Plugins/jQueryValidation/js/jquery.validationEngine.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Plugins/jQueryValidation/js/languages/jquery.validationEngine-en.js")"></script>
-
-
+           
 @{
     ViewBag.Title = "Patient Manager";
+}
+@section MyOtherJavascript {
+    <link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jQueryValidation/css/validationEngine.jquery.css")" />
+    <link type="text/css" rel="stylesheet" href="@Url.Content("~/Plugins/jtable/themes/standard/blue/jtable_blue.css")" />
+    <script type="text/javascript" src="@Url.Content("~/Plugins/jtable/jquery.jtable.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Plugins/jQueryValidation/js/jquery.validationEngine.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Plugins/jQueryValidation/js/languages/jquery.validationEngine-en.js")"></script>
 }
 
 <div id="PatientList"></div>
@@ -61,6 +62,7 @@
                     edit: false,
                     list: false
                 },
+                /*
                 Alerts: {
                     title: 'Alerts',
                     create: false,
@@ -70,7 +72,8 @@
                         bindAlertsChildTable($alerts,data);
                         return $alerts;
                     }
-                },    
+                },
+                */    
                 FirstName: {
                     title: 'First Name',
                     display: function (data) {

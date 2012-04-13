@@ -32,6 +32,11 @@ a:active {
     color: #3366FF;
 }
 
+#detail-show
+{
+    margin-bottom: 50px;
+}
+
 p, ul {
     margin-bottom: 20px;
     line-height: 1.6em;
@@ -229,8 +234,8 @@ table th {
     text-align: left;
     font-weight: normal;
     text-decoration: underline;
-    color: #4A6EB8;
-    background-color: #e8eef4;
+    color: rgb(207, 220, 231);
+    background-color: #4C4C4C;
     border: solid 1px #e8eef4;
 }
 
@@ -352,6 +357,32 @@ div#logo {
 
 /*---------------MY OWN CODE HERE-------------------*/
 
+#detail-hide
+{
+    float: right;
+    color: Blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#detail-show
+{
+    float: right;
+    color: Blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#custom-messages
+{
+    margin-top: 10px;
+}
+
+#detail-collapse
+{
+    margin-bottom: 20px;
+}
+
 .alert-type1
 {
     background-color: #FFADAD;
@@ -370,8 +401,9 @@ div#logo {
 
 #AlertInfo
 {
+    margin-top: 10px;
     width: 460px;
-    height: 313px;
+    height: 303px;
     overflow-y: scroll;
 }
 
@@ -447,8 +479,7 @@ div#logo {
     display: block;
     height: auto;
     position: relative;
-    margin: 0 0 1.5em;
-    
+    margin: 0 0 10px;
     border-style: inset;
     -moz-border-radius: 5px;
     border-radius: 5px;

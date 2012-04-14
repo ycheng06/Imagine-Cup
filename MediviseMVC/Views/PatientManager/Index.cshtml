@@ -47,6 +47,7 @@
               });
         });
     };
+    /*
     var bindAlertsChildTable = function (elem,persondata) {
         elem.click(function () {
             $('#PatientList').jtable('openChildTable', elem.closest('tr'),
@@ -75,17 +76,16 @@
                    data.childTable.jtable('load');
                });
         });
-    };
+    };*/
     $(document).ready(function () {
         $("#PatientList").jtable({
             title: 'Patients',
             selecting: true,
-            selectingCheckboxes: true,
             paging: true,
             pageSize: 20,
             actions: {
                 listAction: '/PatientManager/PatientList',
-                updateAction: '/PatientManager/UpdatePatient',
+                //updateAction: '/PatientManager/UpdatePatient',
                 deleteAction: '/PatientManager/DeletePatient',
                 createAction: '/PatientManager/CreatePatient'
             },

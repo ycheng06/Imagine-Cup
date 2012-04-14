@@ -29,6 +29,7 @@ namespace MediviseMVC.Models
         public DateTime EndDate { get; set; }
 
         [Required(ErrorMessage="Message is blank")]
+        //[MaxLength(50)]
         public string MessageText { get; set; }
 
         public int PatientId { get; set; }

@@ -100,168 +100,189 @@
     }
 }
 <!--=======================================-->
-<b>Medication Timeline</b>
-<div class="drug-timeline">
-    @{
-        //figuring out progress on progressbar
-        DateTime today = DateTime.Today;
-        int progressDays = 0;
-        int totalDays = 1;
-        if (max <= today){
-            progressDays = 1;
-        }
-        else if (min >= today){
-            progressDays = 0;
-        }
-        else{
-            totalDays = (max - min).Days;
-            progressDays = (today - (min.AddDays(0))).Days;
-        }
 
-                    //show the progress bar
-        <text>
-            <div id="progressbar"></div>
-            <script type="text/javascript">
-                $("#progressbar").progressBar( @(progressDays + 2), {
-                    steps: @(totalDays),
-                    max: @(totalDays),
-                    width: $("#progressbar").width(),
-                    height: 59 * @(Model.Drugs.Count) + 50,
-                    showText: false,
-                    barImage: '../../../Plugins/jquery.progressbar/images/progressbar_custom.gif',
-                    boxImage: '../../../Plugins/jquery.progressbar/images/progressborder_blank.gif'
-                });
+<div id="bottomBox">
+    <fieldset>
+        <legend>Medication Timeline</legend>
+        <div class="drug-timeline">
+            @{
+                //figuring out progress on progressbar
+                DateTime today = DateTime.Today;
+                int progressDays = 0;
+                int totalDays = 1;
+                if (max <= today){
+                    progressDays = 1;
+                }
+                else if (min >= today){
+                    progressDays = 0;
+                }
+                else{
+                    totalDays = (max - min).Days;
+                    progressDays = (today - (min.AddDays(0))).Days;
+                }
 
-            </script>
-        </text>
-        
-        int countHelper = 0;
-        @:<div class="sliders-group">
-        foreach (var drug in Model.Drugs){
-            <text>
-                <div class="slider-box">
-                    <div class="slider-text">
-                        @(drug.DrugInfo.Name) - @(drug.TimesPerWeek) times/week | @Html.DisplayFor(modelItem => drug.StartDate) to @Html.DisplayFor(modelItem => drug.EndDate)
-                    </div>
-                    <div id="slider@(countHelper)"></div>
+                            //show the progress bar
+                <text>
+                    <div id="progressbar"></div>
                     <script type="text/javascript">
-                        var slider = $('#slider@(countHelper)');
-                        //note: month 0 = janurary
-                        slider.dateRangeSlider({
-                            arrows: false,
-                            bounds: {   min: new Date(@(min.Year), @(min.Month - 1), @(min.Day)), 
-                                        max: new Date(@(max.Year), @(max.Month - 1), @(max.Day)) },
-                            defaultValues: {    min: new Date(@(drug.StartDate.Year), @(drug.StartDate.Month - 1), @(drug.StartDate.Day)), 
-                                                max: new Date(@(drug.EndDate.Year), @(drug.EndDate.Month - 1), @(drug.EndDate.Day)) },
-                            valueLabels: "change"
+                        $("#progressbar").progressBar( @(progressDays + 2), {
+                            steps: @(totalDays),
+                            max: @(totalDays),
+                            width: $("#progressbar").width(),
+                            height: 59 * @(Model.Drugs.Count) + 50,
+                            showText: false,
+                            barImage: '../../../Plugins/jquery.progressbar/images/progressbar_custom.gif',
+                            boxImage: '../../../Plugins/jquery.progressbar/images/progressborder_blank.gif'
                         });
                     </script>
-                </div>
-            </text>
-            countHelper++;
+                </text>
+        
+                int countHelper = 0;
+                @:<div class="sliders-group">
+                foreach (var drug in Model.Drugs){
+                    <text>
+                        <div class="slider-box">
+                            <div class="slider-text">
+                                @(drug.DrugInfo.Name) - @(drug.TimesPerWeek) times/week | @Html.DisplayFor(modelItem => drug.StartDate) to @Html.DisplayFor(modelItem => drug.EndDate)
+                            </div>
+                            <div id="slider@(countHelper)"></div>
+                            <script type="text/javascript">
+                                var slider = $('#slider@(countHelper)');
+                                //note: month 0 = janurary
+                                slider.dateRangeSlider({
+                                    arrows: false,
+                                    bounds: {   min: new Date(@(min.Year), @(min.Month - 1), @(min.Day)), 
+                                                max: new Date(@(max.Year), @(max.Month - 1), @(max.Day)) },
+                                    defaultValues: {    min: new Date(@(drug.StartDate.Year), @(drug.StartDate.Month - 1), @(drug.StartDate.Day)), 
+                                                        max: new Date(@(drug.EndDate.Year), @(drug.EndDate.Month - 1), @(drug.EndDate.Day)) },
+                                    valueLabels: "change"
+                                });
+                            </script>
+                        </div>
+                    </text>
+                    countHelper++;
+                }
+
+                
+                
+                //calculating positions for testDates
+                /*
+                int counterHelper3 = 0;
+                foreach(var drug in Model.Drugs){
+                    <text>
+                        <div class="drugSlider" id="drugSlider@(counterHelper3)">
+                        <div class="myHandle" id="drugHandle@(counterHelper3)"></div>
+                            <script type="text/javascript">
+                                var progressDate = @(drug.StartDate - min).Days);   //may need to check for zero
+                                var position = ($('.drugSlider').width() / @(totalDays)) * progressDate;
+                                $('#drugHandle@(counterHelper3)').css("left", position + 10);
+                            </script>
+                        </div>
+                    </text>
+                    counterHelper3++;
+                }
+                 */
+                <text>
+                    <div class="mySliderContainer">
+                        Checkup Dates
+                        <div class="mySlider" id="mySliderId">            
+                        @{
+                            int counterHelper2 = 0;
+                            foreach (var test in Model.Tests)
+                            {
+                                <text>
+                                    <div class="myHandle" id="myHandle@(counterHelper2)"></div>
+                                    <script type="text/javascript">
+                                        var progressDate = @((Model.Tests.ElementAt(counterHelper2).TestDate - min).Days);
+                                        var position = ($('#mySliderId').width() / @(totalDays)) * progressDate;    //(barwidth / totaldays) * progressdays
+                                        $('#myHandle@(counterHelper2)').css("left", position + 10);
+                                    </script>
+                                </text>
+                                counterHelper2++;
+                            }
+                        }
+                        </div>
+                    </div>
+                </text>
+                @:</div>
+            }
+        </div>
+
+        <!--=======================================-->
+
+        <!-- popup div -->
+        @{
+            for (int i = 0; i < Model.Tests.Count; i++)
+            {
+                var test = Model.Tests.ElementAt(i);
+                <text>
+                    <div class="test-pop" id="test-pop@(i)">
+                        <h3>@(test.TestInfo.Name)</h3>
+                        <p>
+                            @(test.TestDate.ToShortDateString())
+                        </p>
+                    </div>
+                </text>
+            }
         }
 
-        //calculating positions for testDates
-        <text>
-            <div class="mySliderContainer">
-                Checkup Dates
-                <div class="mySlider" id="mySliderId">            
-                @{
-                    int counterHelper2 = 0;
-                    foreach (var test in Model.Tests)
-                    {
-                        <text>
-                            <div class="myHandle" id="myHandle@(counterHelper2)"></div>
-                            <script type="text/javascript">
-                                var progressDate = @((Model.Tests.ElementAt(counterHelper2).TestDate - min).Days);
-                                var position = ($('#mySliderId').width() / @(totalDays)) * progressDate;    //(barwidth / totaldays) * progressdays
-                                $('#myHandle@(counterHelper2)').css("left", position + 10);
-                            </script>
-                        </text>
-                        counterHelper2++;
-                    }
+        <a id="detail-show">show timeline details...</a>
+        <a id="detail-hide">hide timeline details...</a>
+        <div id="detail-collapse">
+            <b><br />Medications</b>
+            <table title = "Drug Messages">
+                <tr>
+                    <th>Drug Name</th>
+                    <th>Dosage</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                </tr>
+                @foreach (var drug in Model.Drugs)
+                {
+                <tr>
+                    <td>@drug.DrugInfo.Name</td>
+                    <td>@drug.TimesPerWeek Times Per Week</td>
+                    <td>@Html.DisplayFor(modelItem => drug.StartDate) </td>
+                    <td>@Html.DisplayFor(modelItem => drug.EndDate) </td>
+                </tr>
                 }
-                </div>
-            </div>
-        </text>
-        @:</div>
-    }
-</div>
+            </table>
 
-<!--=======================================-->
+            <b><br />Test Dates</b>
+            <table title = "Test Messages">
+                <tr>
+                <th>Description</th>
+                <th>Test Date</th>
+                </tr>
+                @foreach (var test in Model.Tests)
+                {
+                    <tr>
+                    <td>@test.TestInfo.Name</td>
+                    <td>@Html.DisplayFor(modelItem => test.TestDate) </td>
+                    </tr>
+                }
+            </table>
+        </div>
 
-<!-- popup div -->
-@{
-    for (int i = 0; i < Model.Tests.Count; i++){
-        var test = Model.Tests.ElementAt(i);
-        <text>
-            <div class="test-pop" id="test-pop@(i)">
-                <h3>@(test.TestInfo.Name)</h3>
-                <p>
-                    @(test.TestDate.ToShortDateString())
-                </p>
-            </div>
-        </text>
-    }
-}
-
-<a id="detail-show">show timeline details...</a>
-<a id="detail-hide">hide timeline details...</a>
-<div id="detail-collapse">
-    <b><br />Medications</b>
-    <table title = "Drug Messages">
-        <tr>
-            <th>Drug Name</th>
-            <th>Dosage</th>
+        <b>Custom Messages</b>
+        <table title="Custom Messages">
+            <tr>
+            <th>Message</th>
             <th>Start Date</th>
             <th>End Date</th>
-        </tr>
-        @foreach (var drug in Model.Drugs)
-        {
-        <tr>
-            <td>@drug.DrugInfo.Name</td>
-            <td>@drug.TimesPerWeek Times Per Week</td>
-            <td>@Html.DisplayFor(modelItem => drug.StartDate) </td>
-            <td>@Html.DisplayFor(modelItem => drug.EndDate) </td>
-        </tr>
-        }
-    </table>
+            </tr>
+            @foreach (var msg in Model.Messages)
+            {
+                <tr>
+                <td>@msg.MessageText</td>
+                <td>@Html.DisplayFor(modelItem => msg.StartDate) </td>
+                <td>@Html.DisplayFor(modelItem => msg.EndDate) </td>
+                </tr>
+            }
+        </table>
 
-    <b><br />Test Dates</b>
-    <table title = "Test Messages">
-      <tr>
-        <th>Description</th>
-        <th>Test Date</th>
-      </tr>
-      @foreach (var test in Model.Tests)
-      {
-          <tr>
-            <td>@test.TestInfo.Name</td>
-            <td>@Html.DisplayFor(modelItem => test.TestDate) </td>
-          </tr>
-      }
-    </table>
+    </fieldset>
 </div>
-
-
-
-<b>Custom Messages</b>
-<table title="Custom Messages">
- <tr>
-   <th>Message</th>
-   <th>Start Date</th>
-   <th>End Date</th>
- </tr>
- @foreach (var msg in Model.Messages)
- {
-     <tr>
-       <td>@msg.MessageText</td>
-       <td>@Html.DisplayFor(modelItem => msg.StartDate) </td>
-       <td>@Html.DisplayFor(modelItem => msg.EndDate) </td>
-     </tr>
- }
-</table>
 <p>
-     @Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Edit", "Edit", new { id = Model.PatientId }) |
-     @Html.ActionLink("TimeLine", "Edit", "TreatmentPlanner", new { id = Model.PatientId }, null)
+     @Html.ActionLink("Back to List", "Index") | @Html.ActionLink("TimeLine", "Edit", "TreatmentPlanner", new { id = Model.PatientId }, null)
 </p>

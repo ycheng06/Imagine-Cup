@@ -357,6 +357,12 @@ div#logo {
 
 /*---------------MY OWN CODE HERE-------------------*/
 
+#login
+{
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
 #detail-hide
 {
     float: right;
@@ -425,7 +431,13 @@ div#logo {
 #alertBox
 {
     width: 48%;
-    float: left;
+    float:left;
+}
+
+#bottomBox
+{
+    width: 100%;
+    clear:both;
 }
 
 .myHandle

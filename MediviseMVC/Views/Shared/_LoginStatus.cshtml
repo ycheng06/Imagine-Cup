@@ -1,6 +1,8 @@
 ﻿@if (Request.IsAuthenticated)
 {
-        <text>@User.Identity.Name | @Html.ActionLink("Logoff", "LogOff", "Account")</text>
+    <div id="login">
+        <text>Logged in as @User.Identity.Name | @Html.ActionLink("Logoff", "LogOff", "Account")</text>
+    </div>
 }
 else
 {

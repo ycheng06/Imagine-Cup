@@ -75,17 +75,26 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MessageEdit.xaml.cs">
+      <DependentUpon>MessageEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PatientDrugUserControl.xaml.cs">
       <DependentUpon>PatientDrugUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="PatientListUserControl.xaml.cs">
       <DependentUpon>PatientListUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PatientMessageUserControl.xaml.cs">
+      <DependentUpon>PatientMessageUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PatientPage.xaml.cs">
       <DependentUpon>PatientPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PatientProfileUserControl.xaml.cs">
       <DependentUpon>PatientProfileUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PatientTestUserControl.xaml.cs">
+      <DependentUpon>PatientTestUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProfileEdit.xaml.cs">
       <DependentUpon>ProfileEdit.xaml</DependentUpon>
@@ -95,6 +104,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.datasvcmap</DependentUpon>
+    </Compile>
+    <Compile Include="TestEdit.xaml.cs">
+      <DependentUpon>TestEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -117,11 +129,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MessageEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PatientDrugUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PatientListUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PatientMessageUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -133,7 +153,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PatientTestUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ProfileEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -150,17 +178,13 @@
     <Content Include="AppBarRefresh.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="ApplicationIcon.png" />
+    <Resource Include="Background.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
     <Resource Include="appbar.stop.rest.png" />
-    <Content Include="ApplicationIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Background.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Service References\Medivise\Reference.datasvcmap">
       <Generator>DataServicesCoreClientGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

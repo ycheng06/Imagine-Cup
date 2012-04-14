@@ -13,25 +13,21 @@ using Microsoft.Phone.Controls;
 
 namespace MediviseMobile
 {
-    public partial class ProfileEdit : PhoneApplicationPage
+    public partial class MessageEdit : PhoneApplicationPage
     {
-        string[] gender = {"Male", "Female"};
-
-        public ProfileEdit()
+        public MessageEdit()
         {
             InitializeComponent();
-            this.ListPicker.ItemsSource = gender;
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            DataContext = App.PatientViewModel.Patients.First();
-            base.OnNavigatedTo(e);
-        }
-
-        private void AppBarSave_Click(object sender, EventArgs e)
-        {
-                App.PatientViewModel.SaveChanges();
+            string selectedIndex = "";
+            if (NavigationContext.QueryString.TryGetValue("selectedIndex", out selectedIndex))
+            {
+                int index = int.Parse(selectedIndex);
+                DataContext = App.PatientViewModel.Messages[index];
+            }
         }
     }
 }

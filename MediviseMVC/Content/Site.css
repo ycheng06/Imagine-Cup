@@ -425,6 +425,7 @@ div#logo {
 #alertBox
 {
     width: 48%;
+    float: left;
 }
 
 .myHandle

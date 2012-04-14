@@ -61,7 +61,8 @@
                     </StackPanel>
                     <StackPanel>
                         <TextBlock Text="gender" Style="{StaticResource PhoneTextNormalStyle}"/>
-                        <TextBox Text="{Binding Gender, Mode= OneWay}" IsReadOnly="True"/>
+                        <!--<TextBox Text="{Binding Gender, Mode= OneWay}" IsReadOnly="True"/>-->
+                        <toolkit:ListPicker x:Name="ListPicker"/>
                     </StackPanel>
                     <StackPanel>
                         <TextBlock Text="treatment start date"  Style="{StaticResource PhoneTextNormalStyle}"/>

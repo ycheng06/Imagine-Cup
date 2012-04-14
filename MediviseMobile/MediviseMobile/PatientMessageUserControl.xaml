@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="MediviseMobile.PatientMessageUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+    
+    <Grid x:Name="LayoutRoot">
+        <ListBox x:Name="MessageListBox" Margin="0,0,-12,0" ItemsSource="{Binding Messages}" SelectionChanged="MessageListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <StackPanel Margin="0,0,0,20">
+                            <TextBlock Text="{Binding MessageText}" TextTrimming="WordEllipsis" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding StartDate, StringFormat='MM/dd/yyyy'}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                                <TextBlock Text="to" Style="{StaticResource PhoneTextNormalStyle}"/>
+                                <TextBlock Text="{Binding EndDate, StringFormat='MM/dd/yyyy'}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

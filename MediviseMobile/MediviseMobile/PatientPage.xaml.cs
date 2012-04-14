@@ -58,9 +58,13 @@ namespace MediviseMobile
             }
             else if (e.Item == p.Items[2])
             {
+                App.PatientViewModel.LoadTest(id);
+                e.Item.Content = new PatientTestUserControl();
             }
             else if (e.Item == p.Items[3])
-            { 
+            {
+                App.PatientViewModel.LoadMessage(id);
+                e.Item.Content = new PatientMessageUserControl();
             }
         }
 
@@ -85,7 +89,7 @@ namespace MediviseMobile
 
         private void AppBarRefresh_Click(object sender, EventArgs e)
         {
-            App.PatientViewModel.Refresh(id);
+            App.PatientViewModel.Refresh(id, this.Pivot2.SelectedIndex);
         }
 
         private void AppBarEdit_Click(object sender, EventArgs e)

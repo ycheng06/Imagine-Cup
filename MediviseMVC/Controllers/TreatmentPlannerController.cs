@@ -53,10 +53,12 @@ namespace MediviseMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                drug.TimesPerWeek = getTimesPerWeek(drug);
-                updatePatientTreatmentDuration(drug);
                 trackerDB.Patients.Find(drug.PatientId).Drugs.Add(drug);
                 trackerDB.SaveChanges();
+
+                drug.TimesPerWeek = getTimesPerWeek(drug);
+                updatePatientTreatmentStartDate(drug.PatientId, drug.StartDate);
+                updatePatientTreatmentEndDate(drug.PatientId, drug.EndDate);
                 return RedirectToAction("Edit", new { id = drug.PatientId });
             }
             populateDrugNames(1);
@@ -77,10 +79,12 @@ namespace MediviseMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                drug.TimesPerWeek = getTimesPerWeek(drug);
-                updatePatientTreatmentDuration(drug);
                 trackerDB.Entry(drug).State = EntityState.Modified;
                 trackerDB.SaveChanges();
+
+                drug.TimesPerWeek = getTimesPerWeek(drug);
+                updatePatientTreatmentStartDate(drug.PatientId, drug.StartDate);
+                updatePatientTreatmentEndDate(drug.PatientId, drug.EndDate);
                 return RedirectToAction("Edit", new { id = drug.PatientId });
             }
             populateDrugNames(drug.DrugInfoId);
@@ -107,19 +111,6 @@ namespace MediviseMVC.Controllers
                 total++;
 
             return total;
-        }
-
-        private void updatePatientTreatmentDuration(Drug drug)  //done every time a drug is modified/added (and NOT every time it is displayed)
-        {
-            //look up corresponding patient
-            var patient = trackerDB.Patients.Find(drug.PatientId);
-
-            if (drug.EndDate > patient.TreatmentEndDate)
-            {
-                patient.TreatmentEndDate = drug.EndDate;
-                trackerDB.Entry(patient).State = EntityState.Modified;
-                trackerDB.SaveChanges();
-            }
         }
 
         // GET: /TreatmentPlanner/DeleteDrug/3
@@ -153,9 +144,11 @@ namespace MediviseMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                updatePatientTreatmentDuration(test);
                 trackerDB.Patients.Find(test.PatientId).Tests.Add(test);
                 trackerDB.SaveChanges();
+
+                updatePatientTreatmentStartDate(test.PatientId, test.TestDate);
+                updatePatientTreatmentEndDate(test.PatientId, test.TestDate);
                 return RedirectToAction("Edit", new { id = test.PatientId });
             }
             populateTestNames();
@@ -172,25 +165,15 @@ namespace MediviseMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                updatePatientTreatmentDuration(test);
                 trackerDB.Entry(test).State = EntityState.Modified;
                 trackerDB.SaveChanges();
+
+                updatePatientTreatmentStartDate(test.PatientId, test.TestDate);
+                updatePatientTreatmentEndDate(test.PatientId, test.TestDate);
                 return RedirectToAction("Edit", new { id=test.PatientId});
             }
             populateTestNames();
             return View(test);
-        }
-        private void updatePatientTreatmentDuration(Test test)  //done every time a drug is modified/added (and NOT every time it is displayed)
-        {
-            //look up corresponding patient
-            var patient = trackerDB.Patients.Find(test.PatientId);
-
-            if (test.TestDate > patient.TreatmentEndDate)
-            {
-                patient.TreatmentEndDate = test.TestDate;
-                trackerDB.Entry(patient).State = EntityState.Modified;
-                trackerDB.SaveChanges();
-            }
         }
         public ActionResult DeleteTest(int id)
         {
@@ -218,9 +201,11 @@ namespace MediviseMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                updatePatientTreatmentDuration(msg);
                 trackerDB.Patients.Find(msg.PatientId).Messages.Add(msg);
                 trackerDB.SaveChanges();
+
+                updatePatientTreatmentStartDate(msg.PatientId, msg.StartDate);
+                updatePatientTreatmentEndDate(msg.PatientId, msg.EndDate);
                 return RedirectToAction("Edit", new { id = msg.PatientId });
             }
             return View(msg);
@@ -235,24 +220,14 @@ namespace MediviseMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                updatePatientTreatmentDuration(msg);
                 trackerDB.Entry(msg).State = EntityState.Modified;
                 trackerDB.SaveChanges();
+
+                updatePatientTreatmentStartDate(msg.PatientId, msg.StartDate);
+                updatePatientTreatmentEndDate(msg.PatientId, msg.EndDate);
                 return RedirectToAction("Edit", new { id=msg.PatientId});
             }
             return View(msg);
-        }
-        private void updatePatientTreatmentDuration(Message message)  //done every time a drug is modified/added (and NOT every time it is displayed)
-        {
-            //look up corresponding patient
-            var patient = trackerDB.Patients.Find(message.PatientId);
-
-            if (message.EndDate > patient.TreatmentEndDate)
-            {
-                patient.TreatmentEndDate = message.EndDate;
-                trackerDB.Entry(patient).State = EntityState.Modified;
-                trackerDB.SaveChanges();
-            }
         }
         public ActionResult DeleteMsg(int id)
         {
@@ -290,6 +265,128 @@ namespace MediviseMVC.Controllers
                 return false;
             }
             return true;
+        }
+        private void updatePatientTreatmentStartDate(int patientId, DateTime startDate)  //done every time a drug is modified/added (and NOT every time it is displayed)
+        {
+            //look up corresponding patient
+            /*
+            var patient = trackerDB.Patients.Find(patientId);
+
+             if (startDate < patient.TreatmentStartDate)
+            {
+                patient.TreatmentStartDate = startDate;
+                trackerDB.Entry(patient).State = EntityState.Modified;
+                trackerDB.SaveChanges();
+            }
+            else if (patient.TreatmentStartDate < startDate)
+            {
+                replaceWithSmallestStartDate(patient.PatientId, startDate);
+            }
+            */
+            //conditional above ignored because it makes it possible for user to manipulate system so that TreatmentStartDate does not update properly
+            replaceWithSmallestStartDate(patientId, startDate);
+
+        }
+        private void replaceWithSmallestStartDate(int patientId, DateTime updatedDate)
+        {
+            //go through drug, test, messages and find largest enddate
+            var patient = trackerDB.Patients.Find(patientId);
+            DateTime startDate = updatedDate;
+
+            //drug
+            List<Drug> drugs = trackerDB.Drugs.Where(d => d.PatientId == patientId).ToList();
+            foreach (Drug d in drugs)
+            {
+                if (d.StartDate < startDate)
+                {
+                    startDate = d.StartDate;
+                }
+            }
+
+            //test
+            List<Test> tests = trackerDB.Tests.Where(t => t.PatientId == patientId).ToList();
+            foreach (Test t in tests)
+            {
+                if (t.TestDate < startDate)
+                {
+                    startDate = t.TestDate;
+                }
+            }
+            
+            //message
+            List<Message> messages = trackerDB.Messages.Where(m => m.PatientId == patientId).ToList();
+            foreach (Message m in messages)
+            {
+                if (m.EndDate < startDate)
+                {
+                    startDate = m.StartDate;
+                }
+            }
+
+            patient.TreatmentStartDate = startDate;
+            trackerDB.Entry(patient).State = EntityState.Modified;
+            trackerDB.SaveChanges();
+        }
+        private void updatePatientTreatmentEndDate(int patientId, DateTime endDate)  //done every time a drug is modified/added (and NOT every time it is displayed)
+        {
+            //look up corresponding patient
+            /*
+            var patient = trackerDB.Patients.Find(patientId);
+
+            if (endDate > patient.TreatmentEndDate)
+            {
+                patient.TreatmentEndDate = endDate;
+                trackerDB.Entry(patient).State = EntityState.Modified;
+                trackerDB.SaveChanges();
+            }
+            else if (patient.TreatmentEndDate > endDate)
+            {
+                replaceWithGreatestEndDate(patient.PatientId, endDate);
+            }
+            */
+            //conditional above ignored because it makes it possible for user to manipulate system so that TreatmentEndDate does not update properly
+            replaceWithGreatestEndDate(patientId, endDate);
+        }
+        private void replaceWithGreatestEndDate(int patientId, DateTime latestDate)
+        {
+            //go through drug, test, messages and find largest enddate
+            var patient = trackerDB.Patients.Find(patientId);
+            DateTime endDate = latestDate;
+
+            //drug
+            List<Drug> drugs = trackerDB.Drugs.Where(d => d.PatientId == patientId).ToList();
+            foreach (Drug d in drugs)
+            {
+                if (d.EndDate > endDate)
+                {
+                    endDate = d.EndDate;
+                }
+            }
+
+            //test
+            List<Test> tests = trackerDB.Tests.Where(t => t.PatientId == patientId).ToList();
+            foreach (Test t in tests)
+            {
+                if (t.TestDate > endDate)
+                {
+                    endDate = t.TestDate;
+                }
+            }
+            
+            //message
+            List<Message> messages = trackerDB.Messages.Where(m => m.PatientId == patientId).ToList();
+            foreach (Message m in messages)
+            {
+                if (m.EndDate > endDate)
+                {
+                    endDate = m.EndDate;
+                }
+            }
+
+            //change TreatmentEndDate
+            patient.TreatmentEndDate = endDate;
+            trackerDB.Entry(patient).State = EntityState.Modified;
+            trackerDB.SaveChanges();
         }
         protected override void Dispose(bool disposing)
         {

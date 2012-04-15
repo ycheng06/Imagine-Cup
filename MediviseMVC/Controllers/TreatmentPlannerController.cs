@@ -269,9 +269,10 @@ namespace MediviseMVC.Controllers
         private void updatePatientTreatmentStartDate(int patientId, DateTime startDate)  //done every time a drug is modified/added (and NOT every time it is displayed)
         {
             //look up corresponding patient
+            /*
             var patient = trackerDB.Patients.Find(patientId);
 
-            if (startDate < patient.TreatmentStartDate)
+             if (startDate < patient.TreatmentStartDate)
             {
                 patient.TreatmentStartDate = startDate;
                 trackerDB.Entry(patient).State = EntityState.Modified;
@@ -281,6 +282,9 @@ namespace MediviseMVC.Controllers
             {
                 replaceWithSmallestStartDate(patient.PatientId, startDate);
             }
+            */
+            //conditional above ignored because it makes it possible for user to manipulate system so that TreatmentStartDate does not update properly
+            replaceWithSmallestStartDate(patientId, startDate);
 
         }
         private void replaceWithSmallestStartDate(int patientId, DateTime updatedDate)
@@ -326,6 +330,7 @@ namespace MediviseMVC.Controllers
         private void updatePatientTreatmentEndDate(int patientId, DateTime endDate)  //done every time a drug is modified/added (and NOT every time it is displayed)
         {
             //look up corresponding patient
+            /*
             var patient = trackerDB.Patients.Find(patientId);
 
             if (endDate > patient.TreatmentEndDate)
@@ -338,6 +343,9 @@ namespace MediviseMVC.Controllers
             {
                 replaceWithGreatestEndDate(patient.PatientId, endDate);
             }
+            */
+            //conditional above ignored because it makes it possible for user to manipulate system so that TreatmentEndDate does not update properly
+            replaceWithGreatestEndDate(patientId, endDate);
         }
         private void replaceWithGreatestEndDate(int patientId, DateTime latestDate)
         {

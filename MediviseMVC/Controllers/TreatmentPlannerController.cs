@@ -120,6 +120,10 @@ namespace MediviseMVC.Controllers
                 trackerDB.Entry(patient).State = EntityState.Modified;
                 trackerDB.SaveChanges();
             }
+            else if (patient.TreatmentEndDate > drug.EndDate)
+            {
+                replaceWithGreatestEndDate(patient.PatientId,drug.EndDate);
+            }
         }
 
         // GET: /TreatmentPlanner/DeleteDrug/3
@@ -191,6 +195,10 @@ namespace MediviseMVC.Controllers
                 trackerDB.Entry(patient).State = EntityState.Modified;
                 trackerDB.SaveChanges();
             }
+            else if (patient.TreatmentEndDate > test.TestDate)
+            {
+                replaceWithGreatestEndDate(patient.PatientId, test.TestDate);
+            }
         }
         public ActionResult DeleteTest(int id)
         {
@@ -253,6 +261,10 @@ namespace MediviseMVC.Controllers
                 trackerDB.Entry(patient).State = EntityState.Modified;
                 trackerDB.SaveChanges();
             }
+            else if (patient.TreatmentEndDate > message.EndDate)
+            {
+                replaceWithGreatestEndDate(patient.PatientId, message.EndDate);
+            }
         }
         public ActionResult DeleteMsg(int id)
         {
@@ -290,6 +302,47 @@ namespace MediviseMVC.Controllers
                 return false;
             }
             return true;
+        }
+        private void replaceWithGreatestEndDate(int patientId, DateTime latestDate)
+        {
+            //go through drug, test, messages and find largest enddate
+            var patient = trackerDB.Patients.Find(patientId);
+            DateTime endDate = latestDate;
+
+            //drug
+            List<Drug> drugs = trackerDB.Drugs.Where(d => d.PatientId == patientId).ToList();
+            foreach (Drug d in drugs)
+            {
+                if (d.EndDate > endDate)
+                {
+                    endDate = d.EndDate;
+                }
+            }
+
+            //test
+            List<Test> tests = trackerDB.Tests.Where(t => t.PatientId == patientId).ToList();
+            foreach (Test t in tests)
+            {
+                if (t.TestDate > endDate)
+                {
+                    endDate = t.TestDate;
+                }
+            }
+            
+            //message
+            List<Message> messages = trackerDB.Messages.Where(m => m.PatientId == patientId).ToList();
+            foreach (Message m in messages)
+            {
+                if (m.EndDate > endDate)
+                {
+                    endDate = m.EndDate;
+                }
+            }
+
+            //change TreatmentEndDate
+            patient.TreatmentEndDate = endDate;
+            trackerDB.Entry(patient).State = EntityState.Modified;
+            trackerDB.SaveChanges();
         }
         protected override void Dispose(bool disposing)
         {

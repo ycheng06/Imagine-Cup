@@ -129,6 +129,12 @@ namespace MediviseMVC.Controllers
                     case "AlertDate DESC":
                         currentPage = currentPage.OrderByDescending(a => a.AlertDate).ToList();
                         break;
+                    case "FullName ASC":
+                        currentPage = currentPage.OrderBy(a => a.Patient.FirstName).ThenBy(a => a.Patient.LastName).ToList();
+                        break;
+                    case "FullName DESC":
+                        currentPage = currentPage.OrderBy(a => a.Patient.FirstName).ThenBy(a => a.Patient.LastName).ToList();
+                        break;
                     default:
                         break;
                 }

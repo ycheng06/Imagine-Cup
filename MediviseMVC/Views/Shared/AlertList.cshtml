@@ -1,18 +1,16 @@
 ﻿@model IEnumerable<MediviseMVC.Models.Alert>
-    <div id="AlertInfo">
-    <table>
-     <tr>
-       <th>Alert Type</th>
-       <th>Alert Date</th>
-       <th></th>
-     </tr>
-     @foreach (var alert in Model)
-     {
-       <tr class="alertRow">
-         <td>@alert.AlertType.Name</td>
-         <td>@alert.AlertDate.ToShortDateString()</td>
-         @*<td>@Ajax.ActionLink("Delete", "Delete", "Alert", new { id = alert.AlertId }, new AjaxOptions { UpdateTargetId = "AlertInfo", HttpMethod = "Post" })</td>*@
-       </tr>
-     }
-    </table>
-    </div>
+<table>
+    <tr>
+    <th>Alert Type</th>
+    <th>Alert Date</th>
+    <!--<th></th>-->
+    </tr>
+    @foreach (var alert in Model)
+    {
+    <tr class="alertRow">
+        <td>@alert.AlertType.Name</td>
+        <td>@alert.AlertDate.ToShortDateString()</td>
+        @*<td>@Ajax.ActionLink("Delete", "Delete", "Alert", new { id = alert.AlertId }, new AjaxOptions { UpdateTargetId = "AlertInfo", HttpMethod = "Post" })</td>*@
+    </tr>
+    }
+</table>

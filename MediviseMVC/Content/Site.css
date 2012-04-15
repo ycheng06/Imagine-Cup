@@ -212,7 +212,10 @@ select {
 }
 
 input[type="submit"] {
-    font-size: 0.8em;
+    padding: 5px;
+}
+
+input[type="reset"] {
     padding: 5px;
 }
 
@@ -327,12 +330,12 @@ div#logo {
 
 .common-box
 {
+    margin: 0.5em 0 0.5em 0;
 }
 
 .common-label
 {
     display: inline-block;
-    margin: 1em 0 0 0;
     background-color: #E2F1FF;
 }
 
@@ -404,12 +407,19 @@ div#logo {
     background-color: #
 }
 
+#PatientInfo
+{
+    width: 460px;
+    height: 320px;
+    margin-top: 10px;
+    overflow-y: scroll;
+}
 
 #AlertInfo
 {
     margin-top: 10px;
     width: 460px;
-    height: 303px;
+    height: 320px;
     overflow-y: scroll;
 }
 
@@ -440,7 +450,20 @@ div#logo {
     clear:both;
 }
 
-.myHandle
+.drugHandle
+{
+    position: absolute;
+    height: 20px;
+    width: 10px;
+    background-color: #7E7E9C;
+    margin: -2px;
+    z-index: 2;
+    
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.testHandle
 {
     position: absolute;
     height: 20px;
@@ -455,8 +478,7 @@ div#logo {
 
 .mySliderContainer
 {
-    height: 20px;
-    margin: 0 6px;
+    margin: 5px -1px 15px -1px;
 }
 
 .mySlider
@@ -482,11 +504,6 @@ div#logo {
   border-radius: 10px;
 }
 
-.test-slider
-{
-    margin: 0 6px 0 6px;
-}
-
 .drug-timeline
 {
     display: block;
@@ -503,8 +520,6 @@ div#logo {
     z-index: 1;
     opacity: .50;
     filter: alpha(opacity=50);
-    margin-left: 3px;
-    margin-right: 3px;
     height: auto;
     
 }
@@ -516,16 +531,12 @@ div#logo {
     left: 0;
     width: 100%;
     z-index: 2;
+    padding: 0 0 0 0;
 }
 
-.slider-text
+.sliderText
 {
-    margin-left: 10px;
-}
-
-.slider-box
-{
-    margin: 5px 0 20px;
+    margin: 0 0 -4px 5px;
 }
 
 #bodytag, body 

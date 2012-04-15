@@ -115,7 +115,7 @@ namespace MediviseMVC.Controllers
         {
             try
             {
-                List<Alert> alerts = db.Alerts.ToList();
+                List<Alert> alerts = db.Alerts.Where(p => p.Patient.RegisteredBy == User.Identity.Name).ToList();
                 List<Alert> currentPage = alerts.Skip((jtStartIndex - 1) * jtPageSize).Take(jtPageSize).ToList();
                 switch (jtSorting)
                 {

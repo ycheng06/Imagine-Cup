@@ -172,7 +172,7 @@ namespace MediviseMVC.Controllers
             try
             {
                 //reconsider this part
-                List<Patient> patients = db.Patients.ToList();
+                List<Patient> patients = db.Patients.Where(p => p.RegisteredBy == User.Identity.Name).ToList();
                 List<Patient> currentPage = patients.Skip((jtStartIndex-1)*jtPageSize).Take(jtPageSize).ToList();
                 switch (jtSorting)
                 {

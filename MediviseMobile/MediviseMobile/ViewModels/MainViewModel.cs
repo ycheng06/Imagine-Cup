@@ -75,7 +75,11 @@ namespace MediviseMobile
         {
             if (context == null) context = new MediviseEntities(rootUri);
             Alerts = new DataServiceCollection<Alert>(context);
-
+            //context.SendingRequest += (sender, args) =>
+            //    {
+            //        args.RequestHeaders["AuthToken"] = App.AuthenticationToken.ToString();
+                    
+            //    };
             var query = from a in context.Alerts.Expand("Patient").Expand("AlertType")
                         orderby a.AlertDate descending
                         select a;

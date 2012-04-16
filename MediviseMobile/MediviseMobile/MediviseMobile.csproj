@@ -72,6 +72,9 @@
     <Compile Include="DrugEdit.xaml.cs">
       <DependentUpon>DrugEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LogOn.xaml.cs">
+      <DependentUpon>LogOn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -100,6 +103,11 @@
       <DependentUpon>ProfileEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\Authentication\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\Medivise\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -122,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DrugEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LogOn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -170,7 +182,16 @@
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml" />
+    <None Include="Service References\Authentication\Authentication.wsdl" />
+    <None Include="Service References\Authentication\Authentication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Authentication\Authentication1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Authentication\AuthenticationService.wsdl" />
     <None Include="Service References\Medivise\service.edmx" />
+    <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppBarEdit.png" />
@@ -180,19 +201,29 @@
     </Content>
     <Resource Include="ApplicationIcon.png" />
     <Resource Include="Background.png" />
+    <None Include="Service References\Medivise\Reference.datasvcmap">
+      <Generator>DataServicesCoreClientGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Authentication\Authentication.disco" />
+    <None Include="Service References\Authentication\configuration91.svcinfo" />
+    <None Include="Service References\Authentication\configuration.svcinfo" />
+    <None Include="Service References\Authentication\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
     <Resource Include="appbar.stop.rest.png" />
-    <None Include="Service References\Medivise\Reference.datasvcmap">
-      <Generator>DataServicesCoreClientGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <ServiceReferenceMetadataStorage Include="Service References\Medivise\">
@@ -200,7 +231,7 @@
     </ServiceReferenceMetadataStorage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
+    <WCFMetadataStorage Include="Service References\Authentication\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />

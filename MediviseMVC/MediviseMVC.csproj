@@ -54,6 +54,34 @@
     <Reference Include="Microsoft.CSharp">
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Services.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Design, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Services.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Spatial, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VsDesigner.DataServices.Adapter, Version=10.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.VsDesigner.DataServices.Adapter.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <Private>True</Private>
     </Reference>
@@ -75,6 +103,7 @@
     <Reference Include="System.Data.Entity">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel">
       <Private>True</Private>
     </Reference>
@@ -189,6 +218,9 @@
     <Compile Include="Jobs\MessageConstructor.cs" />
     <Compile Include="Jobs\SendReminderJob.cs" />
     <Compile Include="Jobs\SendWarningJob.cs" />
+    <Compile Include="MediviseService.svc.cs">
+      <DependentUpon>MediviseService.svc</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\AlertType.cs" />
@@ -206,6 +238,7 @@
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Authentication.svc" />
     <Content Include="Content\MediviseLogo.png" />
     <Content Include="Content\themes\base\jquery-ui-1.8.18.custom.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -239,6 +272,7 @@
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Global.asax" />
+    <Content Include="MediviseService.svc" />
     <Content Include="Plugins\jQRangeSlider\css\dev.css" />
     <Content Include="Plugins\jQRangeSlider\css\icons\.gitignore" />
     <Content Include="Plugins\jQRangeSlider\css\icons\label.png" />

@@ -18,8 +18,10 @@ namespace MediviseMobile
 {
     public partial class App : Application
     {
+
         private static MainViewModel viewModel = null;
         private static PatientViewModel patientViewModel = null;
+        public static CookieContainer AuthenticationToken = null;
         /// <summary>
         /// A static ViewModel used by the views to bind against.
         /// </summary>

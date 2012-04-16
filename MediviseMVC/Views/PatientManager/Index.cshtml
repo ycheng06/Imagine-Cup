@@ -82,10 +82,11 @@
             title: 'Patients',
             selecting: true,
             paging: true,
+            sorting: true,
+            defaultSorting: "LastName ASC",
             pageSize: 20,
             actions: {
                 listAction: '/PatientManager/PatientList',
-                //updateAction: '/PatientManager/UpdatePatient',
                 deleteAction: '/PatientManager/DeletePatient',
                 createAction: '/PatientManager/CreatePatient'
             },
@@ -110,6 +111,7 @@
                 */    
                 FirstName: {
                     title: 'First Name',
+                    sorting: true,
                     display: function (data) {
                         return '<a href="/PatientManager/Details/' + data.record.PatientId + '">' + data.record.FirstName + '</a>';
                     },
@@ -117,15 +119,18 @@
                 },
                 LastName: {
                     title: 'Last Name',
+                    sorting: true,
                     inputClass: 'validate[required]'
                 },
                 Gender: {
                     title: 'Gender',
+                    sorting: false,
                     options: { Male: 'Male', Female: 'Female', Unspecified: 'Unspecified' },
                     inputClass: 'validate[required]'
                 },
                 Phone: {
                     title: 'Phone',
+                    sorting: false,
                     display: function(data) {
                        var $phones = $('<div id="PhoneChildTable">'+data.record.Phone+'</div>');
                        var phones = {};
@@ -149,15 +154,18 @@
                 },
                 Address: {
                     title: 'Address',
+                    sorting: false,
                     inputClass: 'validate[required]'
                 },
                 TreatmentStartDate: {
                     title: 'Treatment Starts',
+                    sorting: true,
                     type: 'date',
                     inputClass: 'validate[required,custom[date]]'
                 },
                 TreatmentEndDate: {
                     title: 'Treatment Ends',
+                    sorting: true,
                     type: 'date',
                     inputClass: 'validate[required,custom[date]]'
                 },

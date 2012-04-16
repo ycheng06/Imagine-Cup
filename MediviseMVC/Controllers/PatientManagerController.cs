@@ -167,13 +167,42 @@ namespace MediviseMVC.Controllers
         }
         //*******JSON Data Feeds for AJAX*********************
         [HttpPost]
-        public JsonResult PatientList(int jtStartIndex,int jtPageSize)
+        public JsonResult PatientList(int jtStartIndex,int jtPageSize,string jtSorting=null)
         {
             try
             {
                 //reconsider this part
-                List<Patient> patients = db.Patients.ToList();
+                List<Patient> patients = db.Patients.Where(p => p.RegisteredBy == User.Identity.Name).ToList();
                 List<Patient> currentPage = patients.Skip((jtStartIndex-1)*jtPageSize).Take(jtPageSize).ToList();
+                switch (jtSorting)
+                {
+                    case "FirstName ASC":
+                        currentPage = currentPage.OrderBy(p => p.FirstName).ToList();
+                        break;
+                    case "FirstName DESC":
+                        currentPage = currentPage.OrderByDescending(p => p.FirstName).ToList();
+                        break;
+                    case "LastName ASC":
+                        currentPage = currentPage.OrderBy(p => p.LastName).ToList();
+                        break;
+                    case "LastName DESC":
+                        currentPage = currentPage.OrderByDescending(p => p.LastName).ToList();
+                        break;
+                    case "TreatmentStartDate ASC":
+                        currentPage = currentPage.OrderBy(p => p.TreatmentStartDate).ToList();
+                        break;
+                    case "TreatmentStartDate DESC":
+                        currentPage = currentPage.OrderByDescending(p => p.TreatmentStartDate).ToList();
+                        break;
+                    case "TreatmentEndDate ASC":
+                        currentPage = currentPage.OrderBy(p => p.TreatmentEndDate).ToList();
+                        break;
+                    case "TreatmentEndDate DESC":
+                        currentPage = currentPage.OrderByDescending(p => p.TreatmentEndDate).ToList();
+                        break;
+                    default:
+                        break;
+                }
                 var jsonData = currentPage.Select(p => JsonizePatient(p));
                 return Json(new { Result = "OK", Records = jsonData,TotalRecordCount = patients.Count});
             }

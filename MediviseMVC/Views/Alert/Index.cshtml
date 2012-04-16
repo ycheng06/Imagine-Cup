@@ -32,7 +32,7 @@
                 },
                 FullName: {
                     title: 'Patient',
-                    sorting:false,
+                    sorting:true,
                     display: function (data) {
                         return '<a href="/PatientManager/Details/' + data.record.PatientId + '">' + data.record.FullName + '</a>';
                     }

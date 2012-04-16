@@ -115,7 +115,7 @@ namespace MediviseMVC.Controllers
         {
             try
             {
-                List<Alert> alerts = db.Alerts.ToList();
+                List<Alert> alerts = db.Alerts.Where(p => p.Patient.RegisteredBy == User.Identity.Name).ToList();
                 List<Alert> currentPage = alerts.Skip((jtStartIndex - 1) * jtPageSize).Take(jtPageSize).ToList();
                 switch (jtSorting)
                 {
@@ -128,6 +128,12 @@ namespace MediviseMVC.Controllers
                         break;
                     case "AlertDate DESC":
                         currentPage = currentPage.OrderByDescending(a => a.AlertDate).ToList();
+                        break;
+                    case "FullName ASC":
+                        currentPage = currentPage.OrderBy(a => a.Patient.FirstName).ThenBy(a => a.Patient.LastName).ToList();
+                        break;
+                    case "FullName DESC":
+                        currentPage = currentPage.OrderBy(a => a.Patient.FirstName).ThenBy(a => a.Patient.LastName).ToList();
                         break;
                     default:
                         break;

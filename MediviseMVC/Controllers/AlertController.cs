@@ -116,28 +116,24 @@ namespace MediviseMVC.Controllers
             try
             {
                 List<Alert> alerts = db.Alerts.Where(p => p.Patient.RegisteredBy == User.Identity.Name).ToList();
-                List<Alert> currentPage = alerts.Skip((jtStartIndex - 1) * jtPageSize).Take(jtPageSize).ToList();
                 switch (jtSorting)
                 {
                     case "AlertDate ASC":
-                        currentPage = currentPage.OrderBy(a => a.AlertDate).ToList();
-                        foreach (var a in currentPage)
-                        {
-                            Trace.WriteLine("Date: " + a.AlertDate.ToShortDateString());
-                        }
+                        alerts = alerts.OrderBy(a => a.AlertDate).ToList();
                         break;
                     case "AlertDate DESC":
-                        currentPage = currentPage.OrderByDescending(a => a.AlertDate).ToList();
+                        alerts = alerts.OrderByDescending(a => a.AlertDate).ToList();
                         break;
                     case "FullName ASC":
-                        currentPage = currentPage.OrderBy(a => a.Patient.FirstName).ThenBy(a => a.Patient.LastName).ToList();
+                        alerts = alerts.OrderBy(a => a.Patient.FirstName).ThenBy(a => a.Patient.LastName).ToList();
                         break;
                     case "FullName DESC":
-                        currentPage = currentPage.OrderBy(a => a.Patient.FirstName).ThenBy(a => a.Patient.LastName).ToList();
+                        alerts = alerts.OrderBy(a => a.Patient.FirstName).ThenBy(a => a.Patient.LastName).ToList();
                         break;
                     default:
                         break;
                 }
+                List<Alert> currentPage = alerts.Skip(jtStartIndex).Take(jtPageSize).ToList();
                 var jsonData = currentPage.Select(a => JsonizeAlert(a));
                 return Json(new { Result = "OK", Records = jsonData, TotalRecordCount = alerts.Count });
             }

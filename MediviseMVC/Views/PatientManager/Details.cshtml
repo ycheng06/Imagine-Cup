@@ -93,6 +93,7 @@
     DateTime min = new DateTime(0);
     DateTime max = new DateTime(0);
 
+    /*
     if (Model.Drugs.Count() != 0){
         min = Model.Drugs.First().StartDate;
         max = Model.Drugs.First().EndDate;
@@ -109,10 +110,11 @@
             if (msg.EndDate > max) { max = msg.EndDate; }
         }
     }
+    */
 
     //USE TREATMENT START AND END DATE HERE | using top layer logic temp
-    //min = Model.TreatmentStartDate;
-    //max = Model.TreatmentEndDate;
+    min = Model.TreatmentStartDate;
+    max = Model.TreatmentEndDate;
     max = max.AddDays(1);
 }
 <!--=======================================-->

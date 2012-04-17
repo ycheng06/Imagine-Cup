@@ -57,8 +57,7 @@ namespace MediviseMVC.Controllers
                 trackerDB.SaveChanges();
 
                 drug.TimesPerWeek = getTimesPerWeek(drug);
-                updatePatientTreatmentStartDate(drug.PatientId, drug.StartDate);
-                updatePatientTreatmentEndDate(drug.PatientId, drug.EndDate);
+                updatePatientTreatmentDuration(drug.PatientId, drug.StartDate, drug.EndDate);
                 return RedirectToAction("Edit", new { id = drug.PatientId });
             }
             populateDrugNames(1);
@@ -83,8 +82,7 @@ namespace MediviseMVC.Controllers
                 trackerDB.SaveChanges();
 
                 drug.TimesPerWeek = getTimesPerWeek(drug);
-                updatePatientTreatmentStartDate(drug.PatientId, drug.StartDate);
-                updatePatientTreatmentEndDate(drug.PatientId, drug.EndDate);
+                updatePatientTreatmentDuration(drug.PatientId, drug.StartDate, drug.EndDate);
                 return RedirectToAction("Edit", new { id = drug.PatientId });
             }
             populateDrugNames(drug.DrugInfoId);
@@ -147,8 +145,7 @@ namespace MediviseMVC.Controllers
                 trackerDB.Patients.Find(test.PatientId).Tests.Add(test);
                 trackerDB.SaveChanges();
 
-                updatePatientTreatmentStartDate(test.PatientId, test.TestDate);
-                updatePatientTreatmentEndDate(test.PatientId, test.TestDate);
+                updatePatientTreatmentDuration(test.PatientId, test.TestDate, test.TestDate);
                 return RedirectToAction("Edit", new { id = test.PatientId });
             }
             populateTestNames();
@@ -168,8 +165,7 @@ namespace MediviseMVC.Controllers
                 trackerDB.Entry(test).State = EntityState.Modified;
                 trackerDB.SaveChanges();
 
-                updatePatientTreatmentStartDate(test.PatientId, test.TestDate);
-                updatePatientTreatmentEndDate(test.PatientId, test.TestDate);
+                updatePatientTreatmentDuration(test.PatientId, test.TestDate, test.TestDate);
                 return RedirectToAction("Edit", new { id=test.PatientId});
             }
             populateTestNames();
@@ -204,8 +200,7 @@ namespace MediviseMVC.Controllers
                 trackerDB.Patients.Find(msg.PatientId).Messages.Add(msg);
                 trackerDB.SaveChanges();
 
-                updatePatientTreatmentStartDate(msg.PatientId, msg.StartDate);
-                updatePatientTreatmentEndDate(msg.PatientId, msg.EndDate);
+                updatePatientTreatmentDuration(msg.PatientId, msg.StartDate, msg.EndDate);
                 return RedirectToAction("Edit", new { id = msg.PatientId });
             }
             return View(msg);
@@ -223,8 +218,7 @@ namespace MediviseMVC.Controllers
                 trackerDB.Entry(msg).State = EntityState.Modified;
                 trackerDB.SaveChanges();
 
-                updatePatientTreatmentStartDate(msg.PatientId, msg.StartDate);
-                updatePatientTreatmentEndDate(msg.PatientId, msg.EndDate);
+                updatePatientTreatmentDuration(msg.PatientId, msg.StartDate, msg.EndDate);
                 return RedirectToAction("Edit", new { id=msg.PatientId});
             }
             return View(msg);
@@ -266,27 +260,16 @@ namespace MediviseMVC.Controllers
             }
             return true;
         }
-        private void updatePatientTreatmentStartDate(int patientId, DateTime startDate)  //done every time a drug is modified/added (and NOT every time it is displayed)
+        private void updatePatientTreatmentDuration(int patientId, DateTime startDate, DateTime endDate)
         {
-            //look up corresponding patient
-            /*
-            var patient = trackerDB.Patients.Find(patientId);
-
-             if (startDate < patient.TreatmentStartDate)
-            {
-                patient.TreatmentStartDate = startDate;
-                trackerDB.Entry(patient).State = EntityState.Modified;
-                trackerDB.SaveChanges();
-            }
-            else if (patient.TreatmentStartDate < startDate)
-            {
-                replaceWithSmallestStartDate(patient.PatientId, startDate);
-            }
-            */
-            //conditional above ignored because it makes it possible for user to manipulate system so that TreatmentStartDate does not update properly
             replaceWithSmallestStartDate(patientId, startDate);
+            replaceWithGreatestEndDate(patientId, endDate);
 
+            var patient = trackerDB.Patients.Find(patientId);
+            trackerDB.Entry(patient).State = EntityState.Modified;
+            trackerDB.SaveChanges();
         }
+
         private void replaceWithSmallestStartDate(int patientId, DateTime updatedDate)
         {
             //go through drug, test, messages and find largest enddate
@@ -324,28 +307,6 @@ namespace MediviseMVC.Controllers
             }
 
             patient.TreatmentStartDate = startDate;
-            trackerDB.Entry(patient).State = EntityState.Modified;
-            trackerDB.SaveChanges();
-        }
-        private void updatePatientTreatmentEndDate(int patientId, DateTime endDate)  //done every time a drug is modified/added (and NOT every time it is displayed)
-        {
-            //look up corresponding patient
-            /*
-            var patient = trackerDB.Patients.Find(patientId);
-
-            if (endDate > patient.TreatmentEndDate)
-            {
-                patient.TreatmentEndDate = endDate;
-                trackerDB.Entry(patient).State = EntityState.Modified;
-                trackerDB.SaveChanges();
-            }
-            else if (patient.TreatmentEndDate > endDate)
-            {
-                replaceWithGreatestEndDate(patient.PatientId, endDate);
-            }
-            */
-            //conditional above ignored because it makes it possible for user to manipulate system so that TreatmentEndDate does not update properly
-            replaceWithGreatestEndDate(patientId, endDate);
         }
         private void replaceWithGreatestEndDate(int patientId, DateTime latestDate)
         {
@@ -385,8 +346,6 @@ namespace MediviseMVC.Controllers
 
             //change TreatmentEndDate
             patient.TreatmentEndDate = endDate;
-            trackerDB.Entry(patient).State = EntityState.Modified;
-            trackerDB.SaveChanges();
         }
         protected override void Dispose(bool disposing)
         {

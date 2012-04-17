@@ -125,9 +125,9 @@
                 //figuring out progress on progressbar by (days passed)/(total days)
                 DateTime today = DateTime.Today;
                 int progressDays = 0;
-                int totalDays = 1;
+                int totalDays = (max - min).Days;
                 if (max <= today){
-                    progressDays = 1;
+                    progressDays = totalDays;
                 }
                 else if (min >= today){
                     progressDays = 0;

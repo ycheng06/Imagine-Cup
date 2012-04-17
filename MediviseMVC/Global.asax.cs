@@ -44,7 +44,7 @@ namespace MediviseMVC
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
             ModelBinders.Binders.DefaultBinder = new DateTimeConversionBinder();
-            //Scheduler();
+            Scheduler();
         }
 
         private void Scheduler()
@@ -81,7 +81,7 @@ namespace MediviseMVC
 
             CalendarIntervalTriggerImpl warningTrigger = new CalendarIntervalTriggerImpl("warningTrigger", Quartz.IntervalUnit.Hour, 1);
             warningTrigger.StartTimeUtc = DateTime.UtcNow;
-            sched.ScheduleJob(makeReminder, warningTrigger);
+            sched.ScheduleJob(makeWarning, warningTrigger);
 
         }
 

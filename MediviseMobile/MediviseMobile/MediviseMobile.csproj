@@ -103,7 +103,7 @@
       <DependentUpon>ProfileEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\Authentication\Reference.cs">
+    <Compile Include="Service References\AuthenticationService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -181,16 +181,25 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
-    <None Include="Properties\WMAppManifest.xml" />
-    <None Include="Service References\Authentication\Authentication.wsdl" />
-    <None Include="Service References\Authentication\Authentication.xsd">
+    <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Authentication\Authentication1.xsd">
+    <None Include="Service References\AuthenticationService\Authentication.wsdl" />
+    <None Include="Service References\AuthenticationService\Authentication.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Authentication\AuthenticationService.wsdl" />
+    <None Include="Service References\AuthenticationService\Authentication1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AuthenticationService\AuthenticationService.wsdl" />
     <None Include="Service References\Medivise\service.edmx" />
+    <None Include="Service References\AuthenticationService\Authentication.disco" />
+    <None Include="Service References\AuthenticationService\configuration91.svcinfo" />
+    <None Include="Service References\AuthenticationService\configuration.svcinfo" />
+    <None Include="Service References\AuthenticationService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
@@ -203,13 +212,6 @@
     <Resource Include="Background.png" />
     <None Include="Service References\Medivise\Reference.datasvcmap">
       <Generator>DataServicesCoreClientGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\Authentication\Authentication.disco" />
-    <None Include="Service References\Authentication\configuration91.svcinfo" />
-    <None Include="Service References\Authentication\configuration.svcinfo" />
-    <None Include="Service References\Authentication\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
@@ -231,7 +233,7 @@
     </ServiceReferenceMetadataStorage>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\Authentication\" />
+    <WCFMetadataStorage Include="Service References\AuthenticationService\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />

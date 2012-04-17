@@ -57,26 +57,32 @@
     <Reference Include="Microsoft.Data.Edm, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Edm.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Data.OData, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.OData.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Data.Services, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Services.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Data.Services.Client, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Services.Client.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Data.Services.Design, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Services.Design.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Data.Spatial, Version=4.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\Microsoft WCF Data Services October 2011 CTP\bin\.NETFramework\Microsoft.Data.Spatial.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VsDesigner.DataServices.Adapter, Version=10.99.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -103,7 +109,9 @@
     <Reference Include="System.Data.Entity">
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.ServiceModel">
       <Private>True</Private>
     </Reference>
@@ -355,36 +363,9 @@
     <Content Include="Plugins\jtable\themes\standard\red\jtable_red.css" />
     <Content Include="Plugins\jtable\themes\standard\red\loading.gif" />
     <Content Include="Plugins\jtable\themes\standard\red\title-bg.png" />
-    <Content Include="Plugins\jQueryValidation\.gitignore" />
     <Content Include="Plugins\jQueryValidation\css\screenshot.png" />
     <Content Include="Plugins\jQueryValidation\css\template.css" />
     <Content Include="Plugins\jQueryValidation\css\validationEngine.jquery.css" />
-    <Content Include="Plugins\jQueryValidation\demos\demoAdjustments.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoAjaxInlinePHP.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoAjaxJAVA.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoAjaxSubmitPHP.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoAttr.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoAutoHide.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoCheckBox.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoDatepicker.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoFieldTypes.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoGlobalSettings.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoHooks.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoLiveEvent.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoMultipleForms.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoOverflown.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoPerFieldPromptDirection.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoPositioning.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoRegExp.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoShowPrompt.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoValidationComplete.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoValidators.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoValidators.ja.html" />
-    <Content Include="Plugins\jQueryValidation\demos\demoWithoutId.html" />
-    <Content Include="Plugins\jQueryValidation\demos\phpajax\ajaxValidateFieldName.php" />
-    <Content Include="Plugins\jQueryValidation\demos\phpajax\ajaxValidateFieldUser.php" />
-    <Content Include="Plugins\jQueryValidation\demos\phpajax\ajaxValidateSubmit.php" />
-    <Content Include="Plugins\jQueryValidation\index.html" />
     <Content Include="Plugins\jQueryValidation\js\contrib\other-validations.js" />
     <Content Include="Plugins\jQueryValidation\js\jquery-1.6.min.js" />
     <Content Include="Plugins\jQueryValidation\js\jquery.validationEngine.js" />
@@ -438,21 +419,31 @@
     <Content Include="Plugins\slider\tests\show_hide.html" />
     <Content Include="Plugins\slider\tests\zero_value.html" />
     <Content Include="Plugins\slider\tools\yuicompressor-2.4.7.jar" />
-    <Content Include="Scripts\Scripts\EditorHookup.js" />
-    <Content Include="Scripts\Scripts\jquery-1.5.1-vsdoc.js" />
-    <Content Include="Scripts\Scripts\jquery-1.5.1.js" />
-    <Content Include="Scripts\Scripts\jquery-1.5.1.min.js" />
-    <Content Include="Scripts\Scripts\jquery-1.7.1.min.js" />
-    <Content Include="Scripts\Scripts\jquery-ui-1.8.11.js" />
-    <Content Include="Scripts\Scripts\jquery-ui-1.8.11.min.js" />
-    <Content Include="Scripts\Scripts\jquery-ui-1.8.18.custom.min.js" />
-    <Content Include="Scripts\Scripts\jquery-ui.js" />
-    <Content Include="Scripts\Scripts\jquery-ui.min.js" />
-    <Content Include="Scripts\Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\Scripts\jquery.validate.js" />
-    <Content Include="Scripts\Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\Scripts\modernizr-1.7.js" />
-    <Content Include="Scripts\Scripts\modernizr-1.7.min.js" />
+    <Content Include="Scripts\EditorHookup.js" />
+    <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.5.1.js" />
+    <Content Include="Scripts\jquery-1.5.1.min.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.11.js" />
+    <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.18.custom.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\modernizr-1.7.js" />
+    <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -465,16 +456,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\Scripts\MicrosoftAjax.js" />
-    <Content Include="Scripts\Scripts\MicrosoftAjax.debug.js" />
-    <Content Include="Scripts\Scripts\MicrosoftMvcAjax.js" />
-    <Content Include="Scripts\Scripts\MicrosoftMvcAjax.debug.js" />
-    <Content Include="Scripts\Scripts\MicrosoftMvcValidation.js" />
-    <Content Include="Scripts\Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
@@ -539,17 +520,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Plugins\jQRangeSlider\Readme.md" />
-    <None Include="Plugins\jQueryValidation\README.md" />
     <None Include="Plugins\jquery.progressbar\demo.php" />
-    <None Include="Plugins\jQueryValidation\runDemo.bat" />
-    <None Include="Plugins\jQueryValidation\runDemo.sh" />
     <None Include="Plugins\jQueryValidation\test\AjaxTestServer%24AjaxValidationFieldResponse.class" />
     <None Include="Plugins\jQueryValidation\test\AjaxTestServer%24AjaxValidationFormResponse.class" />
     <None Include="Plugins\jQueryValidation\test\AjaxTestServer.class" />
     <None Include="Plugins\jQueryValidation\test\NanoHTTPD%24HTTPSession.class" />
     <None Include="Plugins\jQueryValidation\test\NanoHTTPD%24Response.class" />
     <None Include="Plugins\jQueryValidation\test\NanoHTTPD.class" />
-    <None Include="Plugins\jQueryValidation\TODO" />
     <None Include="Plugins\slider\Makefile" />
     <None Include="Plugins\slider\README.md" />
     <None Include="Plugins\slider\src\skin.psd" />

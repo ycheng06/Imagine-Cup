@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
-using MediviseMobile.Authentication;
+using MediviseMobile.AuthenticationService;
 using System.Diagnostics;
 
 namespace MediviseMobile
@@ -22,28 +22,42 @@ namespace MediviseMobile
             InitializeComponent();
         }
 
+        private CookieContainer cc;
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             AuthenticationServiceClient authService = new AuthenticationServiceClient();
-            App.AuthenticationToken = new CookieContainer();
-            authService.CookieContainer = App.AuthenticationToken;
-            authService.LoginCompleted += authService_LoginCompleted;
+            cc = new CookieContainer();
+            authService.CookieContainer = cc;
+            authService.LoginCompleted += new EventHandler<LoginCompletedEventArgs>(authService_LoginCompleted);
             authService.LoginAsync(UsernameBox.Text, PasswordBox.Text, "", true);
            
         }
 
         private void authService_LoginCompleted(object sender, LoginCompletedEventArgs e)
         {
+            //if (e.Error != null)
+            //{
+            //    MessageBox.Show("Login failed");
+            //}
+            //else
+            //{
+            //    Debug.WriteLine("Ok");
+            //}
             if (e.Error != null)
             {
-                MessageBox.Show("Login failed");
+                MessageBox.Show(e.Error.ToString());
+            }
+            else if (e.Result == false)
+            {
+                MessageBox.Show("error with login, try again");
             }
             else
             {
-                AuthenticationServiceClient authService = (AuthenticationServiceClient)sender;
-                App.AuthenticationToken = authService.CookieContainer;
-                Debug.WriteLine("Ok");
+                Debug.WriteLine("Login successful");
+                var y = cc;
+                var x = cc.Count.ToString();
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+
             }
         }
 

@@ -21,7 +21,7 @@ namespace MediviseMobile
 
         private static MainViewModel viewModel = null;
         private static PatientViewModel patientViewModel = null;
-        public static CookieContainer AuthenticationToken = null;
+        public static CookieContainer AuthenticationCookie;
         /// <summary>
         /// A static ViewModel used by the views to bind against.
         /// </summary>

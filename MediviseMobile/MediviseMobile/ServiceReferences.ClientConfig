@@ -11,7 +11,7 @@
         <client>
             <endpoint address="http://127.0.0.1:81/Authentication.svc" binding="basicHttpBinding"
                 bindingConfiguration="BasicHttpBinding_AuthenticationService"
-                contract="Authentication.AuthenticationService" name="BasicHttpBinding_AuthenticationService" />
+                contract="AuthenticationService.AuthenticationService" name="BasicHttpBinding_AuthenticationService" />
         </client>
     </system.serviceModel>
 </configuration>

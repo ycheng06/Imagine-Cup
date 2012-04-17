@@ -223,6 +223,7 @@ namespace MediviseMVC.Controllers
                 patient.RegisteredBy = User.Identity.Name;
                 db.Patients.Add(patient);
                 db.SaveChanges();
+                sendRegisterConfirmation(patient);
                 return Json(new { Result = "OK", Record = JsonizePatient(patient) });
             }
             catch (Exception ex)

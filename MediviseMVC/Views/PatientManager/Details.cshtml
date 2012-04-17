@@ -109,13 +109,11 @@
             if (msg.EndDate > max) { max = msg.EndDate; }
         }
     }
-    
-    
+
     //USE TREATMENT START AND END DATE HERE | using top layer logic temp
     //min = Model.TreatmentStartDate;
     //max = Model.TreatmentEndDate;
-    //@: @(min)
-    //@: @(max)
+    max = max.AddDays(1);
 }
 <!--=======================================-->
 
@@ -136,7 +134,7 @@
                 }
                 else{
                     totalDays = (max - min).Days;
-                    progressDays = (today - (min.AddDays(0))).Days;
+                    progressDays = (today - min).Days + 1;
                 }
 
                 //show the progress bar
@@ -168,13 +166,13 @@
                                 <div class="mySlider" id="drugSlider@(drugCounter)">
                                     <div class="drugHandle" id="drugHandle@(drugCounter)"></div>
                                     <script type="text/javascript">
-                                        var barWidth = (@((drug.EndDate - drug.StartDate).Days) * ($('.mySlider').width() / @(totalDays)));  //FIGURE THE WIDTH OUT HERE!!!!
+                                        var barWidth = (@((drug.EndDate - drug.StartDate).Days + 1) * ($('.mySlider').width() / @(totalDays)));  //FIGURE THE WIDTH OUT HERE!!!!
                                         $('#drugHandle@(drugCounter)').css("width", barWidth);
 
                                         var progressDate = @((drug.StartDate - min).Days);   //may need to check for zero
                                         var position = ($('.mySlider').width() / @(totalDays)) * progressDate;
                                     
-                                        $('#drugHandle@(drugCounter)').css("left", position + 1);
+                                        $('#drugHandle@(drugCounter)').css("left", position + 2);
                                     </script>
                                 </div>
                             </div>
@@ -188,21 +186,27 @@
                             <div class="sliderText">
                                 Checkup Dates
                             </div>
-                            <div class="mySlider">            
-                            @{
-                                int counterHelper2 = 0;
-                                foreach (var test in Model.Tests){
-                                    <text>
-                                        <div class="testHandle" id="testHandle@(counterHelper2)"></div>
+                            <div class="mySlider">
+                                <div class="testHandleGroup">
+                                    @{
                                         <script type="text/javascript">
-                                            var progressDate = @((Model.Tests.ElementAt(counterHelper2).TestDate - min).Days);
-                                            var position = ($('.mySlider').width() / @(totalDays)) * progressDate;    //(barwidth / totaldays) * progressdays
-                                            $('#testHandle@(counterHelper2)').css("left", position + 10);
+                                            $('.testHandleGroup').css("width", $('.mySlider').width());
                                         </script>
-                                    </text>
-                                    counterHelper2++;
-                                }
-                            }
+                                        int counterHelper2 = 0;
+                                        foreach (var test in Model.Tests)
+                                        {
+                                            <text>
+                                                <div class="testHandle" id="testHandle@(counterHelper2)"></div>
+                                                <script type="text/javascript">
+                                                    var progressDate = @((Model.Tests.ElementAt(counterHelper2).TestDate - min).Days);
+                                                    var position = ($('.testHandleGroup').width() / @(totalDays)) * progressDate;    //(barwidth / totaldays) * progressdays
+                                                    $('#testHandle@(counterHelper2)').css("left", position + 2);
+                                                </script>
+                                            </text>
+                                            counterHelper2++;
+                                        }
+                                    }
+                                </div>
                             </div>
                         </div>
                     </text>
@@ -212,7 +216,8 @@
 
         <!-- popup div -->
         @{
-            for (int i = 0; i < Model.Tests.Count; i++){
+            for (int i = 0; i < Model.Tests.Count; i++)
+            {
                 var test = Model.Tests.ElementAt(i);
                 <text>
                     <div class="test-pop" id="test-pop@(i)">
